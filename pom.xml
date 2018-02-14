@@ -15,11 +15,14 @@
 
     <modules>
         <module>utils</module>
+        <module>mainApp</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <h2.version>1.4.196</h2.version>
+        <project.version>1.0-SNAPSHOT</project.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -27,12 +30,12 @@
             <dependency>
                 <groupId>com.epam.brest.cource</groupId>
                 <artifactId>utils</artifactId>
-                <version>${progect.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
