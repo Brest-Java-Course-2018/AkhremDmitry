@@ -22,10 +22,10 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.epam.brest.cource</groupId>
-            <artifactId>mainApp</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.epam.brest.cource</groupId>-->
+            <!--<artifactId>mainApp</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
