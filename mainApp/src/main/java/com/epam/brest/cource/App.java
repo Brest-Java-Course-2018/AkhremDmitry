@@ -7,6 +7,13 @@ import java.sql.SQLException;
  * Hello world!
  */
 public class App {
+    /**
+     * main.
+     *
+     * @param args args
+     * @throws SQLException SQLException
+     * @throws ClassNotFoundException SQLException
+     */
     public static void main(final String[] args)
             throws SQLException, ClassNotFoundException {
 
@@ -25,13 +32,19 @@ public class App {
 
         dbUtils.getUsers(connection);
 
-        dbUtils.udateUserById(connection, 1, "felix", "cat", "superCat");
+        dbUtils.updateUserById(connection, 1, "felix", "cat", "superCat");
 
         dbUtils.getUsers(connection);
 
     }
 
-
+    /**
+     * sum method for test.
+     *
+     * @param a some variable a
+     * @param b some variable b
+     * @return sum a+b
+     */
     public final int sum(final int a, final int b) {
         return a + b;
     }
