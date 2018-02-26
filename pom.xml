@@ -14,8 +14,7 @@
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>utils</module>
-        <module>mainApp</module>
+        <module>model</module>
     </modules>
 
     <distributionManagement>
@@ -35,16 +34,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.epam.brest.cource</groupId>
-                <artifactId>utils</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.epam.brest.cource</groupId>
-                <artifactId>mainApp</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
