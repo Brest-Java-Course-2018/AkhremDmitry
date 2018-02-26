@@ -10,16 +10,27 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.epam.brest.cource.model</groupId>
-    <artifactId>model</artifactId>
+    <groupId>com.epam.brest.cource</groupId>
+    <artifactId>test-db</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>model</name>
+    <name>test-db</name>
 
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
     </dependencies>
-
 </project>

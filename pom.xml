@@ -15,6 +15,8 @@
 
     <modules>
         <module>model</module>
+        <module>dao</module>
+        <module>test-db</module>
     </modules>
 
     <distributionManagement>
@@ -30,10 +32,47 @@
         <project.version>1.0-SNAPSHOT</project.version>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
+        <spring.version>4.3.14.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.epam.brest.cource.model</groupId>
+                <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.cource.dao</groupId>
+                <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam.brest.cource</groupId>
+                <artifactId>test-db</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
