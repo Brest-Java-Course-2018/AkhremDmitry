@@ -1,6 +1,4 @@
-package com.epam.brest.cource.dao;
-
-import com.epam.brest.cource.model.Department;
+package com.epam.brest.course.dao;
 
 import java.util.List;
 
@@ -12,4 +10,7 @@ public interface DepartmentDao {
 
     List<Department> getAllDepartment();
     Department getDepartmentById(int departmentId);
+    Department addDepartment(Department department);
+    void updateDepartment(Department department);
+    void deleteDepartmentById(int id);
 }

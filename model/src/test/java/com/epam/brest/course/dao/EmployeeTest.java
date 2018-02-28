@@ -1,7 +1,7 @@
-package com.epam.brest.cource.model;
+package com.epam.brest.course.dao;
 
 
-import com.epam.brest.cource.model.Employee;
+import com.epam.brest.course.dao.Employee;
 import org.junit.Assert;
 
 public class EmployeeTest {

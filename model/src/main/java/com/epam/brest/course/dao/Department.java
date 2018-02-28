@@ -1,4 +1,4 @@
-package com.epam.brest.cource.model;
+package com.epam.brest.course.dao;
 
 /**
  * POJO Department for model.
