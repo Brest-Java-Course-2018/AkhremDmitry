@@ -41,6 +41,14 @@ public class Department {
                 '}';
     }
 
+    public Department() {
+    }
+
+    public Department(String departmentName, String description) {
+        this.departmentName = departmentName;
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
