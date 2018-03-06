@@ -29,13 +29,6 @@ public interface DepartmentDao {
     Department addDepartment(Department department);
 
     /**
-     * Return department by name from database.
-     * @param  departmentName String
-     * @return Department
-     */
-    Department getDepartmentByName(String departmentName);
-
-    /**
      * Update department in database.
      * @param department Department
      */

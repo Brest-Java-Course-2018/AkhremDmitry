@@ -49,19 +49,6 @@ public class DepartmentDaoImplTest {
         Assert.assertTrue(newDepartment.getDepartmentName().equals(department.getDepartmentName()));
         Assert.assertTrue(newDepartment.getDescription().equals(department.getDescription()));
         Assert.assertTrue((sizeBefore+1) == departmentDao.getAllDepartment().size());
-
-
-//        Department departmentExp = new Department();
-//        departmentExp.setDepartmentName("Java");
-//        departmentExp.setDescription("Java Department");
-//        Department departmentAct = departmentDao.addDepartment(departmentExp);
-//
-//        Assert.assertNotNull(departmentAct);
-//        Assert.assertEquals("Java", departmentAct.getDepartmentName());
-//        Assert.assertEquals("Java Department", departmentAct.getDescription());
-//
-//        departmentAct = departmentDao.addDepartment(departmentExp);
-//        Assert.assertNull(departmentAct);
     }
 
     @Rule
@@ -93,15 +80,6 @@ public class DepartmentDaoImplTest {
         Assert.assertEquals(newDepartment, updatedDepartment);
     }
 
-    @Test
-    public void getDepartmentByName() {
-        String departmentNameExp = "Distribution";
-        String departmentNameAct = departmentDao.getDepartmentByName("Distribution").getDepartmentName();
-        Assert.assertEquals(departmentNameExp, departmentNameAct);
-
-        Department departmentAct = departmentDao.getDepartmentByName("noName");
-        Assert.assertNull(departmentAct);
-    }
 
     @Test
     public void deleteDepartmentById() {
