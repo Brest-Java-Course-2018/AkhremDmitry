@@ -1,5 +1,7 @@
 package com.epam.brest.course.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,6 +21,8 @@ import java.util.List;
  */
 
 public class DepartmentDaoImpl implements DepartmentDao {
+
+    private static final Logger LOGGER = LogManager.getLogger();
     /**
      * departmentId.
      */
@@ -88,6 +92,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public final List<Department> getAllDepartment() {
+        LOGGER.debug("getAllDepartment");
         List<Department> departments = namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(departmentGet, new DepartmentRowMapper());
@@ -96,6 +101,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public final Department getDepartmentById(final int departmentId) {
+        LOGGER.debug("getDepartmentById({})", departmentId);
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("departmentId",
                         departmentId);
@@ -111,12 +117,15 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public final Department addDepartment(final Department department) {
+        LOGGER.debug("addDepartment({})", department);
         MapSqlParameterSource namedParameters =
                 new MapSqlParameterSource("departmentName",
                         department.getDepartmentName());
         int result = namedParameterJdbcTemplate.queryForObject(departmentCheck,
                 namedParameters, Integer.class);
+        LOGGER.debug("result({})", result);
         if (result == 0) {
+            LOGGER.debug("addDepartment", department);
             namedParameters = new MapSqlParameterSource();
             namedParameters.addValue("departmentName",
                     department.getDepartmentName());
