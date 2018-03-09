@@ -71,6 +71,21 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
+    public List<Employee> getAllEmployeeWhere(final String whereSql,
+                                              final int minSalary,
+                                              final int maxSalary) {
+        String employeeGetAllWhere = employeeGetAll + whereSql;
+        SqlParameterSource namedParameters =
+                new MapSqlParameterSource("minSalary", minSalary)
+                        .addValue("maxSalary", maxSalary);
+        List<Employee> employees = namedParameterJdbcTemplate
+                .query(employeeGetAllWhere,
+                        namedParameters,
+                        BeanPropertyRowMapper.newInstance(Employee.class));
+        return employees;
+    }
+
+    @Override
     public final Employee getEmployeeById(final int employeeId) {
         Employee employee;
         SqlParameterSource namedParameters =

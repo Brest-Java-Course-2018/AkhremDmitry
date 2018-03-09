@@ -4,7 +4,9 @@ import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dao.DepartmentDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
 
 public class DepartmentServiceImpl implements DepartmentService {
 
@@ -13,9 +15,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentDao departmentDao;
 
-    public DepartmentServiceImpl (DepartmentDao departmentDao){
+    public DepartmentServiceImpl(DepartmentDao departmentDao) {
         this.departmentDao = departmentDao;
     }
+
     @Override
     public Department getDepartmentById(int departmentId) {
         LOGGER.debug("getDepartmentById({})", departmentId);
@@ -28,5 +31,28 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = departmentDao.getDepartmentById(departmentId);
         department.setDescription(description);
         departmentDao.updateDepartment(department);
+    }
+
+    @Override
+    public List<Department> getAllDepartment() {
+        LOGGER.debug("getAllDepartment");
+        List<Department> departments;
+        departments = departmentDao.getAllDepartment();
+        return departments;
+    }
+
+    @Override
+    public Department addDepartment(final Department department) {
+        LOGGER.debug("addDepartment({})", department);
+        if (department.getDepartmentName().matches(".*[\\W].*")){
+            throw new IllegalArgumentException("Department name can contain only letters, numbers and underline");
+        }
+        return departmentDao.addDepartment(department);
+    }
+
+    @Override
+    public void deleteDepartmentById(int departmentId) {
+        LOGGER.debug("deleteDepartmentById({})", departmentId);
+        departmentDao.deleteDepartmentById(departmentId);
     }
 }

@@ -1,27 +1,14 @@
-package com.epam.brest.course.dao;
+package com.epam.brest.course.service;
+
+import com.epam.brest.course.dao.Employee;
 
 import java.util.List;
 
-/**
- * Employee DAO Interface.
- */
-public interface EmployeeDao {
+public interface EmployeeService {
 
-    /**
-     * Return all employee from database.
-     *
-     * @return List
-     */
     List<Employee> getAllEmployee();
 
-    /**
-     * Return all employee from database.
-     *
-     * @return List
-     */
-    List<Employee> getAllEmployeeWhere(final String whereSql,
-                                       final int minSalary,
-                                       final int maxSalary);
+    List<Employee> getAllEmployeeWhere(int minSalary, int maxSalary);
 
     /**
      * Return employee by ID from database.
@@ -44,7 +31,7 @@ public interface EmployeeDao {
      *
      * @param employee Employee
      */
-    void updateEmployee(Employee employee);
+    void updateEmployeeSalary(int employeeId, int salary);
 
     /**
      * Remove employee by ID from database.
@@ -52,6 +39,4 @@ public interface EmployeeDao {
      * @param employeeId int
      */
     void deleteEmployeeById(int employeeId);
-
-
 }

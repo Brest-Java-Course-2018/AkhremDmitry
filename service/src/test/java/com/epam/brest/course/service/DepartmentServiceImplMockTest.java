@@ -42,4 +42,5 @@ public class DepartmentServiceImplMockTest {
 
         Assert.assertEquals(DESC, department.getDescription());
     }
+
 }
