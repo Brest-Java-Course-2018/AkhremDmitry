@@ -53,7 +53,7 @@ public class DepartmentServiceImplTest {
     @Test
     public void addDepartment() {
         int depCountExp = departmentService.getAllDepartment().size() + 1;
-        Department departmentExp = new Department("Academic", DESC);
+        Department departmentExp = new Department("Aыыыcademic", DESC);
         Department departmentAct = departmentService.addDepartment(departmentExp);
         int depCountAct = departmentService.getAllDepartment().size();
 

@@ -15,8 +15,11 @@ public interface EmployeeDao {
     List<Employee> getAllEmployee();
 
     /**
-     * Return all employee from database.
+     * Return all employee with salary in the range from database.
      *
+     * @param whereSql  String
+     * @param minSalary int
+     * @param maxSalary int
      * @return List
      */
     List<Employee> getAllEmployeeWhere(final String whereSql,

@@ -4,53 +4,108 @@ package com.epam.brest.course.dao;
  * POJO Employee for model.
  */
 public class Employee {
+
+    /**
+     * Property employeeId.
+     */
     private int employeeId;
+
+    /**
+     * Property employeeName.
+     */
     private String employeeName;
+
+    /**
+     * Property salary.
+     */
     private int salary;
+
+    /**
+     * Property departmentId.
+     */
     private int departmentId;
 
+    /**
+     * Constructor Employee.
+     */
     public Employee() {
     }
 
-    public Employee(String employeeName, int salary, int departmentId) {
+    /**
+     * Constructor Employee.
+     * @param employeeName String
+     * @param salary int
+     * @param departmentId int
+     */
+    public Employee(final String employeeName,
+                    final int salary,
+                    final int departmentId) {
         this.employeeName = employeeName;
         this.salary = salary;
         this.departmentId = departmentId;
     }
 
     /**
-     * Get Employee id.
+     * Get employee id.
      * @return employeeId
      */
-    public int getEmployeeId() {
+    public final int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    /**
+     * Set employee id.
+     * @param employeeId int
+     */
+    public final void setEmployeeId(final int employeeId) {
         this.employeeId = employeeId;
     }
 
-    public String getEmployeeName() {
+    /**
+     * Get employee name.
+     * @return String
+     */
+    public final String getEmployeeName() {
         return employeeName;
     }
 
-    public void setEmployeeName(String employeeName) {
+    /**
+     * Set employee name.
+     * @param employeeName String
+     */
+    public final void setEmployeeName(final String employeeName) {
         this.employeeName = employeeName;
     }
 
-    public int getSalary() {
+    /**
+     * Get salary.
+     * @return int
+     */
+    public final int getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    /**
+     * Set salary.
+     * @param salary int
+     */
+    public final void setSalary(final int salary) {
         this.salary = salary;
     }
 
-    public int getDepartmentId() {
+    /**
+     * Get department id.
+     * @return int
+     */
+    public final int getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
+    /**
+     * Set department id.
+     * @param departmentId int
+     */
+    public final void setDepartmentId(final int departmentId) {
         this.departmentId = departmentId;
     }
 
@@ -78,11 +133,11 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", employeeName='" + employeeName + '\'' +
-                ", salary=" + salary +
-                ", departmentId=" + departmentId +
-                '}';
+        return "Employee{"
+                + "employeeId=" + employeeId
+                + ", employeeName='" + employeeName + '\''
+                + ", salary=" + salary
+                + ", departmentId=" + departmentId
+                + '}';
     }
 }

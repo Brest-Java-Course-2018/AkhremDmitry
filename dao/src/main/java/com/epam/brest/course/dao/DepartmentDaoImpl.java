@@ -19,9 +19,11 @@ import java.util.List;
 /**
  * Department DAO.
  */
-
 public class DepartmentDaoImpl implements DepartmentDao {
 
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
     /**
      * departmentId.

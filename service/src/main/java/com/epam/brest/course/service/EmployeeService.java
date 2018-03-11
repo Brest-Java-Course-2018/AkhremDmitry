@@ -4,10 +4,25 @@ import com.epam.brest.course.dao.Employee;
 
 import java.util.List;
 
+/**
+ * Employee service Interface.
+ */
 public interface EmployeeService {
 
+    /**
+     * Return all employee from database.
+     *
+     * @return List
+     */
     List<Employee> getAllEmployee();
 
+    /**
+     * Return all employee with salary in the range from database.
+     *
+     * @param minSalary int
+     * @param maxSalary int
+     * @return List
+     */
     List<Employee> getAllEmployeeWhere(int minSalary, int maxSalary);
 
     /**
@@ -27,9 +42,10 @@ public interface EmployeeService {
     Employee addEmployee(Employee employee);
 
     /**
-     * Update employee in database.
+     * Update salary in database.
      *
-     * @param employee Employee
+     * @param employeeId Employee
+     * @param salary int
      */
     void updateEmployeeSalary(int employeeId, int salary);
 

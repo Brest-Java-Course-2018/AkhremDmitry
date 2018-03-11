@@ -6,7 +6,7 @@ import java.util.List;
 
 
 /**
- * Department DAO Interface.
+ * Department service Interface.
  */
 
 public interface DepartmentService {
@@ -20,15 +20,16 @@ public interface DepartmentService {
     Department getDepartmentById(int departmentId);
 
     /**
-     * Add department to database.
+     * Update department description in database.
      *
      * @param departmentId Integer
-     * @return Department
+     * @param description  String
      */
     void updateDepartmentDescription(Integer departmentId, String description);
 
     /**
      * Return all department from database.
+     *
      * @return List
      */
     List<Department> getAllDepartment();
@@ -36,6 +37,7 @@ public interface DepartmentService {
 
     /**
      * Add department to database.
+     *
      * @param department Department
      * @return Department
      */
@@ -43,6 +45,7 @@ public interface DepartmentService {
 
     /**
      * Remove department by ID from database.
+     *
      * @param departmentId int
      */
     void deleteDepartmentById(int departmentId);

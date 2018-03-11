@@ -4,49 +4,93 @@ package com.epam.brest.course.dao;
  * POJO Department for model.
  */
 public class Department {
+
+    /**
+     * Property departmentId.
+     */
     private int departmentId;
+
+    /**
+     * Property departmentName.
+     */
     private String departmentName;
+
+    /**
+     * Property description.
+     */
     private String description;
 
-    public Integer getDepartmentId() {
+    /**
+     * Constructor Department.
+     */
+    public Department() {
+    }
+
+    /**
+     * Constructor Department.
+     * @param departmentName String
+     * @param description String
+     */
+    public Department(final String departmentName, final String description) {
+        this.departmentName = departmentName;
+        this.description = description;
+    }
+
+    /**
+     * Get department id.
+     * @return Integer
+     */
+    public final Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
+    /**
+     * Set department id.
+     * @param departmentId Integer
+     */
+    public final void setDepartmentId(final Integer departmentId) {
         this.departmentId = departmentId;
     }
 
-    public String getDepartmentName() {
+    /**
+     * Get department name.
+     * @return String
+     */
+    public final String getDepartmentName() {
         return departmentName;
     }
 
-    public void setDepartmentName(String departmentName) {
+    /**
+     * Set department name.
+     * @param departmentName String
+     */
+    public final void setDepartmentName(final String departmentName) {
         this.departmentName = departmentName;
     }
 
-    public String getDescription() {
+    /**
+     * Get description.
+     * @return String
+     */
+    public final String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    /**
+     * Set description.
+     * @param description String
+     */
+    public final void setDescription(final String description) {
         this.description = description;
     }
 
     @Override
     public String toString() {
-        return "Department{" +
-                "departmentId=" + departmentId +
-                ", departmentName='" + departmentName + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
-
-    public Department() {
-    }
-
-    public Department(String departmentName, String description) {
-        this.departmentName = departmentName;
-        this.description = description;
+        return "Department{"
+                + "departmentId=" + departmentId
+                + ", departmentName='" + departmentName + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.epam.brest.course.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -9,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+
 import java.util.List;
 
 /**
@@ -19,7 +19,6 @@ public class EmployeeDaoImp implements EmployeeDao {
     /**
      * NamedParameterJdbcTemplate.
      */
-    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
@@ -54,6 +53,7 @@ public class EmployeeDaoImp implements EmployeeDao {
 
     /**
      * Setter for namedParameterJdbcTemplate.
+     *
      * @param namedParameterJdbcTemplate NamedParameterJdbcTemplate
      */
     public final void setNamedParameterJdbcTemplate(
@@ -71,9 +71,9 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> getAllEmployeeWhere(final String whereSql,
-                                              final int minSalary,
-                                              final int maxSalary) {
+    public final List<Employee> getAllEmployeeWhere(final String whereSql,
+                                                    final int minSalary,
+                                                    final int maxSalary) {
         String employeeGetAllWhere = employeeGetAll + whereSql;
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("minSalary", minSalary)

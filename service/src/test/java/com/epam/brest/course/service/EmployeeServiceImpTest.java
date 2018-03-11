@@ -2,7 +2,9 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Employee;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -22,6 +24,9 @@ public class EmployeeServiceImpTest {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private final static String NAME = "Erick";
     private final static int SALARY = 800;
@@ -70,6 +75,14 @@ public class EmployeeServiceImpTest {
         Assert.assertEquals(NAME, employee.getEmployeeName());
         Assert.assertEquals(SALARY, employee.getSalary());
         Assert.assertEquals(DEPARTMENTID, employee.getDepartmentId());
+    }
+
+    @Test
+    public void addWrongEmployeeWithRule() {
+        Employee employee = new Employee("@WrongName", SALARY, DEPARTMENTID);
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Department name can contain only letters");
+        employeeService.addEmployee(employee);
     }
 
     @Test

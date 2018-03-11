@@ -7,26 +7,39 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-
+/**
+ * Department service.
+ */
 public class DepartmentServiceImpl implements DepartmentService {
 
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
-
+    /**
+     * DepartmentDao.
+     */
     private DepartmentDao departmentDao;
 
-    public DepartmentServiceImpl(DepartmentDao departmentDao) {
+    /**
+     * Constructor DepartmentServiceImpl.
+     *
+     * @param departmentDao DepartmentDao
+     */
+    public DepartmentServiceImpl(final DepartmentDao departmentDao) {
         this.departmentDao = departmentDao;
     }
 
     @Override
-    public Department getDepartmentById(int departmentId) {
+    public final Department getDepartmentById(final int departmentId) {
         LOGGER.debug("getDepartmentById({})", departmentId);
         return departmentDao.getDepartmentById(departmentId);
     }
 
     @Override
-    public void updateDepartmentDescription(Integer departmentId, String description) {
+    public final void updateDepartmentDescription(final Integer departmentId,
+                                                  final String description) {
         LOGGER.debug("getDepartmentById({}, {})", departmentId, description);
         Department department = departmentDao.getDepartmentById(departmentId);
         department.setDescription(description);
@@ -34,7 +47,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> getAllDepartment() {
+    public final List<Department> getAllDepartment() {
         LOGGER.debug("getAllDepartment");
         List<Department> departments;
         departments = departmentDao.getAllDepartment();
@@ -42,16 +55,17 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department addDepartment(final Department department) {
+    public final Department addDepartment(final Department department) {
         LOGGER.debug("addDepartment({})", department);
-        if (department.getDepartmentName().matches(".*[\\W].*")){
-            throw new IllegalArgumentException("Department name can contain only letters, numbers and underline");
+        if (department.getDepartmentName().matches(".*[^a-zA-Zа-яА-Я0-9_].*")) {
+            throw new IllegalArgumentException("Department "
+                    + "name can contain only letters, numbers and underline");
         }
         return departmentDao.addDepartment(department);
     }
 
     @Override
-    public void deleteDepartmentById(int departmentId) {
+    public final void deleteDepartmentById(final int departmentId) {
         LOGGER.debug("deleteDepartmentById({})", departmentId);
         departmentDao.deleteDepartmentById(departmentId);
     }
