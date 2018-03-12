@@ -13,7 +13,7 @@
     <groupId>com.epam.brest.course</groupId>
     <artifactId>service</artifactId>
     <version>${parent.version}</version>
-    <name>dao</name>
+    <name>service</name>
 
     <dependencies>
         <dependency>

@@ -52,6 +52,12 @@ public class EmployeeDaoImp implements EmployeeDao {
     private String employeeDelete;
 
     /**
+     * SQL request for get List employees by departmentId.
+     */
+    @Value("${employee.GetAllByDepartmentId}")
+    private String employeeGetAllByDepartmentId;
+
+    /**
      * Setter for namedParameterJdbcTemplate.
      *
      * @param namedParameterJdbcTemplate NamedParameterJdbcTemplate
@@ -80,6 +86,17 @@ public class EmployeeDaoImp implements EmployeeDao {
                         .addValue("maxSalary", maxSalary);
         List<Employee> employees = namedParameterJdbcTemplate
                 .query(employeeGetAllWhere,
+                        namedParameters,
+                        BeanPropertyRowMapper.newInstance(Employee.class));
+        return employees;
+    }
+
+    @Override
+    public List<Employee> getAllEmployeeByDepartmentId(int departmentId) {
+        SqlParameterSource namedParameters =
+                new MapSqlParameterSource("departmentId", departmentId);
+        List<Employee> employees = namedParameterJdbcTemplate
+                .query(employeeGetAllByDepartmentId,
                         namedParameters,
                         BeanPropertyRowMapper.newInstance(Employee.class));
         return employees;

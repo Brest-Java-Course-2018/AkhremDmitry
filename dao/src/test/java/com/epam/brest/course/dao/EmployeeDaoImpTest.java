@@ -89,4 +89,18 @@ public class EmployeeDaoImpTest {
 
         Assert.assertTrue((sizeBefore-1) == sizeAfter);
     }
+
+    @Test
+    public void getAllEmployeeByDepartmentId() {
+        employeeDao.addEmployee(new Employee("Stan", 1500, 2));
+        employeeDao.addEmployee(new Employee("Batters", 600, 2));
+        employeeDao.addEmployee(new Employee("Kyle", 660, 1));
+        List<Employee> employees = employeeDao.getAllEmployeeByDepartmentId(1);
+
+        Assert.assertFalse(employees.isEmpty());
+        for(Employee curEmployee: employees){
+            Assert.assertEquals(1, curEmployee.getDepartmentId());
+        }
+
+    }
 }

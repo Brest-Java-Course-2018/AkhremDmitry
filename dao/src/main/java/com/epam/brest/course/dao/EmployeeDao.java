@@ -27,6 +27,14 @@ public interface EmployeeDao {
                                        final int maxSalary);
 
     /**
+     * Return List employees by departmentId from database.
+     *
+     * @param departmentId int
+     * @return List<Employee>
+     */
+    List<Employee> getAllEmployeeByDepartmentId(final int departmentId);
+
+    /**
      * Return employee by ID from database.
      *
      * @param employeeId int

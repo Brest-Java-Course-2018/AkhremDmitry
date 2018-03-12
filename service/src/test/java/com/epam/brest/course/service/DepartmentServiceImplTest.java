@@ -43,7 +43,7 @@ public class DepartmentServiceImplTest {
     public void getAllDepartment() {
         List<Department> departments = departmentService.getAllDepartment();
         Assert.assertFalse(departments.isEmpty());
-        Assert.assertTrue(1 == departments.size());
+        Assert.assertTrue(2 == departments.size());
 
         Department departmentExp = departmentService.getDepartmentById(1);
         Department departmentAct = departments.get(0);
