@@ -8,25 +8,29 @@
     <title>Hello thymeleaf</title>
 
 
-
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
-    th:href="@{/resources/static/css/font-awesome.min.css}">
-    <link rel="stylesheet" href="../../resources/static/css/bootstrap.css"
-    th:href="@{/resources/static/css/bootstrap.css}">
-    <link rel="stylesheet" href="../../resources/static/css/style.css"
-    th:href="@{/resources/static/css/style.css}">
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
 
 </head>
 <body>
-<h1 th:text="'Hello ' + ${name} + '!'">Hello sample</h1>
+<div class="container">
+    <h1 th:text="'Hello ' + ${name} + '!'">Hello sample</h1>
+</div>
+
 
 <script src="../../resources/static/js/jquery.min.js"
-        th:href="@{/resources/static/js/jquery.min.js}"></script>
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
 <script src="../../resources/static/js/popper.min.js"
-        th:href="@{/resources/static/js/popper.min.js}"></script>
+        th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
-        th:href="@{/resources/static/js/bootstrap.min.js}"></script>
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
 
 </body>
 </html>
