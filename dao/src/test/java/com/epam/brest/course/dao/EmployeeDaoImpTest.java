@@ -103,4 +103,22 @@ public class EmployeeDaoImpTest {
         }
 
     }
+    @Test
+    public void getAllEmployeeWhere() {
+        String whereSql = " WHERE salary >= :minSalary "
+                + "AND salary <= :maxSalary";
+        Employee employeeExp1 = new Employee("Stan", 1500, 1);
+        Employee employeeExp2 = new Employee("Kyle", 1100, 1);
+        Employee employeeExp3 = new Employee("Kenni", 1200, 1);
+        employeeDao.addEmployee(employeeExp1);
+        employeeDao.addEmployee(employeeExp2);
+        employeeDao.addEmployee(employeeExp3);
+
+        List<Employee> employees = employeeDao.getAllEmployeeWhere(whereSql,1100,1499);
+
+        Assert.assertEquals(2, employees.size());
+        Assert.assertTrue(employees.get(0).getSalary() >= 1100 && employees.get(0).getSalary() <= 1499);
+        Assert.assertTrue(employees.get(1).getSalary() >= 1100 && employees.get(1).getSalary() <= 1499);
+        Assert.assertNotEquals(employees.get(0),employees.get(1));
+    }
 }
