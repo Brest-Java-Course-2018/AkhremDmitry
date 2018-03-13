@@ -8,8 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DepartmentController {
 
     @GetMapping(value = "/department")
-    public String hello(Model model) {
-//        model.addAttribute("name", name);
+    public String department(Model model) {
         return "department";
+    }
+
+    @GetMapping(value = "/departments")
+    public String departments(Model model) {
+        return "departments";
+    }
+
+    @GetMapping(value = "/editDepartment")
+    public String editDepartment(Model model) {
+        return "editDepartment";
     }
 }
