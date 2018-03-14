@@ -18,5 +18,6 @@
 
     <bean id="employeeService" class="com.epam.brest.course.service.EmployeeServiceImp">
         <property name="employeeDao" ref="employeeDao"/>
+        <property name="departmentDao" ref="departmentDao"/>
     </bean>
 </beans>

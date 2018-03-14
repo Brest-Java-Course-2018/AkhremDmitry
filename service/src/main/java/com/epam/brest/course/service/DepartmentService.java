@@ -1,6 +1,7 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
+import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface DepartmentService {
      *
      * @param departmentId int
      * @return Department
+     * @throws DataAccessException on data access error.
      */
     Department getDepartmentById(int departmentId);
 
@@ -24,6 +26,7 @@ public interface DepartmentService {
      *
      * @param departmentId Integer
      * @param description  String
+     * @throws DataAccessException on data access error.
      */
     void updateDepartmentDescription(Integer departmentId, String description);
 
@@ -40,6 +43,7 @@ public interface DepartmentService {
      *
      * @param department Department
      * @return Department
+     * @throws DataAccessException on data access error.
      */
     Department addDepartment(Department department);
 
@@ -47,6 +51,7 @@ public interface DepartmentService {
      * Remove department by ID from database.
      *
      * @param departmentId int
+     * @throws DataAccessException on data access error.
      */
     void deleteDepartmentById(int departmentId);
 

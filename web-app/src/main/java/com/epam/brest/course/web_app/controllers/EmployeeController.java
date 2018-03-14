@@ -1,24 +1,40 @@
 package com.epam.brest.course.web_app.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+/**
+ * Employee controller.
+ */
 @Controller
 public class EmployeeController {
 
+    /**
+     * Show employee page.
+     *
+     * @return template name
+     */
     @GetMapping(value = "/employee")
-    public String employee(Model model) {
+    public final String employee() {
         return "employee";
     }
 
+    /**
+     * Show employees page.
+     *
+     * @return template name
+     */
     @GetMapping(value = "/employees")
-    public String employees(Model model) {
+    public final String employees() {
         return "employees";
     }
 
+    /**
+     * Show editEmployee page.
+     *
+     * @return template name
+     */
     @GetMapping(value = "/editEmployee")
-    public String editEmployee(Model model) {
+    public final String editEmployee() {
         return "editEmployee";
     }
 }

@@ -2,12 +2,19 @@ package com.epam.brest.course.web_app.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+/**
+ * Home controller.
+ */
 @Controller
 public class HomeController {
 
+    /**
+     * Show home page.
+     *
+     * @return template name
+     */
     @GetMapping(value = "/")
-    public String defaultPageRedirect() {
+    public final String defaultPageRedirect() {
         return "redirect:departments";
     }
 

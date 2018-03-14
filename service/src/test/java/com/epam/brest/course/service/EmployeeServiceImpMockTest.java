@@ -1,5 +1,6 @@
 package com.epam.brest.course.service;
 
+import com.epam.brest.course.dao.DepartmentDao;
 import com.epam.brest.course.dao.Employee;
 import com.epam.brest.course.dao.EmployeeDao;
 import org.easymock.Capture;
@@ -26,6 +27,9 @@ public class EmployeeServiceImpMockTest {
     @Autowired
     private EmployeeDao mockEmployeeDao;
 
+    @Autowired
+    private DepartmentDao mockDepartmentDao;
+
     private static String NAME = "Kenny";
     private static int SALARY = 450;
     private static int DEPARTMENTID = 1;
@@ -40,6 +44,7 @@ public class EmployeeServiceImpMockTest {
     @After
     public void after(){
         EasyMock.reset(mockEmployeeDao);
+        EasyMock.reset(mockDepartmentDao);
     }
 
     @Test
@@ -63,13 +68,19 @@ public class EmployeeServiceImpMockTest {
 
     @Test
     public void deleteEmployeeByIdTest(){
+        EasyMock.expect(mockEmployeeDao.getEmployeeById(ID)).andReturn(EMPLOYEE);
         mockEmployeeDao.deleteEmployeeById(ID);
         EasyMock.expectLastCall().once();
+        EasyMock.expect(mockEmployeeDao.getNumberEmployeesInDepartment(DEPARTMENTID)).andReturn(0);
+        mockDepartmentDao.deleteDepartmentById(ID);
+        EasyMock.expectLastCall();
 
         EasyMock.replay(mockEmployeeDao);
+        EasyMock.replay(mockDepartmentDao);
 
         employeeService.deleteEmployeeById(ID);
         EasyMock.verify(mockEmployeeDao);
+        EasyMock.verify(mockDepartmentDao);
     }
 
     @Test

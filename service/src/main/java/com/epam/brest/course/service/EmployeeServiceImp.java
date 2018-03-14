@@ -1,5 +1,6 @@
 package com.epam.brest.course.service;
 
+import com.epam.brest.course.dao.DepartmentDao;
 import com.epam.brest.course.dao.Employee;
 import com.epam.brest.course.dao.EmployeeDao;
 import org.apache.logging.log4j.LogManager;
@@ -23,11 +24,20 @@ public class EmployeeServiceImp implements EmployeeService {
     private EmployeeDao employeeDao;
 
     /**
+     * EmployeeDao.
+     */
+    private DepartmentDao departmentDao;
+
+    /**
      * Setter for EmployeeDao.
      * @param employeeDao EmployeeDao.
      */
     public final void setEmployeeDao(final EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
+    }
+
+    public void setDepartmentDao(DepartmentDao departmentDao) {
+        this.departmentDao = departmentDao;
     }
 
     @Override
@@ -78,6 +88,10 @@ public class EmployeeServiceImp implements EmployeeService {
     @Override
     public final void deleteEmployeeById(final int employeeId) {
         LOGGER.debug("deleteEmployeeById({})", employeeId);
+        Employee employee = employeeDao.getEmployeeById(employeeId);
         employeeDao.deleteEmployeeById(employeeId);
+        if (employeeDao.getNumberEmployeesInDepartment(employee.getDepartmentId())==0){
+           departmentDao.deleteDepartmentById(employee.getDepartmentId());
+        }
     }
 }

@@ -51,7 +51,7 @@ public class EmployeeDaoImpTest {
         Assert.assertEquals(employeeExp.getEmployeeName(), employeeAct.getEmployeeName());
         Assert.assertEquals(employeeExp.getSalary(), employeeAct.getSalary());
         Assert.assertEquals(employeeExp.getDepartmentId(), employeeAct.getDepartmentId());
-        Assert.assertTrue((sizeAfter-1)==sizeBefore);
+        Assert.assertTrue((sizeAfter - 1) == sizeBefore);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class EmployeeDaoImpTest {
         employees = employeeDao.getAllEmployee();
         int sizeAfter = employees.size();
 
-        Assert.assertTrue((sizeBefore-1) == sizeAfter);
+        Assert.assertTrue((sizeBefore - 1) == sizeAfter);
     }
 
     @Test
@@ -98,11 +98,12 @@ public class EmployeeDaoImpTest {
         List<Employee> employees = employeeDao.getAllEmployeeByDepartmentId(1);
 
         Assert.assertFalse(employees.isEmpty());
-        for(Employee curEmployee: employees){
+        for (Employee curEmployee : employees) {
             Assert.assertEquals(1, curEmployee.getDepartmentId());
         }
 
     }
+
     @Test
     public void getAllEmployeeWhere() {
         String whereSql = " WHERE salary >= :minSalary "
@@ -114,11 +115,21 @@ public class EmployeeDaoImpTest {
         employeeDao.addEmployee(employeeExp2);
         employeeDao.addEmployee(employeeExp3);
 
-        List<Employee> employees = employeeDao.getAllEmployeeWhere(whereSql,1100,1499);
+        List<Employee> employees = employeeDao.getAllEmployeeWhere(whereSql, 1100, 1499);
 
         Assert.assertEquals(2, employees.size());
         Assert.assertTrue(employees.get(0).getSalary() >= 1100 && employees.get(0).getSalary() <= 1499);
         Assert.assertTrue(employees.get(1).getSalary() >= 1100 && employees.get(1).getSalary() <= 1499);
-        Assert.assertNotEquals(employees.get(0),employees.get(1));
+        Assert.assertNotEquals(employees.get(0), employees.get(1));
+    }
+
+    @Test
+    public void getNumberEmployeesInDepartment() {
+        employeeDao.addEmployee(new Employee("Stan", 1500, 1));
+        employeeDao.addEmployee(new Employee("Kyle", 1100, 2));
+        employeeDao.addEmployee(new Employee("Kenni", 1200, 1));
+        Assert.assertEquals(3, employeeDao.getNumberEmployeesInDepartment(1));
+        Assert.assertEquals(1, employeeDao.getNumberEmployeesInDepartment(2));
+        Assert.assertEquals(0, employeeDao.getNumberEmployeesInDepartment(3));
     }
 }

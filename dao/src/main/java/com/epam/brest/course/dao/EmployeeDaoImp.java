@@ -24,38 +24,41 @@ public class EmployeeDaoImp implements EmployeeDao {
     /**
      * SQL request for get employees.
      */
-    @Value("${employee.GetAll}")
+    @Value("${employee.getAll}")
     private String employeeGetAll;
 
     /**
      * SQL request for get employee by Id.
      */
-    @Value("${employee.GetById}")
+    @Value("${employee.getById}")
     private String employeeGetById;
 
     /**
      * SQL request for add employee.
      */
-    @Value("${employee.Add}")
+    @Value("${employee.add}")
     private String employeeAdd;
 
     /**
      * SQL request for update employee.
      */
-    @Value("${employee.Update}")
+    @Value("${employee.update}")
     private String employeeUpdate;
 
     /**
      * SQL request for delete employee.
      */
-    @Value("${employee.Delete}")
+    @Value("${employee.delete}")
     private String employeeDelete;
 
     /**
      * SQL request for get List employees by departmentId.
      */
-    @Value("${employee.GetAllByDepartmentId}")
+    @Value("${employee.getAllByDepartmentId}")
     private String employeeGetAllByDepartmentId;
+
+    @Value("${employee.getNumberEmployeesInDepartment}")
+    private String employeeGetNumberEmployeesInDepartment;
 
     /**
      * Setter for namedParameterJdbcTemplate.
@@ -92,7 +95,7 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> getAllEmployeeByDepartmentId(int departmentId) {
+    public final List<Employee> getAllEmployeeByDepartmentId(final int departmentId) {
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("departmentId", departmentId);
         List<Employee> employees = namedParameterJdbcTemplate
@@ -140,6 +143,16 @@ public class EmployeeDaoImp implements EmployeeDao {
                 new MapSqlParameterSource("employeeId", employeeId);
         namedParameterJdbcTemplate.update(employeeDelete, namedParameters);
 
+    }
+
+    @Override
+    public int getNumberEmployeesInDepartment(int departmentID) {
+        SqlParameterSource namedParameters =
+                new MapSqlParameterSource("departmentId", departmentID);
+        int numberOfEmployees = namedParameterJdbcTemplate
+                .queryForObject(employeeGetNumberEmployeesInDepartment,
+                        namedParameters, Integer.class);
+        return numberOfEmployees;
     }
 
 }
