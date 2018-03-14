@@ -16,6 +16,11 @@ public class Employee {
     private String employeeName;
 
     /**
+     * Property employee Email.
+     */
+    private String employeeEmail;
+
+    /**
      * Property salary.
      */
     private int salary;
@@ -31,22 +36,57 @@ public class Employee {
     public Employee() {
     }
 
+//    /**
+//     * Constructor Employee.
+//     *
+//     * @param employeeName String
+//     * @param salary       int
+//     * @param departmentId int
+//     */
+//    public Employee(final String employeeName,
+//                    final int salary,
+//                    final int departmentId) {
+//        this.employeeName = employeeName;
+//        this.salary = salary;
+//        this.departmentId = departmentId;
+//    }
+
     /**
      * Constructor Employee.
-     * @param employeeName String
-     * @param salary int
-     * @param departmentId int
+     *
+     * @param employeeName  String
+     * @param salary        int
+     * @param departmentId  int
+     * @param employeeEmail String.
      */
-    public Employee(final String employeeName,
-                    final int salary,
-                    final int departmentId) {
+    public Employee(String employeeName, String employeeEmail, int salary, int departmentId) {
         this.employeeName = employeeName;
+        this.employeeEmail = employeeEmail;
         this.salary = salary;
         this.departmentId = departmentId;
     }
 
     /**
+     * Get employee Email.
+     *
+     * @return employeeEmail
+     */
+    public String getEmployeeEmail() {
+        return employeeEmail;
+    }
+
+    /**
+     * Set employee Email.
+     *
+     * @param employeeEmail String
+     */
+    public void setEmployeeEmail(String employeeEmail) {
+        this.employeeEmail = employeeEmail;
+    }
+
+    /**
      * Get employee id.
+     *
      * @return employeeId
      */
     public final int getEmployeeId() {
@@ -55,6 +95,7 @@ public class Employee {
 
     /**
      * Set employee id.
+     *
      * @param employeeId int
      */
     public final void setEmployeeId(final int employeeId) {
@@ -63,6 +104,7 @@ public class Employee {
 
     /**
      * Get employee name.
+     *
      * @return String
      */
     public final String getEmployeeName() {
@@ -71,6 +113,7 @@ public class Employee {
 
     /**
      * Set employee name.
+     *
      * @param employeeName String
      */
     public final void setEmployeeName(final String employeeName) {
@@ -79,6 +122,7 @@ public class Employee {
 
     /**
      * Get salary.
+     *
      * @return int
      */
     public final int getSalary() {
@@ -87,6 +131,7 @@ public class Employee {
 
     /**
      * Set salary.
+     *
      * @param salary int
      */
     public final void setSalary(final int salary) {
@@ -95,6 +140,7 @@ public class Employee {
 
     /**
      * Get department id.
+     *
      * @return int
      */
     public final int getDepartmentId() {
@@ -103,6 +149,7 @@ public class Employee {
 
     /**
      * Set department id.
+     *
      * @param departmentId int
      */
     public final void setDepartmentId(final int departmentId) {
@@ -119,13 +166,16 @@ public class Employee {
         if (employeeId != employee.employeeId) return false;
         if (salary != employee.salary) return false;
         if (departmentId != employee.departmentId) return false;
-        return employeeName != null ? employeeName.equals(employee.employeeName) : employee.employeeName == null;
+        if (employeeName != null ? !employeeName.equals(employee.employeeName) : employee.employeeName != null)
+            return false;
+        return employeeEmail != null ? employeeEmail.equals(employee.employeeEmail) : employee.employeeEmail == null;
     }
 
     @Override
     public int hashCode() {
         int result = employeeId;
         result = 31 * result + (employeeName != null ? employeeName.hashCode() : 0);
+        result = 31 * result + (employeeEmail != null ? employeeEmail.hashCode() : 0);
         result = 31 * result + salary;
         result = 31 * result + departmentId;
         return result;
@@ -136,6 +186,7 @@ public class Employee {
         return "Employee{"
                 + "employeeId=" + employeeId
                 + ", employeeName='" + employeeName + '\''
+                + ", employeeEmail='" + employeeEmail + '\''
                 + ", salary=" + salary
                 + ", departmentId=" + departmentId
                 + '}';

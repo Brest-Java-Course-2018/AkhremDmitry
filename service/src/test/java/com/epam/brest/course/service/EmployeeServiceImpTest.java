@@ -29,6 +29,7 @@ public class EmployeeServiceImpTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private final static String NAME = "Erick";
+    private final static String EMAIL = "Erick@gmail.com";
     private final static int SALARY = 800;
     private final static int DEPARTMENTID = 1;
 
@@ -40,9 +41,9 @@ public class EmployeeServiceImpTest {
 
     @Test
     public void getAllEmployeeWhere() {
-        Employee employeeExp1 = new Employee("Stan", 1500, 1);
-        Employee employeeExp2 = new Employee("Kyle", 1100, 1);
-        Employee employeeExp3 = new Employee("Kenni", 1200, 1);
+        Employee employeeExp1 = new Employee("Stan", "Stan@gmail.com", 1500, 1);
+        Employee employeeExp2 = new Employee("Kyle", "Kyle@gmail.com", 1100, 1);
+        Employee employeeExp3 = new Employee("Kenni", "Kenni@gmail.com", 1200, 1);
         employeeService.addEmployee(employeeExp1);
         employeeService.addEmployee(employeeExp2);
         employeeService.addEmployee(employeeExp3);
@@ -58,7 +59,7 @@ public class EmployeeServiceImpTest {
     @Test
     public void getEmployeeById() {
         Employee employeeExp = employeeService
-                .addEmployee(new Employee(NAME, SALARY, DEPARTMENTID));
+                .addEmployee(new Employee(NAME, EMAIL, SALARY, DEPARTMENTID));
         Employee employeeAct = employeeService.getEmployeeById(employeeExp.getEmployeeId());
 
         Assert.assertEquals(employeeExp, employeeAct);
@@ -68,18 +69,19 @@ public class EmployeeServiceImpTest {
     public void addEmployee() {
         List<Employee> employees = employeeService.getAllEmployee();
         int empCountExp = employees.size()+1;
-        Employee employee = employeeService.addEmployee(new Employee(NAME, SALARY, DEPARTMENTID));
+        Employee employee = employeeService.addEmployee(new Employee(NAME, EMAIL, SALARY, DEPARTMENTID));
         int empCountAct = employeeService.getAllEmployee().size();
 
         Assert.assertTrue(empCountExp == empCountAct);
         Assert.assertEquals(NAME, employee.getEmployeeName());
+        Assert.assertEquals(EMAIL, employee.getEmployeeEmail());
         Assert.assertEquals(SALARY, employee.getSalary());
         Assert.assertEquals(DEPARTMENTID, employee.getDepartmentId());
     }
 
     @Test
     public void addWrongEmployeeWithRule() {
-        Employee employee = new Employee("@WrongName", SALARY, DEPARTMENTID);
+        Employee employee = new Employee("@WrongName", EMAIL, SALARY, DEPARTMENTID);
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Department name can contain only letters");
         employeeService.addEmployee(employee);
@@ -89,7 +91,7 @@ public class EmployeeServiceImpTest {
     public void updateEmployeeSalary() {
         int salaryExp = 1200;
         Employee employee = employeeService
-                .addEmployee(new Employee(NAME, SALARY, DEPARTMENTID));
+                .addEmployee(new Employee(NAME, EMAIL, SALARY, DEPARTMENTID));
         employeeService.updateEmployeeSalary(employee.getEmployeeId(), salaryExp);
         Employee employeeAct = employeeService.getEmployeeById(employee.getEmployeeId());
 
@@ -100,7 +102,7 @@ public class EmployeeServiceImpTest {
 
     @Test
     public void deleteEmployeeById() {
-        Employee employee = new Employee(NAME, SALARY, DEPARTMENTID);
+        Employee employee = new Employee(NAME, EMAIL, SALARY, DEPARTMENTID);
         employee = employeeService.addEmployee(employee);
         List<Employee> employees = employeeService.getAllEmployee();
         int empCountExp = employees.size()-1;

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>BS 4 template</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
@@ -30,20 +30,23 @@
              th:src="@{/resources/static/img/logo.svg}" width="64" height="32"></a>
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
-        <a class="nav-item nav-link" href="departments.html">Departments <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="employees.html">Employees</a>
+            <a class="nav-item nav-link" href="departments.html"
+               th:href="@{/departments}">Departments <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="employees.html"
+               th:href="@{/employees}">Employees</a>
         </div>
     </div>
 </nav>
 
 <header>
     <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <a href="departments.html" class="small"
+        <a href="departments.html"
+           th:href="@{/departments}"
+           class="small"
            data-toggle="tooltip"
            data-placement="bottom"
            title="Go back"><i class="fa fa-arrow-left text-dark"> </i></a>
-        <a class="navbar-brand text-uppercase mr-auto"
-           >
+        <a class="navbar-brand text-uppercase mr-auto">
             &nbsp;Add department
         </a>
 
@@ -65,21 +68,21 @@
 
     <div class="container-fluid">
         <div class="row">
-                <!--&lt;!&ndash; Block level &ndash;&gt;-->
-                <!--<div class="col-2 text-truncate">-->
-                    <!--Praeterea iter est quasdam res quas ex communi.-->
-                <!--</div>-->
+            <!--&lt;!&ndash; Block level &ndash;&gt;-->
+            <!--<div class="col-2 text-truncate">-->
+            <!--Praeterea iter est quasdam res quas ex communi.-->
+            <!--</div>-->
             <div class="col">
                 <div class="card">
                     <div class="card-body">
                         <form>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
-                                       for="depNameInput">Department name</label>
+                                       for="field_departmentName">Department name</label>
                                 <input type="text"
                                        class="form-control"
-                                       id="depNameInput"
-                                       placeholder="Add department name">
+                                       id="field_departmentName"
+                                       value="Add department name">
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
@@ -87,7 +90,7 @@
                                 <input type="text"
                                        class="form-control"
                                        id="descriptionInput"
-                                       placeholder="Add description">
+                                       value="Add description">
                             </div>
                         </form>
                     </div>
@@ -99,7 +102,6 @@
 </section>
 
 
-
 <script src="../../resources/static/js/jquery.min.js"
         th:src="@{/resources/static/js/jquery.min.js}"></script>
 <script src="../../resources/static/js/popper.min.js"
@@ -109,7 +111,7 @@
 
 <script>
     $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
 </body>

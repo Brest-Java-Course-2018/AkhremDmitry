@@ -57,6 +57,9 @@ public class EmployeeDaoImp implements EmployeeDao {
     @Value("${employee.getAllByDepartmentId}")
     private String employeeGetAllByDepartmentId;
 
+    /**
+     * SQL request for get number employees in department.
+     */
     @Value("${employee.getNumberEmployeesInDepartment}")
     private String employeeGetNumberEmployeesInDepartment;
 

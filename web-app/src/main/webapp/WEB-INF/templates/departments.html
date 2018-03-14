@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>BS 4 template</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
@@ -30,8 +30,9 @@
              th:src="@{/resources/static/img/logo.svg}" width="64" height="32"></a>
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="departments.html">Departments <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="employees.html">Employees</a>
+            <a class="nav-item nav-link active" href="departments.html">Departments <span
+                    class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="employees.html">Employees</a>
         </div>
     </div>
 </nav>
@@ -56,105 +57,117 @@
 <section id="departments">
     <div class="container-fluid">
         <div class="row">
-                <!--&lt;!&ndash; Block level &ndash;&gt;-->
-                <!--<div class="col-2 text-truncate">-->
-                    <!--Praeterea iter est quasdam res quas ex communi.-->
-                <!--</div>-->
+            <!--&lt;!&ndash; Block level &ndash;&gt;-->
+            <!--<div class="col-2 text-truncate">-->
+            <!--Praeterea iter est quasdam res quas ex communi.-->
+            <!--</div>-->
             <div class="col">
-                <table class="table table-striped">
-                    <thead class="thead-inverse">
-                    <tr>
-                        <th>Title</th>
-                        <th>Avg salary</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><!--&nbsp;&nbsp;&nbsp;-->CEO</td>
-                        <td>1000</td>
-                        <td class="text-right">
-                            <a href="editDepartment.html" class="btn-sm btn-outline-secondary"
-                               data-toggle="tooltip"
-                               data-placement="top"
-                               title="Edit department">
-                                <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
-                            </a>
-                            <a href="#" class="btn-sm btn-outline-secondary"
+                <div class="card" th:if="not ${departments.isEmpty()}">
 
-                               data-toggle="tooltip"
-                               data-target="confirmDeleteModal"
-                               data-placement="top"
-                               title="Delete department">
+
+                    <table class="table table-striped">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>Title</th>
+                            <th>Avg salary</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="department : ${departments}">
+                            <td th:text="${department.departmentName}"><!--&nbsp;&nbsp;&nbsp;-->CEO</td>
+                            <td>1000</td>
+                            <td class="text-right">
+                                <a href="editDepartment.html"
+                                   th:href="'/editDepartment/'+${department.departmentId}"
+                                   class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit department">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
+                                </a>
+                                <a href="#" class="btn-sm btn-outline-secondary"
+
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete department">
                                 <span data-toggle="modal" data-target="#confirmDeleteModal">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
 
                                 </span>
 
-                            </a>
+                                </a>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Accounting</td>
-                        <td>2500</td>
-                        <td class="text-right">
-                            <a href="editDepartment.html" class="btn-sm btn-outline-secondary"
-                               data-toggle="tooltip"
-                               data-placement="top"
-                               title="Edit department">
-                                <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
-                            </a>
-                            <a href="#" class="btn-sm btn-outline-secondary"
+                            </td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>Accounting</td>
+                            <td>2500</td>
+                            <td class="text-right">
+                                <a href="editDepartment.html"
+                                   th:href="@{/department/2}"
+                                   class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit department">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
+                                </a>
+                                <a href="#" class="btn-sm btn-outline-secondary"
 
-                               data-toggle="tooltip"
-                               data-target="confirmDeleteModal"
-                               data-placement="top"
-                               title="Delete department">
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete department">
                                 <span data-toggle="modal" data-target="#confirmDeleteModal">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
 
                                 </span>
 
-                            </a>
+                                </a>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Development</td>
-                        <td>1150</td>
-                        <td class="text-right">
-                            <a href="editDepartment.html" class="btn-sm btn-outline-secondary"
-                               data-toggle="tooltip"
-                               data-placement="top"
-                               title="Edit department">
-                                <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
-                            </a>
-                            <a href="#" class="btn-sm btn-outline-secondary"
+                            </td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>Development</td>
+                            <td>1150</td>
+                            <td class="text-right">
+                                <a href="editDepartment.html" class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit department">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
+                                </a>
+                                <a href="#" class="btn-sm btn-outline-secondary"
 
-                               data-toggle="tooltip"
-                               data-target="confirmDeleteModal"
-                               data-placement="top"
-                               title="Delete department">
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete department">
                                 <span data-toggle="modal" data-target="#confirmDeleteModal">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
 
                                 </span>
 
-                            </a>
+                                </a>
 
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+        <div class="card alert alert-info" th:if="${departments.isEmpty()}" align="center">
+            Please add departments.
         </div>
     </div>
 
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header alert-danger">
@@ -183,7 +196,7 @@
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
 <script>
     $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
 

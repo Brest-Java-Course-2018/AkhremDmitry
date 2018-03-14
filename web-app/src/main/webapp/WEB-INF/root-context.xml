@@ -10,6 +10,8 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+    <import resource="sample-db-spring.xml"/>
+
     <mvc:default-servlet-handler/>
 
     <mvc:annotation-driven/>
@@ -41,6 +43,27 @@
     </bean>
 
 
-    <context:property-placeholder location="classpath:application.properties"/>
+    <!--<context:property-placeholder location="classpath:application.properties"/>-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:sql.properties</value>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="departmentDao" class="com.epam.brest.course.dao.DepartmentDaoImpl">
+        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
+        <constructor-arg ref="departmentDao"/>
+    </bean>
 
 </beans>

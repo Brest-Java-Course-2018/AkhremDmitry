@@ -34,6 +34,7 @@ public class EmployeeDaoImpTest {
         Assert.assertNotNull(employee);
         Assert.assertEquals(1, employee.getEmployeeId());
         Assert.assertEquals("Kartman", employee.getEmployeeName());
+        Assert.assertEquals("Kartman@gmail.com", employee.getEmployeeEmail());
         Assert.assertEquals(1000, employee.getSalary());
         Assert.assertEquals(1, employee.getDepartmentId());
     }
@@ -43,12 +44,13 @@ public class EmployeeDaoImpTest {
         List<Employee> employees = employeeDao.getAllEmployee();
         int sizeBefore = employees.size();
         Employee employeeExp =
-                new Employee("Kenni", 1150, 1);
+                new Employee("Kenni", "Kenni@gmail.com", 1150, 1);
         Employee employeeAct = employeeDao.addEmployee(employeeExp);
         int sizeAfter = employeeDao.getAllEmployee().size();
 
         Assert.assertNotNull(employeeAct.getEmployeeId());
         Assert.assertEquals(employeeExp.getEmployeeName(), employeeAct.getEmployeeName());
+        Assert.assertEquals(employeeExp.getEmployeeEmail(), employeeAct.getEmployeeEmail());
         Assert.assertEquals(employeeExp.getSalary(), employeeAct.getSalary());
         Assert.assertEquals(employeeExp.getDepartmentId(), employeeAct.getDepartmentId());
         Assert.assertTrue((sizeAfter - 1) == sizeBefore);
@@ -57,12 +59,12 @@ public class EmployeeDaoImpTest {
     @Test
     public void updateEmployee() {
         Employee employee =
-                new Employee("Stan", 1500, 1);
+                new Employee("Stan", "Stan@gmail.com", 1500, 1);
         employee = employeeDao.addEmployee(employee);
         List<Employee> employees = employeeDao.getAllEmployee();
         int sizeBefore = employees.size();
         Employee employeeExp =
-                new Employee("Kyle", 1600, 1);
+                new Employee("Kyle", "Kyle@gmail.com", 1600, 1);
         employeeExp.setEmployeeId(employee.getEmployeeId());
         employeeDao.updateEmployee(employeeExp);
         employees = employeeDao.getAllEmployee();
@@ -79,7 +81,7 @@ public class EmployeeDaoImpTest {
     @Test
     public void deleteEmployeeById() {
         Employee employee =
-                new Employee("Batters", 600, 1);
+                new Employee("Batters", "Batters@gmail.com", 600, 1);
         employee = employeeDao.addEmployee(employee);
         List<Employee> employees = employeeDao.getAllEmployee();
         int sizeBefore = employees.size();
@@ -92,12 +94,13 @@ public class EmployeeDaoImpTest {
 
     @Test
     public void getAllEmployeeByDepartmentId() {
-        employeeDao.addEmployee(new Employee("Stan", 1500, 2));
-        employeeDao.addEmployee(new Employee("Batters", 600, 2));
-        employeeDao.addEmployee(new Employee("Kyle", 660, 1));
+        employeeDao.addEmployee(new Employee("Stan", "Stan@gmail.com", 1500, 2));
+        employeeDao.addEmployee(new Employee("Batters", "Batters@gmail.com", 600, 2));
+        employeeDao.addEmployee(new Employee("Kyle", "Kyle@gmail.com", 660, 1));
         List<Employee> employees = employeeDao.getAllEmployeeByDepartmentId(1);
 
         Assert.assertFalse(employees.isEmpty());
+        Assert.assertEquals(2, employees.size());
         for (Employee curEmployee : employees) {
             Assert.assertEquals(1, curEmployee.getDepartmentId());
         }
@@ -108,9 +111,9 @@ public class EmployeeDaoImpTest {
     public void getAllEmployeeWhere() {
         String whereSql = " WHERE salary >= :minSalary "
                 + "AND salary <= :maxSalary";
-        Employee employeeExp1 = new Employee("Stan", 1500, 1);
-        Employee employeeExp2 = new Employee("Kyle", 1100, 1);
-        Employee employeeExp3 = new Employee("Kenni", 1200, 1);
+        Employee employeeExp1 = new Employee("Stan","Stan@gmail.com", 1500, 1);
+        Employee employeeExp2 = new Employee("Kyle", "Kyle@gmail.com", 1100, 1);
+        Employee employeeExp3 = new Employee("Kenni", "Kenni@gmail.com", 1200, 1);
         employeeDao.addEmployee(employeeExp1);
         employeeDao.addEmployee(employeeExp2);
         employeeDao.addEmployee(employeeExp3);
@@ -125,9 +128,9 @@ public class EmployeeDaoImpTest {
 
     @Test
     public void getNumberEmployeesInDepartment() {
-        employeeDao.addEmployee(new Employee("Stan", 1500, 1));
-        employeeDao.addEmployee(new Employee("Kyle", 1100, 2));
-        employeeDao.addEmployee(new Employee("Kenni", 1200, 1));
+        employeeDao.addEmployee(new Employee("Stan", "Stan@gmail.com", 1500, 1));
+        employeeDao.addEmployee(new Employee("Kyle", "Kyle@gmail.com", 1100, 2));
+        employeeDao.addEmployee(new Employee("Kenni", "Kenni@gmail.com", 1200, 1));
         Assert.assertEquals(3, employeeDao.getNumberEmployeesInDepartment(1));
         Assert.assertEquals(1, employeeDao.getNumberEmployeesInDepartment(2));
         Assert.assertEquals(0, employeeDao.getNumberEmployeesInDepartment(3));
