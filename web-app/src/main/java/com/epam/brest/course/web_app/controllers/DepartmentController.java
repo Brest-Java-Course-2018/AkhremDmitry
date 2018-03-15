@@ -21,10 +21,10 @@ public class DepartmentController {
     DepartmentService departmentService;
 
 
-
     /**
      * Show departments page.
      *
+     * @param model Model
      * @return template name
      */
     @GetMapping(value = "/departments")
@@ -38,7 +38,7 @@ public class DepartmentController {
     /**
      * Show department page.
      *
-     * @param id departmentId
+     * @param model Model
      * @return template name
      */
     @GetMapping(value = "/department")
@@ -47,9 +47,12 @@ public class DepartmentController {
 
         return "department";
     }
+
     /**
      * Show editDepartment page.
      *
+     * @param id    department id
+     * @param model Model
      * @return template name
      */
     @GetMapping(value = "/editDepartment/{id}")

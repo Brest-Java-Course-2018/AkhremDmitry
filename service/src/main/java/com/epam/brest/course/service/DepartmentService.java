@@ -2,7 +2,6 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * Department service Interface.
  */
 
-@Service
+
 public interface DepartmentService {
 
     /**

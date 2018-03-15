@@ -19,7 +19,4 @@
         <jdbc:script location="classpath:sample_db/data-script.sql"/>
     </jdbc:initialize-database>
 
-    <bean id="transactionmanager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
 </beans>
