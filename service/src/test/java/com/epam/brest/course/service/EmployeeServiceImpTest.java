@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -35,7 +36,7 @@ public class EmployeeServiceImpTest {
 
     @Test
     public void getAllEmployee(){
-        List<Employee> employees = employeeService.getAllEmployee();
+        Collection<Employee> employees = employeeService.getAllEmployee();
         Assert.assertFalse(employees.isEmpty());
     }
 
@@ -48,7 +49,7 @@ public class EmployeeServiceImpTest {
         employeeService.addEmployee(employeeExp2);
         employeeService.addEmployee(employeeExp3);
 
-        List<Employee> employees = employeeService.getAllEmployeeWhere(1100,1499);
+        List<Employee> employees = (List<Employee>) employeeService.getAllEmployeeWhere(1100,1499);
 
         Assert.assertEquals(2, employees.size());
         Assert.assertTrue(employees.get(0).getSalary() >= 1100 && employees.get(0).getSalary() <= 1499);
@@ -67,7 +68,7 @@ public class EmployeeServiceImpTest {
 
     @Test
     public void addEmployee() {
-        List<Employee> employees = employeeService.getAllEmployee();
+        Collection<Employee> employees = employeeService.getAllEmployee();
         int empCountExp = employees.size()+1;
         Employee employee = employeeService.addEmployee(new Employee(NAME, EMAIL, SALARY, DEPARTMENTID));
         int empCountAct = employeeService.getAllEmployee().size();
@@ -104,7 +105,7 @@ public class EmployeeServiceImpTest {
     public void deleteEmployeeById() {
         Employee employee = new Employee(NAME, EMAIL, SALARY, DEPARTMENTID);
         employee = employeeService.addEmployee(employee);
-        List<Employee> employees = employeeService.getAllEmployee();
+        Collection<Employee> employees = employeeService.getAllEmployee();
         int empCountExp = employees.size()-1;
         employeeService.deleteEmployeeById(employee.getEmployeeId());
         int empCountAct = employeeService.getAllEmployee().size();

@@ -1,10 +1,6 @@
-package com.epam.brest.course.dao;
+package com.epam.brest.course.dto;
 
-/**
- * POJO Department for model.
- */
-public class Department {
-
+public class DepartmentDto {
     /**
      * Property departmentId.
      */
@@ -21,17 +17,22 @@ public class Department {
     private String description;
 
     /**
-     * Constructor Department.
+     * Constructor DepartmentDto.
      */
-    public Department() {
+    public DepartmentDto() {
     }
 
     /**
-     * Constructor Department.
-     * @param departmentName String
-     * @param description String
+     * Constructor DepartmentDto.
+     *
+     * @param departmentId id
+     * @param departmentName name
+     * @param description description department.
      */
-    public Department(final String departmentName, final String description) {
+    public DepartmentDto(final int departmentId,
+                         final String departmentName,
+                         final String description) {
+        this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.description = description;
     }
@@ -84,22 +85,21 @@ public class Department {
         this.description = description;
     }
 
-
     @Override
-    public int hashCode() {
-        int result = departmentId;
-        result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+    public String toString() {
+        return "DepartmentDto{" +
+                "departmentId=" + departmentId +
+                ", departmentName='" + departmentName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Department that = (Department) o;
+        DepartmentDto that = (DepartmentDto) o;
 
         if (departmentId != that.departmentId) return false;
         if (departmentName != null ? !departmentName.equals(that.departmentName) : that.departmentName != null)
@@ -108,13 +108,10 @@ public class Department {
     }
 
     @Override
-    public String toString() {
-        return "Department{"
-                + "departmentId=" + departmentId
-                + ", departmentName='" + departmentName + '\''
-                + ", description='" + description + '\''
-                + '}';
+    public int hashCode() {
+        int result = departmentId;
+        result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
-
-
 }

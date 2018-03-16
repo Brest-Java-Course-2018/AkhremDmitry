@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>BS 4 template</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
@@ -85,9 +85,11 @@
                                 <label class="d-none d-sm-inline"
                                        for="depNameInput">Department</label>
                                 <select class="form-control" id="depNameInput">
-                                    <option>CEO</option>
-                                    <option>Accounting</option>
-                                    <option>Development</option>
+                                    <div th:each="department : ${departments}">
+                                        <option th:text="${department.departmentName}">CEO</option>
+                                        <option th:remove="all">Accounting</option>
+                                        <option th:remove="all">Development</option>
+                                    </div>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -96,8 +98,8 @@
                                 <input type="text"
                                        class="form-control"
                                        id="employeeInput"
-                                       value = "Ivan Ivanov"
-                                th:value="${employee.employeeName}">
+                                       value="Ivan Ivanov"
+                                       th:value="${employee.employeeName}">
                             </div>
                         </form>
                     </div>

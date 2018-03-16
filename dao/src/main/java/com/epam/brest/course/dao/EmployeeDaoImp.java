@@ -9,7 +9,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.util.List;
+import java.util.Collection;
+
 
 /**
  * Employee DAO.
@@ -74,8 +75,8 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
-    public final List<Employee> getAllEmployee() {
-        List<Employee> employees = namedParameterJdbcTemplate
+    public final Collection<Employee> getAllEmployee() {
+        Collection<Employee> employees = namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(employeeGetAll,
                         BeanPropertyRowMapper.newInstance(Employee.class));
@@ -83,14 +84,14 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
-    public final List<Employee> getAllEmployeeWhere(final String whereSql,
+    public final Collection<Employee> getAllEmployeeWhere(final String whereSql,
                                                     final int minSalary,
                                                     final int maxSalary) {
         String employeeGetAllWhere = employeeGetAll + whereSql;
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("minSalary", minSalary)
                         .addValue("maxSalary", maxSalary);
-        List<Employee> employees = namedParameterJdbcTemplate
+        Collection<Employee> employees = namedParameterJdbcTemplate
                 .query(employeeGetAllWhere,
                         namedParameters,
                         BeanPropertyRowMapper.newInstance(Employee.class));
@@ -98,10 +99,10 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
-    public final List<Employee> getAllEmployeeByDepartmentId(final int departmentId) {
+    public final Collection<Employee> getAllEmployeeByDepartmentId(final int departmentId) {
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("departmentId", departmentId);
-        List<Employee> employees = namedParameterJdbcTemplate
+        Collection<Employee> employees = namedParameterJdbcTemplate
                 .query(employeeGetAllByDepartmentId,
                         namedParameters,
                         BeanPropertyRowMapper.newInstance(Employee.class));

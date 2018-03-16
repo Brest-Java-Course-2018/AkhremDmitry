@@ -1,6 +1,7 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
+import com.epam.brest.course.dto.DepartmentDto;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,19 +42,21 @@ public class DepartmentServiceImplTest {
 
     @Test
     public void getAllDepartment() {
-        List<Department> departments = departmentService.getAllDepartment();
+        List<DepartmentDto> departments = (List)departmentService.getAllDepartment();
         Assert.assertFalse(departments.isEmpty());
         Assert.assertTrue(2 == departments.size());
 
         Department departmentExp = departmentService.getDepartmentById(1);
-        Department departmentAct = departments.get(0);
-        Assert.assertEquals(departmentExp, departmentAct);
+        DepartmentDto departmentAct = departments.get(0);
+        Assert.assertEquals(departmentExp.getDepartmentId(), departmentAct.getDepartmentId());
+        Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
+        Assert.assertEquals(departmentExp.getDescription(), departmentAct.getDescription());
     }
 
     @Test
     public void addDepartment() {
         int depCountExp = departmentService.getAllDepartment().size() + 1;
-        Department departmentExp = new Department("Aыыыcademic", DESC);
+        Department departmentExp = new Department("Academic", DESC);
         Department departmentAct = departmentService.addDepartment(departmentExp);
         int depCountAct = departmentService.getAllDepartment().size();
 

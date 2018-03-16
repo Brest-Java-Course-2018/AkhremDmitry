@@ -2,7 +2,8 @@ package com.epam.brest.course.dao;
 
 import org.springframework.dao.DataAccessException;
 
-import java.util.List;
+import java.util.Collection;
+
 
 /**
  * Employee DAO Interface.
@@ -15,7 +16,7 @@ public interface EmployeeDao {
      * @return List employees
      * @throws DataAccessException on data access error.
      */
-    List<Employee> getAllEmployee();
+    Collection<Employee> getAllEmployee();
 
     /**
      * Return all employee with salary in the range from database.
@@ -26,7 +27,7 @@ public interface EmployeeDao {
      * @return List
      * @throws DataAccessException on data access error.
      */
-    List<Employee> getAllEmployeeWhere(final String whereSql,
+    Collection<Employee> getAllEmployeeWhere(final String whereSql,
                                        final int minSalary,
                                        final int maxSalary);
 
@@ -37,7 +38,7 @@ public interface EmployeeDao {
      * @return List<Employee>
      * @throws DataAccessException on data access error.
      */
-    List<Employee> getAllEmployeeByDepartmentId(final int departmentId);
+    Collection<Employee> getAllEmployeeByDepartmentId(final int departmentId);
 
     /**
      * Return employee by ID from database.

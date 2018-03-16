@@ -1,9 +1,11 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
+import com.epam.brest.course.dto.DepartmentDto;
+import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.springframework.dao.DataAccessException;
 
-import java.util.List;
+import java.util.Collection;
 
 
 /**
@@ -23,6 +25,15 @@ public interface DepartmentService {
     Department getDepartmentById(int departmentId);
 
     /**
+     * Return departmentDto by ID from database.
+     *
+     * @param departmentId int
+     * @return DepartmentDto
+     * @throws DataAccessException on data access error.
+     */
+    DepartmentDto getDepartmentDtoById(int departmentId);
+
+    /**
      * Update department description in database.
      *
      * @param departmentId Integer
@@ -36,7 +47,14 @@ public interface DepartmentService {
      *
      * @return List
      */
-    List<Department> getAllDepartment();
+    Collection<DepartmentDto> getAllDepartment();
+
+    /**
+     * Return all department with average salary from database.
+     * @return list departmentsDto
+     * @throws DataAccessException on data access error.
+     */
+    Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary();
 
 
     /**

@@ -1,8 +1,10 @@
 package com.epam.brest.course.dao;
 
-import java.util.List;
 
+import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.springframework.dao.DataAccessException;
+
+import java.util.Collection;
 
 /**
  * Department DAO Interface.
@@ -16,7 +18,14 @@ public interface DepartmentDao {
      * @return List departments
      * @throws DataAccessException on data access error.
      */
-    List<Department> getAllDepartment();
+    Collection<Department> getAllDepartment();
+
+    /**
+     * Return all department with average salary from database.
+     * @return list departmentsDto
+     * @throws DataAccessException on data access error.
+     */
+    Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary();
 
     /**
      * Return department by ID from database.

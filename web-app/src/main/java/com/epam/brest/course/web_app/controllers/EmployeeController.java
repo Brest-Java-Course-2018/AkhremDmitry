@@ -1,6 +1,8 @@
 package com.epam.brest.course.web_app.controllers;
 
 import com.epam.brest.course.dao.Employee;
+import com.epam.brest.course.dto.DepartmentDto;
+import com.epam.brest.course.service.DepartmentService;
 import com.epam.brest.course.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
+
+    @Autowired
+    DepartmentService departmentService;
     /**
      * Show employee page.
      *
@@ -48,7 +53,9 @@ public class EmployeeController {
     @GetMapping(value = "/editEmployee/{id}")
     public final String editEmployee(@PathVariable Integer id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
+        Collection<DepartmentDto> departments = departmentService.getAllDepartment();
         model.addAttribute("employee", employee);
+        model.addAttribute("departments", departments);
         return "editEmployee";
     }
 }

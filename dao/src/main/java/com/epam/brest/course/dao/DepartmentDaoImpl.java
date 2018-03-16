@@ -1,5 +1,6 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +15,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Department DAO.
@@ -76,6 +77,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Value("${department.insert}")
     private String departmentInsert;
 
+    /**
+     * SQL request for get departments with average salary.
+     */
+    @Value("${department.getAllWithAvgSalary}")
+    private String departmentGetAllWithAvgSalary;
 
     /**
      * NamedParameterJdbcTemplate.
@@ -93,11 +99,20 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public final List<Department> getAllDepartment() {
+    public final Collection<Department> getAllDepartment() {
         LOGGER.debug("getAllDepartment");
-        List<Department> departments = namedParameterJdbcTemplate
+        Collection<Department> departments = namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(departmentGet, new DepartmentRowMapper());
+        return departments;
+    }
+
+    @Override
+    public Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary() {
+        Collection<DepartmentDtoWithAvgSalary> departments = namedParameterJdbcTemplate
+                .getJdbcOperations()
+                .query(departmentGetAllWithAvgSalary,
+                        BeanPropertyRowMapper.newInstance(DepartmentDtoWithAvgSalary.class));
         return departments;
     }
 

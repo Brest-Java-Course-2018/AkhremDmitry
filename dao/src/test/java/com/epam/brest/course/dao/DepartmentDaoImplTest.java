@@ -1,6 +1,7 @@
 package com.epam.brest.course.dao;
 
 
+import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,7 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Collection;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-db-spring.xml",
@@ -35,13 +37,13 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void getAllDepartment() {
-        List<Department> departments = departmentDao.getAllDepartment();
+        Collection<Department> departments = departmentDao.getAllDepartment();
         Assert.assertFalse(departments.isEmpty());
     }
 
     @Test
     public void addDepartment() {
-        List<Department> departments = departmentDao.getAllDepartment();
+        Collection<Department> departments = departmentDao.getAllDepartment();
         int sizeBefore = departments.size();
         Department department = new Department("Education and Training", "Description");
         Department newDepartment = departmentDao.addDepartment(department);
@@ -86,12 +88,18 @@ public class DepartmentDaoImplTest {
         Department department =
                 new Department("Education", "Department of education");
         department = departmentDao.addDepartment(department);
-        List<Department> departments = departmentDao.getAllDepartment();
+        Collection<Department> departments = departmentDao.getAllDepartment();
         int sizeBefore = departments.size();
         departmentDao.deleteDepartmentById(department.getDepartmentId());
         departments = departmentDao.getAllDepartment();
         int sizeAfter = departments.size();
         Assert.assertTrue((sizeAfter+1) == sizeBefore);
+    }
+
+    @Test
+    public void getAllDepartmentWithAvgSalary() {
+        Collection<DepartmentDtoWithAvgSalary> departments = departmentDao.getAllDepartmentWithAvgSalary();
+        Assert.assertFalse(departments.isEmpty());
     }
 
 }

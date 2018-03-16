@@ -1,6 +1,8 @@
 package com.epam.brest.course.web_app.controllers;
 
 import com.epam.brest.course.dao.Department;
+import com.epam.brest.course.dto.DepartmentDto;
+import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,8 +31,8 @@ public class DepartmentController {
      */
     @GetMapping(value = "/departments")
     public final String departments(Model model) {
-        Collection<Department> departments =
-                departmentService.getAllDepartment();
+        Collection<DepartmentDtoWithAvgSalary> departments =
+                departmentService.getAllDepartmentWithAvgSalary();
         model.addAttribute("departments", departments);
         return "departments";
     }
@@ -43,8 +45,9 @@ public class DepartmentController {
      */
     @GetMapping(value = "/department")
     public final String department(Model model) {
-
-
+        String navbarBrandText = "Add department";
+        model.addAttribute("navbarBrandText", navbarBrandText);
+        model.addAttribute("department", new Department());
         return "department";
     }
 
@@ -57,8 +60,17 @@ public class DepartmentController {
      */
     @GetMapping(value = "/editDepartment/{id}")
     public final String editDepartment(@PathVariable Integer id, Model model) {
-        Department department = departmentService.getDepartmentById(id);
+        DepartmentDto department = departmentService.getDepartmentDtoById(id);
+        String navbarBrandText = "Edit department";
+        model.addAttribute("navbarBrandText", navbarBrandText);
         model.addAttribute("department", department);
-        return "editDepartment";
+
+        return "department";
     }
+
+//    @PostMapping(value = "/editDepartment/{id}")
+//    public final String saveDepartment(@PathVariable Integer id, Model model) {
+//
+//        return "redirect:department";
+//    }
 }

@@ -2,6 +2,7 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dao.DepartmentDao;
+import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.easymock.Capture;
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -13,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -86,14 +87,35 @@ public class DepartmentServiceImplMockTest {
 
     @Test
     public void getAllDepartment() {
-        List<Department> departments = new ArrayList<>();
+        Collection<Department> departments = new ArrayList<>();
         departments.add(DEPARTMENT);
         EasyMock.expect(mockDepartmentDao.getAllDepartment()).andReturn(departments);
 
         EasyMock.replay(mockDepartmentDao);
 
         departmentService.getAllDepartment();
-        EasyMock.verify();
+        EasyMock.verify(mockDepartmentDao);
+    }
+
+    @Test
+    public void getAllDepartmentWithAvgSalary(){
+        Collection<DepartmentDtoWithAvgSalary> departments = new ArrayList<>();
+        EasyMock.expect(mockDepartmentDao.getAllDepartmentWithAvgSalary()).andReturn(departments);
+
+        EasyMock.replay(mockDepartmentDao);
+
+        departmentService.getAllDepartmentWithAvgSalary();
+        EasyMock.verify(mockDepartmentDao);
+    }
+
+    @Test
+    public void getDepartmentDtoById() {
+        EasyMock.expect(mockDepartmentDao.getDepartmentById(ID)).andReturn(DEPARTMENT);
+
+        EasyMock.replay(mockDepartmentDao);
+
+        departmentService.getDepartmentDtoById(ID);
+        EasyMock.verify(mockDepartmentDao);
     }
 
 }

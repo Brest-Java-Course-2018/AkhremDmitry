@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,7 +24,7 @@ public class EmployeeDaoImpTest {
 
     @Test
     public void getAllEmployee() {
-        List<Employee> employees = employeeDao.getAllEmployee();
+        Collection<Employee> employees = employeeDao.getAllEmployee();
         Assert.assertFalse(employees.isEmpty());
     }
 
@@ -41,7 +42,7 @@ public class EmployeeDaoImpTest {
 
     @Test
     public void addEmployee() {
-        List<Employee> employees = employeeDao.getAllEmployee();
+        Collection<Employee> employees = employeeDao.getAllEmployee();
         int sizeBefore = employees.size();
         Employee employeeExp =
                 new Employee("Kenni", "Kenni@gmail.com", 1150, 1);
@@ -61,7 +62,7 @@ public class EmployeeDaoImpTest {
         Employee employee =
                 new Employee("Stan", "Stan@gmail.com", 1500, 1);
         employee = employeeDao.addEmployee(employee);
-        List<Employee> employees = employeeDao.getAllEmployee();
+        Collection<Employee> employees = employeeDao.getAllEmployee();
         int sizeBefore = employees.size();
         Employee employeeExp =
                 new Employee("Kyle", "Kyle@gmail.com", 1600, 1);
@@ -83,7 +84,7 @@ public class EmployeeDaoImpTest {
         Employee employee =
                 new Employee("Batters", "Batters@gmail.com", 600, 1);
         employee = employeeDao.addEmployee(employee);
-        List<Employee> employees = employeeDao.getAllEmployee();
+        Collection<Employee> employees = employeeDao.getAllEmployee();
         int sizeBefore = employees.size();
         employeeDao.deleteEmployeeById(employee.getEmployeeId());
         employees = employeeDao.getAllEmployee();
@@ -97,7 +98,7 @@ public class EmployeeDaoImpTest {
         employeeDao.addEmployee(new Employee("Stan", "Stan@gmail.com", 1500, 2));
         employeeDao.addEmployee(new Employee("Batters", "Batters@gmail.com", 600, 2));
         employeeDao.addEmployee(new Employee("Kyle", "Kyle@gmail.com", 660, 1));
-        List<Employee> employees = employeeDao.getAllEmployeeByDepartmentId(1);
+        Collection<Employee> employees = employeeDao.getAllEmployeeByDepartmentId(1);
 
         Assert.assertFalse(employees.isEmpty());
         Assert.assertEquals(2, employees.size());
@@ -118,7 +119,7 @@ public class EmployeeDaoImpTest {
         employeeDao.addEmployee(employeeExp2);
         employeeDao.addEmployee(employeeExp3);
 
-        List<Employee> employees = employeeDao.getAllEmployeeWhere(whereSql, 1100, 1499);
+        List<Employee> employees = (List)employeeDao.getAllEmployeeWhere(whereSql, 1100, 1499);
 
         Assert.assertEquals(2, employees.size());
         Assert.assertTrue(employees.get(0).getSalary() >= 1100 && employees.get(0).getSalary() <= 1499);

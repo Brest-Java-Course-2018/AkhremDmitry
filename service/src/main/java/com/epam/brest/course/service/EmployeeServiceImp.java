@@ -6,7 +6,8 @@ import com.epam.brest.course.dao.EmployeeDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
+import java.util.Collection;
+
 
 /**
  * Employee service.
@@ -41,18 +42,18 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public final List<Employee> getAllEmployee() {
+    public final Collection<Employee> getAllEmployee() {
         return employeeDao.getAllEmployee();
     }
 
     @Override
-    public final List<Employee> getAllEmployeeWhere(final int minSalary,
+    public final Collection<Employee> getAllEmployeeWhere(final int minSalary,
                                               final int maxSalary) {
         LOGGER.debug("getAllEmployeeWhere minSalary = {}, maxSalary = {}",
                 minSalary, maxSalary);
         String whereSql = " WHERE salary >= :minSalary "
                 + "AND salary <= :maxSalary";
-        List<Employee> employees = employeeDao
+        Collection<Employee> employees = employeeDao
                 .getAllEmployeeWhere(whereSql, minSalary, maxSalary);
         LOGGER.debug("getAllEmployeeWhere {}", employees);
         return employees;
