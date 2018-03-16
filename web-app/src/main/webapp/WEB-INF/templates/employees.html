@@ -47,7 +47,7 @@
            class="navbar-brand text-uppercase mr-auto">Employees</a>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="employee.html"
+                <a href="DELemployee.html"
                    th:href="@{/employee}"
                    class="btn btn-light"
                    data-toggle="tooltip"
@@ -84,7 +84,7 @@
                             <td th:text="${employee.employeeEmail}">ivan.ivanov@test.com</td>
                             <td th:text="${employee.salary}">1000</td>
                             <td class="text-right">
-                                <a href="editEmployee.html"
+                                <a href="employee.html"
                                    th:href="'/editEmployee/' + ${employee.employeeId}"
                                    class="btn-sm btn-outline-secondary"
                                    data-toggle="tooltip"
@@ -112,7 +112,7 @@
                             <td>alex.petrov@test.com</td>
                             <td>1100</td>
                             <td class="text-right">
-                                <a href="editEmployee.html"
+                                <a href="employee.html"
                                    th:href="@{editEmployee/2}"
                                    class="btn-sm btn-outline-secondary"
                                    data-toggle="tooltip"

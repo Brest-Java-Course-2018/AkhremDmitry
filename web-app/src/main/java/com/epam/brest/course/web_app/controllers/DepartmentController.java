@@ -1,13 +1,16 @@
 package com.epam.brest.course.web_app.controllers;
 
+import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collection;
 
@@ -50,6 +53,18 @@ public class DepartmentController {
         return "department";
     }
 
+    @PostMapping(value = "/department")
+    public final String department(Department department,
+                                   BindingResult result) {
+
+     if (result.hasErrors()){
+         return "/department";
+     }else {
+         departmentService.addDepartment(department);
+         return "redirect:/departments";
+     }
+    }
+
     /**
      * Show editDepartment page.
      *
@@ -66,10 +81,4 @@ public class DepartmentController {
 
         return "department";
     }
-
-//    @PostMapping(value = "/editDepartment/{id}")
-//    public final String saveDepartment(@PathVariable Integer id, Model model) {
-//
-//        return "redirect:department";
-//    }
 }

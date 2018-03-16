@@ -50,11 +50,12 @@
            th:text="'&nbsp;'+${navbarBrandText}">
             &nbsp;Add department
         </a>
-
         <ul class="navbar-nav float-right">
             <li class="nav-item">
                 <a href="departments.html"
-                   th:href="@{/departments}"
+                   th:href="@{/department}"
+                   th:onclick="@{document.forms['departmentForm'].submit(); return false;}"
+
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom"
@@ -77,15 +78,20 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form id="departmentForm"
+                              th:object="${department}"
+                              action="departments.html"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
                                        for="field_departmentName">Department name</label>
                                 <input type="text"
                                        class="form-control"
                                        id="field_departmentName"
-                                       value="Add department name"
-                                       th:value="${department.departmentName}?: 'Add department name'">
+                                       placeholder="Add department name"
+                                       th:field="${department.departmentName}">
+                                       <!--th:value="${navbarBrandText.equals('Edit department')} ? ${department.departmentName} : ''">-->
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
@@ -93,8 +99,9 @@
                                 <input type="text"
                                        class="form-control"
                                        id="descriptionInput"
-                                       value="Add description"
-                                       th:value="${department.description}?: 'Add description'">
+                                       placeholder="Add description"
+                                       th:field="${department.description}">
+                                       <!--th:value="${navbarBrandText.equals('Edit department')} ? ${department.description} : ''">-->
                             </div>
                         </form>
                     </div>

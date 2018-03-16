@@ -29,7 +29,11 @@ public class EmployeeController {
      * @return template name
      */
     @GetMapping(value = "/employee")
-    public final String employee() {
+    public final String employee(Model model) {
+        String navbarBrandText = "Add employee";
+        Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+        model.addAttribute("navbarBrandText", navbarBrandText);
+        model.addAttribute("departments", departments);
         return "employee";
     }
 
@@ -54,8 +58,20 @@ public class EmployeeController {
     public final String editEmployee(@PathVariable Integer id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
         Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+
+        DepartmentDto departmentDto= null;
+        for(DepartmentDto curDep: departments){
+            if (curDep.getDepartmentId().equals(id)){
+                departmentDto=curDep;
+            }
+        }
+        departments.remove(departmentDto);
+
+        String navbarBrandText = "Edit employee";
+        model.addAttribute("navbarBrandText", navbarBrandText);
         model.addAttribute("employee", employee);
+        model.addAttribute("employeeDepartment", departmentDto);
         model.addAttribute("departments", departments);
-        return "editEmployee";
+        return "employee";
     }
 }
