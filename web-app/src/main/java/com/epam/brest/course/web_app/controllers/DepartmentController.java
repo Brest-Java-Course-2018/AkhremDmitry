@@ -1,6 +1,5 @@
 package com.epam.brest.course.web_app.controllers;
 
-import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
@@ -47,7 +46,7 @@ public class DepartmentController {
     public final String department(Model model) {
         String navbarBrandText = "Add department";
         model.addAttribute("navbarBrandText", navbarBrandText);
-        model.addAttribute("department", new Department());
+        model.addAttribute("department", new DepartmentDto());
         return "department";
     }
 

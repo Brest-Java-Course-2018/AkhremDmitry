@@ -15,14 +15,14 @@ import java.util.Collection;
 
 public interface DepartmentService {
 
-    /**
-     * Return department by ID from database.
-     *
-     * @param departmentId int
-     * @return Department
-     * @throws DataAccessException on data access error.
-     */
-    Department getDepartmentById(int departmentId);
+//    /**
+//     * Return department by ID from database.
+//     *
+//     * @param departmentId int
+//     * @return Department
+//     * @throws DataAccessException on data access error.
+//     */
+//    Department getDepartmentById(int departmentId);
 
     /**
      * Return departmentDto by ID from database.
@@ -32,15 +32,6 @@ public interface DepartmentService {
      * @throws DataAccessException on data access error.
      */
     DepartmentDto getDepartmentDtoById(int departmentId);
-
-    /**
-     * Update department description in database.
-     *
-     * @param departmentId Integer
-     * @param description  String
-     * @throws DataAccessException on data access error.
-     */
-    void updateDepartmentDescription(Integer departmentId, String description);
 
     /**
      * Return all department from database.

@@ -3,10 +3,8 @@ package com.epam.brest.course.service;
 import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dao.DepartmentDao;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
-import org.easymock.Capture;
 import org.easymock.EasyMock;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,6 @@ import java.util.Collection;
 public class DepartmentServiceImplMockTest {
 
     private static final int ID = 1;
-    private static final String DESC = "Academic Department";
     private static final Department DEPARTMENT =
             new Department("Distribution", "Distribution department");
 
@@ -37,32 +34,15 @@ public class DepartmentServiceImplMockTest {
         EasyMock.reset(mockDepartmentDao);
     }
 
-    @Test
-    public void updateDepartmentDescription() {
-        EasyMock.expect(mockDepartmentDao.getDepartmentById(EasyMock.anyInt()))
-                .andReturn(DEPARTMENT);
-        Capture<Department> captureArgument = Capture.newInstance();
-        mockDepartmentDao.updateDepartment(EasyMock.capture(captureArgument));
-        EasyMock.expectLastCall();
-        EasyMock.replay(mockDepartmentDao);
-
-        departmentService.updateDepartmentDescription(ID, DESC);
-
-        Department department = captureArgument.getValue();
-
-        Assert.assertEquals(DESC, department.getDescription());
-        EasyMock.verify(mockDepartmentDao);
-    }
-
-    @Test
-    public void getDepartmentById() {
-        EasyMock.expect(mockDepartmentDao.getDepartmentById(ID)).andReturn(DEPARTMENT);
-
-        EasyMock.replay(mockDepartmentDao);
-
-        departmentService.getDepartmentById(ID);
-        EasyMock.verify(mockDepartmentDao);
-    }
+//    @Test
+//    public void getDepartmentById() {
+//        EasyMock.expect(mockDepartmentDao.getDepartmentById(ID)).andReturn(DEPARTMENT);
+//
+//        EasyMock.replay(mockDepartmentDao);
+//
+//        departmentService.getDepartmentById(ID);
+//        EasyMock.verify(mockDepartmentDao);
+//    }
 
     @Test
     public void addDepartment() {

@@ -36,11 +36,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.departmentDao = departmentDao;
     }
 
-    @Override
-    public final Department getDepartmentById(final int departmentId) {
-        LOGGER.debug("getDepartmentById({})", departmentId);
-        return departmentDao.getDepartmentById(departmentId);
-    }
+//    @Override
+//    public final Department getDepartmentById(final int departmentId) {
+//        LOGGER.debug("getDepartmentById({})", departmentId);
+//        return departmentDao.getDepartmentById(departmentId);
+//    }
 
     @Override
     public final DepartmentDto getDepartmentDtoById(final int departmentId) {
@@ -50,15 +50,6 @@ public class DepartmentServiceImpl implements DepartmentService {
                 department.getDepartmentName(),
                 department.getDescription());
         return departmentDto;
-    }
-
-    @Override
-    public final void updateDepartmentDescription(final Integer departmentId,
-                                                  final String description) {
-        LOGGER.debug("getDepartmentById({}, {})", departmentId, description);
-        Department department = departmentDao.getDepartmentById(departmentId);
-        department.setDescription(description);
-        departmentDao.updateDepartment(department);
     }
 
     @Override

@@ -33,20 +33,12 @@ public class DepartmentServiceImplTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void updateDepartmentDescription() {
-        departmentService.updateDepartmentDescription(ID, DESC);
-
-        Department department = departmentService.getDepartmentById(ID);
-        Assert.assertEquals(DESC, department.getDescription());
-    }
-
-    @Test
     public void getAllDepartment() {
         List<DepartmentDto> departments = (List)departmentService.getAllDepartment();
         Assert.assertFalse(departments.isEmpty());
         Assert.assertTrue(2 == departments.size());
 
-        Department departmentExp = departmentService.getDepartmentById(1);
+        DepartmentDto departmentExp = departmentService.getDepartmentDtoById(ID);
         DepartmentDto departmentAct = departments.get(0);
         Assert.assertEquals(departmentExp.getDepartmentId(), departmentAct.getDepartmentId());
         Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
@@ -77,14 +69,16 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
-    public void getDepartmentById() {
+    public void getDepartmentDtoById() {
         Department departmentExp = departmentService
                 .addDepartment(new Department("Academic", DESC));
-        Department departmentAct = departmentService
-                .getDepartmentById(departmentExp.getDepartmentId());
+        DepartmentDto departmentAct = departmentService
+                .getDepartmentDtoById(departmentExp.getDepartmentId());
 
         Assert.assertNotNull(departmentAct);
-        Assert.assertEquals(departmentExp, departmentAct);
+        Assert.assertEquals(departmentExp.getDepartmentId(), departmentAct.getDepartmentId());
+        Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
+        Assert.assertEquals(departmentExp.getDescription(), departmentAct.getDescription());
     }
 
     @Test
