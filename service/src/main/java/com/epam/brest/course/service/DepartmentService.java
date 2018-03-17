@@ -58,6 +58,14 @@ public interface DepartmentService {
     Department addDepartment(Department department);
 
     /**
+     * Update department in database.
+     *
+     * @param department Department
+     * @throws DataAccessException on data access error.
+     */
+    void updateDepartment(Department department);
+
+    /**
      * Remove department by ID from database.
      *
      * @param departmentId int

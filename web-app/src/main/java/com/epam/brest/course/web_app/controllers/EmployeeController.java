@@ -7,8 +7,10 @@ import com.epam.brest.course.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collection;
 
@@ -34,7 +36,33 @@ public class EmployeeController {
         Collection<DepartmentDto> departments = departmentService.getAllDepartment();
         model.addAttribute("navbarBrandText", navbarBrandText);
         model.addAttribute("departments", departments);
+        model.addAttribute("employeeDepartment", new DepartmentDto());
+        model.addAttribute("employee", new Employee());
         return "employee";
+    }
+
+    @PostMapping(value = "/employee")
+    public final String addEmployee(Employee employee,
+                                    BindingResult result) {
+        if (result.hasErrors()){
+            return "/employee";
+        }else {
+            employeeService.addEmployee(employee);
+            return "redirect:/employees";
+        }
+
+    }
+
+    @PostMapping(value = "/editEmployee/{id}")
+    public final String updateEmployee(Employee employee,
+                                    BindingResult result) {
+        if (result.hasErrors()){
+            return "/employee";
+        }else {
+            employeeService.addEmployee(employee);
+            return "redirect:/employees";
+        }
+
     }
 
     /**
@@ -61,7 +89,7 @@ public class EmployeeController {
 
         DepartmentDto departmentDto= null;
         for(DepartmentDto curDep: departments){
-            if (curDep.getDepartmentId().equals(id)){
+            if (curDep.getDepartmentId().equals(employee.getDepartmentId())){
                 departmentDto=curDep;
             }
         }
@@ -73,5 +101,11 @@ public class EmployeeController {
         model.addAttribute("employeeDepartment", departmentDto);
         model.addAttribute("departments", departments);
         return "employee";
+    }
+
+    @GetMapping(value = "/employee/{id}/delete")
+    public final String deleteEmployee(@PathVariable Integer id){
+        employeeService.deleteEmployeeById(id);
+        return "redirect:/employees";
     }
 }

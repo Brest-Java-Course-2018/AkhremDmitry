@@ -84,6 +84,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public void updateDepartment(Department department) {
+        LOGGER.debug("updateDepartment({})", department);
+        departmentDao.updateDepartment(department);
+    }
+
+    @Override
     public final void deleteDepartmentById(final int departmentId) {
         LOGGER.debug("deleteDepartmentById({})", departmentId);
         departmentDao.deleteDepartmentById(departmentId);

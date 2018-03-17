@@ -58,7 +58,9 @@
         <ul class="navbar-nav float-right">
             <li class="nav-item">
                 <a href="employees.html"
-                   th:href="@{/employees}"
+                   th:href="@{/employee}"
+                   th:onclick="@{document.forms['employeeForm'].submit(); return false;}"
+
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom"
@@ -81,15 +83,22 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form id="employeeForm"
+                              th:object="${employee}"
+                              action="employees.html"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
-                                       for="depNameInput">Department</label>
-                                <select class="form-control" id="depNameInput">
-                                    <option th:value="${navbarBrandText.equals('Edit employee')} ? ${employeeDepartment.departmentId}"
-                                            th:text="${navbarBrandText.equals('Edit employee')} ? ${employeeDepartment.departmentName}">CEO</option>
+                                       for="empNameInput">Department</label>
+                                <select class="form-control" id="empNameInput">
+                                    <option th:value="${employeeDepartment.departmentId}"
+                                            th:field="${employeeDepartment.departmentId}"
+                                            th:text="${employeeDepartment.departmentId}">CEO</option>
                                     <div th:each="department : ${departments}">
-                                        <option th:value="${department.departmentId}" th:text="${department.departmentName}">CEO</option>
+                                        <option th:value="${department.departmentId}"
+                                                th:field="${employeeDepartment.departmentId}"
+                                                th:text="${department.departmentId}">CEO</option>
                                         <option th:remove="all">Accounting</option>
                                         <option th:remove="all">Development</option>
                                     </div>
@@ -103,7 +112,7 @@
                                        id="employeeInputName"
                                        value="Ivan Ivanov"
                                        placeholder="Add name"
-                                       th:value="${navbarBrandText.equals('Edit employee')} ? ${employee.employeeName}">
+                                       th:field="${employee.employeeName}"/>
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
@@ -113,7 +122,7 @@
                                        id="employeeInputMail"
                                        value="Ivan Ivanov@gmail.com"
                                        placeholder="Add email"
-                                       th:value="${navbarBrandText.equals('Edit employee')} ? ${employee.employeeEmail}">
+                                       th:field="${employee.employeeEmail}"/>
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
@@ -123,7 +132,8 @@
                                        id="employeeInputSalary"
                                        value="1000"
                                        placeholder="Add salary"
-                                       th:value="${navbarBrandText.equals('Edit employee')} ? ${employee.salary}">
+                                       th:field="${employee.salary}"/>
+                                       <!--th:value="${navbarBrandText.equals('Edit employee')} ? ${employee.salary}">-->
                             </div>
                         </form>
                     </div>

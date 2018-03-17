@@ -25,7 +25,9 @@
             data-target="#navbarsNav">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a href="departments.html" class="navbar-brand">
+    <a href="departments.html"
+       th:href="@{/departments}"
+       class="navbar-brand">
         <img src="../../resources/static/img/logo.svg"
              th:src="@{/resources/static/img/logo.svg}" width="64" height="32"></a>
     <div class="collapse navbar-collapse" id="navbarsNav">
@@ -52,6 +54,8 @@
         </a>
         <ul class="navbar-nav float-right">
             <li class="nav-item">
+
+                <!--Команда сабмит для формы DepartmrntForm -->
                 <a href="departments.html"
                    th:href="@{/department}"
                    th:onclick="@{document.forms['departmentForm'].submit(); return false;}"
@@ -83,6 +87,11 @@
                               action="departments.html"
                               th:action="@{${#httpServletRequest.servletPath}}"
                               th:method="@{post}">
+                            <!--скрытое поле депИД для удаления-->
+                            <input id="field_departmentId"
+                            name=""
+                            type="hidden"
+                            th:field="*{departmentId}"/>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
                                        for="field_departmentName">Department name</label>
@@ -91,7 +100,7 @@
                                        id="field_departmentName"
                                        placeholder="Add department name"
                                        th:field="${department.departmentName}">
-                                       <!--th:value="${navbarBrandText.equals('Edit department')} ? ${department.departmentName} : ''">-->
+
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
@@ -100,7 +109,7 @@
                                        class="form-control"
                                        id="descriptionInput"
                                        placeholder="Add description"
-                                       th:field="${department.description}">
+                                       th:field="*{description}">
                                        <!--th:value="${navbarBrandText.equals('Edit department')} ? ${department.description} : ''">-->
                             </div>
                         </form>

@@ -53,8 +53,15 @@ public class DepartmentController {
         return "department";
     }
 
+    /**
+     * Add department to db.
+     *
+     * @param department Department
+     * @param result BindingResult
+     * @return template name
+     */
     @PostMapping(value = "/department")
-    public final String department(Department department,
+    public final String addDepartment(Department department,
                                    BindingResult result) {
 
      if (result.hasErrors()){
@@ -63,6 +70,24 @@ public class DepartmentController {
          departmentService.addDepartment(department);
          return "redirect:/departments";
      }
+    }
+
+    /**
+     * Update department.
+     *
+     * @param department Department
+     * @param result BindingResult
+     * @return template name
+     */
+    @PostMapping(value = "/editDepartment/{id}")
+    public final String updateDepartment(Department department,
+                                   BindingResult result) {
+        if (result.hasErrors()){
+            return "/department";
+        }else {
+            departmentService.updateDepartment(department);
+            return "redirect:/departments";
+        }
     }
 
     /**
@@ -80,5 +105,17 @@ public class DepartmentController {
         model.addAttribute("department", department);
 
         return "department";
+    }
+
+    /**
+     * Delete department.
+     *
+     * @param id departmentId
+     * @return template name
+     */
+    @GetMapping(value = "/department/{id}/delete")
+    public  final String deleteDepartment(@PathVariable Integer id){
+        departmentService.deleteDepartmentById(id);
+        return "redirect:/departments";
     }
 }
