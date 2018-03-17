@@ -95,4 +95,10 @@ public class EmployeeServiceImp implements EmployeeService {
            departmentDao.deleteDepartmentById(employee.getDepartmentId());
         }
     }
+
+    @Override
+    public void updateEmployee(Employee employee) {
+        LOGGER.debug("updateEmployee({})", employee);
+        employeeDao.updateEmployee(employee);
+    }
 }

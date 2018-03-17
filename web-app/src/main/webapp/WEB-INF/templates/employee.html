@@ -76,10 +76,6 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!--&lt;!&ndash; Block level &ndash;&gt;-->
-            <!--<div class="col-2 text-truncate">-->
-            <!--Praeterea iter est quasdam res quas ex communi.-->
-            <!--</div>-->
             <div class="col">
                 <div class="card">
                     <div class="card-body">
@@ -89,22 +85,23 @@
                               th:action="@{${#httpServletRequest.servletPath}}"
                               th:method="@{post}">
                             <div class="form-group">
-                                <label class="d-none d-sm-inline"
-                                       for="empNameInput">Department</label>
-                                <select class="form-control" id="empNameInput">
-                                    <option th:value="${employeeDepartment.departmentId}"
-                                            th:field="${employeeDepartment.departmentId}"
-                                            th:text="${employeeDepartment.departmentId}">CEO</option>
-                                    <div th:each="department : ${departments}">
-                                        <option th:value="${department.departmentId}"
-                                                th:field="${employeeDepartment.departmentId}"
-                                                th:text="${department.departmentId}">CEO</option>
-                                        <option th:remove="all">Accounting</option>
-                                        <option th:remove="all">Development</option>
-                                    </div>
+
+                                <select th:field="${employee.departmentId}">
+                                    <option th:value="${employee.departmentId}"
+                                            th:text="${employeeDepartment.departmentName}">Wireframe
+                                    </option>
+                                    <option th:each="department : ${departments}"
+                                            th:value="${department.departmentId}"
+                                            th:text="${department.departmentName}">Wireframe
+                                    </option>
                                 </select>
                             </div>
+
                             <div class="form-group">
+                                <input id="field_employeeId"
+                                       name=""
+                                       type="hidden"
+                                       th:field="${employee.employeeId}"/>
                                 <label class="d-none d-sm-inline"
                                        for="employeeInputName">Employee Name</label>
                                 <input type="text"
@@ -133,7 +130,7 @@
                                        value="1000"
                                        placeholder="Add salary"
                                        th:field="${employee.salary}"/>
-                                       <!--th:value="${navbarBrandText.equals('Edit employee')} ? ${employee.salary}">-->
+                                <!--th:value="${navbarBrandText.equals('Edit employee')} ? ${employee.salary}">-->
                             </div>
                         </form>
                     </div>

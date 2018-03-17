@@ -59,7 +59,7 @@ public class EmployeeController {
         if (result.hasErrors()){
             return "/employee";
         }else {
-            employeeService.addEmployee(employee);
+            employeeService.updateEmployee(employee);
             return "redirect:/employees";
         }
 

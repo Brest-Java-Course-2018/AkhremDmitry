@@ -62,4 +62,12 @@ public interface EmployeeService {
      * @throws DataAccessException on data access error.
      */
     void deleteEmployeeById(int employeeId);
+
+    /**
+     * Update employee in database.
+     *
+     * @param employee Employee
+     * @throws DataAccessException on data access error.
+     */
+    void updateEmployee(Employee employee);
 }
