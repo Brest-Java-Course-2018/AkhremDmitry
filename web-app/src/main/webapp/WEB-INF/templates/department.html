@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>HR manager</title>
+    <title th:text="#{general.title}">HR manager</title>
     <link rel="stylesheet"
           href="../../resources/static/css/font-awesome.min.css"
           th:href="@{/resources/static/css/font-awesome.min.css}">
@@ -33,9 +33,11 @@
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="departments.html"
-               th:href="@{/departments}">Departments <span class="sr-only">(current)</span></a>
+               th:href="@{/departments}"
+               th:text="#{general.departments}">Departments <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="employees.html"
-               th:href="@{/employees}">Employees</a>
+               th:href="@{/employees}"
+               th:text="#{general.employees}">Employees</a>
         </div>
     </div>
 </nav>
@@ -47,7 +49,8 @@
            class="small"
            data-toggle="tooltip"
            data-placement="bottom"
-           title="Go back"><i class="fa fa-arrow-left text-dark"> </i></a>
+           title="Go back"
+           th:title="#{general.tooltipGoBack}"><i class="fa fa-arrow-left text-dark"> </i></a>
         <a class="navbar-brand text-uppercase mr-auto"
            th:text="'&nbsp;'+${navbarBrandText}">
             &nbsp;Add department
@@ -63,8 +66,10 @@
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom"
-                   title="Save department">
-                    <i class="fa fa-save"></i><span class="d-none d-sm-inline"> Save</span></a>
+                   title="Save department"
+                   th:title="#{general.tooltipSave}">
+                    <i class="fa fa-save"></i><span class="d-none d-sm-inline"
+                                                    th:text="#{general.save}">Save</span></a>
             </li>
         </ul>
     </nav>
@@ -94,7 +99,8 @@
                             th:field="*{departmentId}"/>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
-                                       for="field_departmentName">Department name</label>
+                                       for="field_departmentName"
+                                       th:text="#{department.depName}">Department name</label>
                                 <input type="text"
                                        class="form-control"
                                        id="field_departmentName"
@@ -108,7 +114,8 @@
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
-                                       for="descriptionInput">Description</label>
+                                       for="descriptionInput"
+                                       th:text="#{department.description}">Description</label>
                                 <input type="text"
                                        class="form-control"
                                        id="descriptionInput"
