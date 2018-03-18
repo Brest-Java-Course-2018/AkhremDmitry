@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 /**
@@ -61,11 +62,15 @@ public class DepartmentController {
      * @return template name
      */
     @PostMapping(value = "/department")
-    public final String addDepartment(Department department,
-                                   BindingResult result) {
+    public final String addDepartment(@Valid Department department,
+                                      BindingResult result,
+                                      Model model) {
 
      if (result.hasErrors()){
-         return "/department";
+         String navbarBrandText = "Add department";
+         model.addAttribute("navbarBrandText", navbarBrandText);
+         model.addAttribute("department", department);
+         return "department";
      }else {
          departmentService.addDepartment(department);
          return "redirect:/departments";
@@ -80,10 +85,9 @@ public class DepartmentController {
      * @return template name
      */
     @PostMapping(value = "/editDepartment/{id}")
-    public final String updateDepartment(Department department,
-                                   BindingResult result) {
+    public final String updateDepartment(@Valid Department department, BindingResult result) {
         if (result.hasErrors()){
-            return "/department";
+            return "redirect:/department";
         }else {
             departmentService.updateDepartment(department);
             return "redirect:/departments";

@@ -15,14 +15,14 @@ public interface DepartmentDao {
     /**
      * Return all department from database.
      *
-     * @return List departments
+     * @return Collection departments
      * @throws DataAccessException on data access error.
      */
     Collection<Department> getAllDepartment();
 
     /**
      * Return all department with average salary from database.
-     * @return list departmentsDto
+     * @return Collection departmentsDto
      * @throws DataAccessException on data access error.
      */
     Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary();

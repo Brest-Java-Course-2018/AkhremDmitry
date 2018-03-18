@@ -100,6 +100,10 @@
                                        id="field_departmentName"
                                        placeholder="Add department name"
                                        th:field="${department.departmentName}">
+                                <label class="d-none d-sm-inline text-danger"
+                                       for="field_departmentName"
+                                       th:if="${#fields.hasErrors('departmentName')}"
+                                       th:errors="*{departmentName}">error</label>
 
                             </div>
                             <div class="form-group">
@@ -110,6 +114,10 @@
                                        id="descriptionInput"
                                        placeholder="Add description"
                                        th:field="*{description}">
+                                <label class="d-none d-sm-inline text-danger"
+                                       for="descriptionInput"
+                                       th:if="${#fields.hasErrors('description')}"
+                                       th:errors="*{description}">error</label>
                                        <!--th:value="${navbarBrandText.equals('Edit department')} ? ${department.description} : ''">-->
                             </div>
                         </form>

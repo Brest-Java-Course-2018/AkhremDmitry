@@ -1,5 +1,8 @@
 package com.epam.brest.course.dao;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 /**
  * POJO Department for model.
  */
@@ -13,11 +16,14 @@ public class Department {
     /**
      * Property departmentName.
      */
+    @Size(min=3, message = "Department Name cannot contain less than 3 characters.")
+    @Size(max=255, message = "Department Name cannot contain more than 255 characters.")
     private String departmentName;
 
     /**
      * Property description.
      */
+    @Size(max=255, message = "Description cannot contain more than 255 characters.")
     private String description;
 
     /**

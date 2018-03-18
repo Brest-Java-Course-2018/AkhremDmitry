@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 /**
@@ -25,9 +26,11 @@ public class EmployeeController {
 
     @Autowired
     DepartmentService departmentService;
+
     /**
      * Show employee page.
      *
+     * @param model Model
      * @return template name
      */
     @GetMapping(value = "/employee")
@@ -41,24 +44,59 @@ public class EmployeeController {
         return "employee";
     }
 
+    /**
+     * Add employee to db.
+     *
+     * @param employee Employee
+     * @param result   BindingResult
+     * @return template name
+     */
     @PostMapping(value = "/employee")
-    public final String addEmployee(Employee employee,
-                                    BindingResult result) {
-        if (result.hasErrors()){
-            return "/employee";
-        }else {
+    public final String addEmployee(@Valid Employee employee,
+                                    BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            String navbarBrandText = "Add employee";
+            Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+            model.addAttribute("navbarBrandText", navbarBrandText);
+            model.addAttribute("departments", departments);
+            model.addAttribute("employeeDepartment", new DepartmentDto());
+            model.addAttribute("employee", employee);
+            return "employee";
+        } else {
             employeeService.addEmployee(employee);
             return "redirect:/employees";
         }
 
     }
 
+    /**
+     * Update employee.
+     *
+     * @param employee Employee
+     * @param result BindingResult
+     * @return template name
+     */
     @PostMapping(value = "/editEmployee/{id}")
-    public final String updateEmployee(Employee employee,
-                                    BindingResult result) {
-        if (result.hasErrors()){
-            return "/employee";
-        }else {
+    public final String updateEmployee(@PathVariable Integer id,
+                                       @Valid Employee employee,
+                                       BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+
+            DepartmentDto departmentDto = null;
+            for (DepartmentDto curDep : departments) {
+                if (curDep.getDepartmentId().equals(employee.getDepartmentId())) {
+                    departmentDto = curDep;
+                }
+            }
+            departments.remove(departmentDto);
+
+            model.addAttribute("navbarBrandText", "Edit employee");
+            model.addAttribute("departments", departments);
+            model.addAttribute("employeeDepartment", departmentDto);
+            model.addAttribute("employee", employee);
+            return "redirect:/editEmployee/"+id;
+        } else {
             employeeService.updateEmployee(employee);
             return "redirect:/employees";
         }
@@ -68,6 +106,7 @@ public class EmployeeController {
     /**
      * Show employees page.
      *
+     * @param model Model
      * @return template name
      */
     @GetMapping(value = "/employees")
@@ -80,6 +119,8 @@ public class EmployeeController {
     /**
      * Show editEmployee page.
      *
+     * @param id    Integer
+     * @param model Model
      * @return template name
      */
     @GetMapping(value = "/editEmployee/{id}")
@@ -87,10 +128,10 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployeeById(id);
         Collection<DepartmentDto> departments = departmentService.getAllDepartment();
 
-        DepartmentDto departmentDto= null;
-        for(DepartmentDto curDep: departments){
-            if (curDep.getDepartmentId().equals(employee.getDepartmentId())){
-                departmentDto=curDep;
+        DepartmentDto departmentDto = null;
+        for (DepartmentDto curDep : departments) {
+            if (curDep.getDepartmentId().equals(employee.getDepartmentId())) {
+                departmentDto = curDep;
             }
         }
         departments.remove(departmentDto);
@@ -103,8 +144,14 @@ public class EmployeeController {
         return "employee";
     }
 
+    /**
+     * Delete employee from db.
+     *
+     * @param id Integer
+     * @return template name
+     */
     @GetMapping(value = "/employee/{id}/delete")
-    public final String deleteEmployee(@PathVariable Integer id){
+    public final String deleteEmployee(@PathVariable Integer id) {
         employeeService.deleteEmployeeById(id);
         return "redirect:/employees";
     }

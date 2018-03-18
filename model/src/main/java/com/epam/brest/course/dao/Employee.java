@@ -1,5 +1,7 @@
 package com.epam.brest.course.dao;
 
+import javax.validation.constraints.*;
+
 /**
  * POJO Employee for model.
  */
@@ -13,21 +15,27 @@ public class Employee {
     /**
      * Property employeeName.
      */
+    @Size(min=3, message = "Employee Name cannot contain less than 3 characters.")
+    @Size(max=255, message = "Employee Name cannot contain more than 255 characters.")
     private String employeeName;
 
     /**
      * Property employee Email.
      */
+    @Email(message = "Please check the entered Email.")
+    @NotEmpty(message = "Please enter the Email.")
     private String employeeEmail;
 
     /**
      * Property salary.
      */
+    @Positive(message = "The salary should be greater than zero!")
     private int salary;
 
     /**
      * Property departmentId.
      */
+    @Positive(message = "Please choose a department.")
     private int departmentId;
 
     /**
@@ -35,21 +43,6 @@ public class Employee {
      */
     public Employee() {
     }
-
-//    /**
-//     * Constructor Employee.
-//     *
-//     * @param employeeName String
-//     * @param salary       int
-//     * @param departmentId int
-//     */
-//    public Employee(final String employeeName,
-//                    final int salary,
-//                    final int departmentId) {
-//        this.employeeName = employeeName;
-//        this.salary = salary;
-//        this.departmentId = departmentId;
-//    }
 
     /**
      * Constructor Employee.

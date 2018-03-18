@@ -72,6 +72,7 @@
 
 </header>
 
+
 <section id="employee">
 
     <div class="container-fluid">
@@ -95,6 +96,12 @@
                                             th:text="${department.departmentName}">Wireframe
                                     </option>
                                 </select>
+                                <div>
+                                    <label class="d-none d-sm-inline text-danger"
+                                            for="employeeInputMail"
+                                            th:if="${#fields.hasErrors('departmentId')}"
+                                            th:errors="*{departmentId}">error</label>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -110,16 +117,24 @@
                                        value="Ivan Ivanov"
                                        placeholder="Add name"
                                        th:field="${employee.employeeName}"/>
+                                <label class="d-none d-sm-inline text-danger"
+                                       for="employeeInputName"
+                                       th:if="${#fields.hasErrors('employeeName')}"
+                                       th:errors="*{employeeName}">error</label>
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
                                        for="employeeInputMail">Employee EMail</label>
-                                <input type="text"
+                                <input type="email"
                                        class="form-control"
                                        id="employeeInputMail"
                                        value="Ivan Ivanov@gmail.com"
                                        placeholder="Add email"
                                        th:field="${employee.employeeEmail}"/>
+                                <label class="d-none d-sm-inline text-danger"
+                                       for="employeeInputMail"
+                                       th:if="${#fields.hasErrors('employeeEmail')}"
+                                       th:errors="*{employeeEmail}">error</label>
                             </div>
                             <div class="form-group">
                                 <label class="d-none d-sm-inline"
@@ -129,9 +144,14 @@
                                        id="employeeInputSalary"
                                        value="1000"
                                        placeholder="Add salary"
-                                       th:field="${employee.salary}"/>
+                                       th:field="${employee.salary}">
+                                <label class="d-none d-sm-inline text-danger"
+                                       for="employeeInputSalary"
+                                       th:if="${#fields.hasErrors('salary')}"
+                                       th:errors="*{salary}">error</label>
                                 <!--th:value="${navbarBrandText.equals('Edit employee')} ? ${employee.salary}">-->
                             </div>
+
                         </form>
                     </div>
                 </div>

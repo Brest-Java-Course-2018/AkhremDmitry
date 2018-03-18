@@ -13,7 +13,7 @@ public interface EmployeeDao {
     /**
      * Return all employee from database.
      *
-     * @return List employees
+     * @return Collection employees
      * @throws DataAccessException on data access error.
      */
     Collection<Employee> getAllEmployee();
@@ -24,7 +24,7 @@ public interface EmployeeDao {
      * @param whereSql  String
      * @param minSalary int
      * @param maxSalary int
-     * @return List
+     * @return Collection employees
      * @throws DataAccessException on data access error.
      */
     Collection<Employee> getAllEmployeeWhere(final String whereSql,
@@ -35,7 +35,7 @@ public interface EmployeeDao {
      * Return List employees by departmentId from database.
      *
      * @param departmentId int
-     * @return List<Employee>
+     * @return Collection employees
      * @throws DataAccessException on data access error.
      */
     Collection<Employee> getAllEmployeeByDepartmentId(final int departmentId);
