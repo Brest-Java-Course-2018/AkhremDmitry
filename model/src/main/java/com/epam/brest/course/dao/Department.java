@@ -1,6 +1,5 @@
 package com.epam.brest.course.dao;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
