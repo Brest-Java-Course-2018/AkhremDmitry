@@ -2,6 +2,7 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dao.DepartmentDao;
+import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -34,46 +35,24 @@ public class DepartmentServiceImplMockTest {
         EasyMock.reset(mockDepartmentDao);
     }
 
-//    @Test
-//    public void getDepartmentById() {
-//        EasyMock.expect(mockDepartmentDao.getDepartmentById(ID)).andReturn(DEPARTMENT);
-//
-//        EasyMock.replay(mockDepartmentDao);
-//
-//        departmentService.getDepartmentById(ID);
-//        EasyMock.verify(mockDepartmentDao);
-//    }
-
     @Test
-    public void addDepartment() {
-        EasyMock.expect(mockDepartmentDao.addDepartment(DEPARTMENT)).andReturn(DEPARTMENT);
+    public void getDepartmentById() {
+        EasyMock.expect(mockDepartmentDao.getDepartmentById(ID)).andReturn(DEPARTMENT);
 
         EasyMock.replay(mockDepartmentDao);
 
-        departmentService.addDepartment(DEPARTMENT);
+        departmentService.getDepartmentById(ID);
         EasyMock.verify(mockDepartmentDao);
     }
 
     @Test
-    public void deleteDepartmentById() {
-        mockDepartmentDao.deleteDepartmentById(ID);
-        EasyMock.expectLastCall();
+    public void getAllDepartmentDto() {
+        Collection<DepartmentDto> departments = new ArrayList<>();
+        EasyMock.expect(mockDepartmentDao.getAllDepartmentDto()).andReturn(departments);
 
         EasyMock.replay(mockDepartmentDao);
 
-        departmentService.deleteDepartmentById(ID);
-        EasyMock.verify(mockDepartmentDao);
-    }
-
-    @Test
-    public void getAllDepartment() {
-        Collection<Department> departments = new ArrayList<>();
-        departments.add(DEPARTMENT);
-        EasyMock.expect(mockDepartmentDao.getAllDepartment()).andReturn(departments);
-
-        EasyMock.replay(mockDepartmentDao);
-
-        departmentService.getAllDepartment();
+        departmentService.getAllDepartmentDto();
         EasyMock.verify(mockDepartmentDao);
     }
 
@@ -89,13 +68,39 @@ public class DepartmentServiceImplMockTest {
     }
 
     @Test
-    public void getDepartmentDtoById() {
-        EasyMock.expect(mockDepartmentDao.getDepartmentById(ID)).andReturn(DEPARTMENT);
+    public void addDepartment() {
+        EasyMock.expect(mockDepartmentDao.addDepartment(DEPARTMENT)).andReturn(DEPARTMENT);
 
         EasyMock.replay(mockDepartmentDao);
 
-        departmentService.getDepartmentDtoById(ID);
+        departmentService.addDepartment(DEPARTMENT);
         EasyMock.verify(mockDepartmentDao);
     }
+
+    @Test
+    public void updateDepartment(){
+        mockDepartmentDao.updateDepartment(DEPARTMENT);
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(mockDepartmentDao);
+
+        departmentService.updateDepartment(DEPARTMENT);
+        EasyMock.verify(mockDepartmentDao);
+    }
+
+    @Test
+    public void deleteDepartmentById() {
+        mockDepartmentDao.deleteDepartmentById(ID);
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(mockDepartmentDao);
+
+        departmentService.deleteDepartmentById(ID);
+        EasyMock.verify(mockDepartmentDao);
+    }
+
+
+
+
 
 }

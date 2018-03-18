@@ -33,47 +33,11 @@ public class DepartmentServiceImplTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void getAllDepartment() {
-        List<DepartmentDto> departments = (List)departmentService.getAllDepartment();
-        Assert.assertFalse(departments.isEmpty());
-        Assert.assertTrue(2 == departments.size());
-
-        DepartmentDto departmentExp = departmentService.getDepartmentDtoById(ID);
-        DepartmentDto departmentAct = departments.get(0);
-        Assert.assertEquals(departmentExp.getDepartmentId(), departmentAct.getDepartmentId());
-        Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
-        Assert.assertEquals(departmentExp.getDescription(), departmentAct.getDescription());
-    }
-
-    @Test
-    public void addDepartment() {
-        int depCountExp = departmentService.getAllDepartment().size() + 1;
-        Department departmentExp = new Department("Academic", DESC);
-        Department departmentAct = departmentService.addDepartment(departmentExp);
-        int depCountAct = departmentService.getAllDepartment().size();
-
-        Assert.assertEquals(depCountExp, depCountAct);
-        Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
-        Assert.assertEquals(departmentExp.getDescription(), departmentAct.getDescription());
-    }
-
-    @Test
-    public void deleteDepartmentById() {
-        int depCountExp = departmentService.getAllDepartment().size();
-        Department department = new Department("Academic", DESC);
-        department = departmentService.addDepartment(department);
-        departmentService.deleteDepartmentById(department.getDepartmentId());
-        int depCountAct = departmentService.getAllDepartment().size();
-
-        Assert.assertEquals(depCountExp, depCountAct);
-    }
-
-    @Test
-    public void getDepartmentDtoById() {
+    public void getDepartmentById() {
         Department departmentExp = departmentService
                 .addDepartment(new Department("Academic", DESC));
-        DepartmentDto departmentAct = departmentService
-                .getDepartmentDtoById(departmentExp.getDepartmentId());
+        Department departmentAct = departmentService
+                .getDepartmentById(departmentExp.getDepartmentId());
 
         Assert.assertNotNull(departmentAct);
         Assert.assertEquals(departmentExp.getDepartmentId(), departmentAct.getDepartmentId());
@@ -82,10 +46,58 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
-    public void addWrongDepartmentWithRule() {
-        Department department = new Department("Academic#2", DESC);
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Department name can contain only letters, numbers and underline");
-        departmentService.addDepartment(department);
+    public void getAllDepartmentDto() {
+        List<DepartmentDto> departments = (List)departmentService.getAllDepartmentDto();
+        Assert.assertFalse(departments.isEmpty());
+        Assert.assertTrue(2 == departments.size());
+
+        Department departmentExp = departmentService.getDepartmentById(ID);
+        DepartmentDto departmentAct = departments.get(0);
+        Assert.assertEquals(departmentExp.getDepartmentId(), departmentAct.getDepartmentId());
+        Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
     }
+
+    @Test
+    public void addDepartment() {
+        int depCountExp = departmentService.getAllDepartmentDto().size() + 1;
+        Department departmentExp = new Department("Academic", DESC);
+        Department departmentAct = departmentService.addDepartment(departmentExp);
+        int depCountAct = departmentService.getAllDepartmentDto().size();
+
+        Assert.assertEquals(depCountExp, depCountAct);
+        Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
+        Assert.assertEquals(departmentExp.getDescription(), departmentAct.getDescription());
+    }
+
+    @Test
+    public void updateDepartment(){
+        Department departmentExp = new Department("Academic", DESC);
+        departmentExp = departmentService.addDepartment(departmentExp);
+
+        Department departmentAct = departmentService.getDepartmentById(departmentExp.getDepartmentId());
+        Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
+        Assert.assertEquals(departmentExp.getDescription(), departmentAct.getDescription());
+
+    }
+
+    @Test
+    public void deleteDepartmentById() {
+        int depCountExp = departmentService.getAllDepartmentDto().size();
+        Department department = new Department("Academic", DESC);
+        department = departmentService.addDepartment(department);
+        departmentService.deleteDepartmentById(department.getDepartmentId());
+        int depCountAct = departmentService.getAllDepartmentDto().size();
+
+        Assert.assertEquals(depCountExp, depCountAct);
+    }
+
+
+
+//    @Test
+//    public void addWrongDepartmentWithRule() {
+//        Department department = new Department("Academic#2", DESC);
+//        thrown.expect(IllegalArgumentException.class);
+//        thrown.expectMessage("Department name can contain only letters, numbers and underline");
+//        departmentService.addDepartment(department);
+//    }
 }

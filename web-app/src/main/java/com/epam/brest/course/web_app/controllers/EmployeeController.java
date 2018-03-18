@@ -36,7 +36,7 @@ public class EmployeeController {
     @GetMapping(value = "/employee")
     public final String employee(Model model) {
         String navbarBrandText = "Add employee";
-        Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+        Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
         model.addAttribute("navbarBrandText", navbarBrandText);
         model.addAttribute("departments", departments);
         model.addAttribute("employeeDepartment", new DepartmentDto());
@@ -56,11 +56,10 @@ public class EmployeeController {
                                     BindingResult result, Model model) {
         if (result.hasErrors()) {
             String navbarBrandText = "Add employee";
-            Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+            Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
             model.addAttribute("navbarBrandText", navbarBrandText);
             model.addAttribute("departments", departments);
             model.addAttribute("employeeDepartment", new DepartmentDto());
-            model.addAttribute("employee", employee);
             return "employee";
         } else {
             employeeService.addEmployee(employee);
@@ -81,7 +80,7 @@ public class EmployeeController {
                                        @Valid Employee employee,
                                        BindingResult result, Model model) {
         if (result.hasErrors()) {
-            Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+            Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
 
             DepartmentDto departmentDto = null;
             for (DepartmentDto curDep : departments) {
@@ -94,8 +93,7 @@ public class EmployeeController {
             model.addAttribute("navbarBrandText", "Edit employee");
             model.addAttribute("departments", departments);
             model.addAttribute("employeeDepartment", departmentDto);
-            model.addAttribute("employee", employee);
-            return "redirect:/editEmployee/"+id;
+            return "employee";
         } else {
             employeeService.updateEmployee(employee);
             return "redirect:/employees";
@@ -126,7 +124,7 @@ public class EmployeeController {
     @GetMapping(value = "/editEmployee/{id}")
     public final String editEmployee(@PathVariable Integer id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
-        Collection<DepartmentDto> departments = departmentService.getAllDepartment();
+        Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
 
         DepartmentDto departmentDto = null;
         for (DepartmentDto curDep : departments) {

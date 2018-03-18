@@ -1,6 +1,7 @@
 package com.epam.brest.course.dao;
 
 
+import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.springframework.dao.DataAccessException;
 
@@ -19,6 +20,14 @@ public interface DepartmentDao {
      * @throws DataAccessException on data access error.
      */
     Collection<Department> getAllDepartment();
+
+    /**
+     * Return all department from database.
+     *
+     * @return Collection departments
+     * @throws DataAccessException on data access error.
+     */
+    Collection<DepartmentDto> getAllDepartmentDto();
 
     /**
      * Return all department with average salary from database.

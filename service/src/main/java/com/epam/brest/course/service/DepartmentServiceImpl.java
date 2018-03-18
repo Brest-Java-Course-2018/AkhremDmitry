@@ -7,9 +7,7 @@ import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 
 /**
@@ -36,34 +34,18 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.departmentDao = departmentDao;
     }
 
-//    @Override
-//    public final Department getDepartmentById(final int departmentId) {
-//        LOGGER.debug("getDepartmentById({})", departmentId);
-//        return departmentDao.getDepartmentById(departmentId);
-//    }
-
     @Override
-    public final DepartmentDto getDepartmentDtoById(final int departmentId) {
+    public final Department getDepartmentById(final int departmentId) {
         LOGGER.debug("getDepartmentById({})", departmentId);
-        Department department = departmentDao.getDepartmentById(departmentId);
-        DepartmentDto departmentDto = new DepartmentDto(department.getDepartmentId(),
-                department.getDepartmentName(),
-                department.getDescription());
-        return departmentDto;
+        return departmentDao.getDepartmentById(departmentId);
     }
 
     @Override
-    public final Collection<DepartmentDto> getAllDepartment() {
+    public final Collection<DepartmentDto> getAllDepartmentDto() {
         LOGGER.debug("getAllDepartment");
-        Collection<Department> departments;
-        departments = departmentDao.getAllDepartment();
-        List<DepartmentDto> departmentDtos = new ArrayList<>();
-        for (Department department: departments){
-            departmentDtos.add(new DepartmentDto(department.getDepartmentId(),
-                    department.getDepartmentName(),
-                    department.getDescription()));
-        }
-        return departmentDtos;
+        Collection<DepartmentDto> departments;
+        departments = departmentDao.getAllDepartmentDto();
+        return departments;
     }
 
     @Override
@@ -76,10 +58,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public final Department addDepartment(final Department department) {
         LOGGER.debug("addDepartment({})", department);
-        if (department.getDepartmentName().matches(".*[^a-zA-Zа-яА-Я0-9_].*")) {
-            throw new IllegalArgumentException("Department "
-                    + "name can contain only letters, numbers and underline");
-        }
+//        if (department.getDepartmentName().matches(".*[^a-zA-Zа-яА-Я0-9_].*")) {
+//            throw new IllegalArgumentException("Department "
+//                    + "name can contain only letters, numbers and underline");
+//        }
         return departmentDao.addDepartment(department);
     }
 

@@ -1,7 +1,6 @@
 package com.epam.brest.course.web_app.controllers;
 
 import com.epam.brest.course.dao.Department;
-import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,7 @@ public class DepartmentController {
     public final String department(Model model) {
         String navbarBrandText = "Add department";
         model.addAttribute("navbarBrandText", navbarBrandText);
-        model.addAttribute("department", new DepartmentDto());
+        model.addAttribute("department", new Department());
         return "department";
     }
 
@@ -69,7 +68,6 @@ public class DepartmentController {
      if (result.hasErrors()){
          String navbarBrandText = "Add department";
          model.addAttribute("navbarBrandText", navbarBrandText);
-         model.addAttribute("department", department);
          return "department";
      }else {
          departmentService.addDepartment(department);
@@ -85,9 +83,11 @@ public class DepartmentController {
      * @return template name
      */
     @PostMapping(value = "/editDepartment/{id}")
-    public final String updateDepartment(@Valid Department department, BindingResult result) {
+    public final String updateDepartment(@Valid Department department,
+                                         BindingResult result, Model model) {
         if (result.hasErrors()){
-            return "redirect:/department";
+            model.addAttribute("navbarBrandText", "Edit department");
+            return "department";
         }else {
             departmentService.updateDepartment(department);
             return "redirect:/departments";
@@ -103,7 +103,7 @@ public class DepartmentController {
      */
     @GetMapping(value = "/editDepartment/{id}")
     public final String editDepartment(@PathVariable Integer id, Model model) {
-        DepartmentDto department = departmentService.getDepartmentDtoById(id);
+        Department department = departmentService.getDepartmentById(id);
         String navbarBrandText = "Edit department";
         model.addAttribute("navbarBrandText", navbarBrandText);
         model.addAttribute("department", department);

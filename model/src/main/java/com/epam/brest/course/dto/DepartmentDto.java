@@ -12,11 +12,6 @@ public class DepartmentDto {
     private String departmentName;
 
     /**
-     * Property description.
-     */
-    private String description;
-
-    /**
      * Constructor DepartmentDto.
      */
     public DepartmentDto() {
@@ -25,20 +20,18 @@ public class DepartmentDto {
     /**
      * Constructor DepartmentDto.
      *
-     * @param departmentId id
+     * @param departmentId   id
      * @param departmentName name
-     * @param description description department.
      */
     public DepartmentDto(final int departmentId,
-                         final String departmentName,
-                         final String description) {
+                         final String departmentName) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
-        this.description = description;
     }
 
     /**
      * Get department id.
+     *
      * @return Integer
      */
     public final Integer getDepartmentId() {
@@ -47,6 +40,7 @@ public class DepartmentDto {
 
     /**
      * Set department id.
+     *
      * @param departmentId Integer
      */
     public final void setDepartmentId(final Integer departmentId) {
@@ -55,6 +49,7 @@ public class DepartmentDto {
 
     /**
      * Get department name.
+     *
      * @return String
      */
     public final String getDepartmentName() {
@@ -63,26 +58,11 @@ public class DepartmentDto {
 
     /**
      * Set department name.
+     *
      * @param departmentName String
      */
     public final void setDepartmentName(final String departmentName) {
         this.departmentName = departmentName;
-    }
-
-    /**
-     * Get description.
-     * @return String
-     */
-    public final String getDescription() {
-        return description;
-    }
-
-    /**
-     * Set description.
-     * @param description String
-     */
-    public final void setDescription(final String description) {
-        this.description = description;
     }
 
     @Override
@@ -90,7 +70,6 @@ public class DepartmentDto {
         return "DepartmentDto{" +
                 "departmentId=" + departmentId +
                 ", departmentName='" + departmentName + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
 
@@ -102,16 +81,13 @@ public class DepartmentDto {
         DepartmentDto that = (DepartmentDto) o;
 
         if (departmentId != that.departmentId) return false;
-        if (departmentName != null ? !departmentName.equals(that.departmentName) : that.departmentName != null)
-            return false;
-        return description != null ? description.equals(that.description) : that.description == null;
+        return departmentName != null ? departmentName.equals(that.departmentName) : that.departmentName == null;
     }
 
     @Override
     public int hashCode() {
         int result = departmentId;
         result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
 }

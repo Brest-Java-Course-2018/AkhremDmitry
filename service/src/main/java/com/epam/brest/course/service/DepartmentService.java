@@ -15,30 +15,21 @@ import java.util.Collection;
 
 public interface DepartmentService {
 
-//    /**
-//     * Return department by ID from database.
-//     *
-//     * @param departmentId int
-//     * @return Department
-//     * @throws DataAccessException on data access error.
-//     */
-//    Department getDepartmentById(int departmentId);
-
     /**
-     * Return departmentDto by ID from database.
+     * Return department by ID from database.
      *
      * @param departmentId int
-     * @return DepartmentDto
+     * @return Department
      * @throws DataAccessException on data access error.
      */
-    DepartmentDto getDepartmentDtoById(int departmentId);
+    Department getDepartmentById(int departmentId);
 
     /**
      * Return all department from database.
      *
      * @return List
      */
-    Collection<DepartmentDto> getAllDepartment();
+    Collection<DepartmentDto> getAllDepartmentDto();
 
     /**
      * Return all department with average salary from database.

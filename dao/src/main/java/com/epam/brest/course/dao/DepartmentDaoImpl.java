@@ -1,5 +1,6 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,6 +53,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Value("${department.getById}")
     private String departmentGetById;
+
+    /**
+     * SQL request for get all departmentDto by ID.
+     */
+    @Value("${departmentDto.getAll}")
+    private String departmentDtoGetAll;
 
     /**
      * SQL request for update department.
@@ -113,6 +120,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
                 .getJdbcOperations()
                 .query(departmentGetAllWithAvgSalary,
                         BeanPropertyRowMapper.newInstance(DepartmentDtoWithAvgSalary.class));
+        return departments;
+    }
+
+    @Override
+    public final Collection<DepartmentDto> getAllDepartmentDto(){
+        LOGGER.debug("getAllDepartmentDto");
+        Collection<DepartmentDto> departments = namedParameterJdbcTemplate
+                .getJdbcOperations()
+                .query(departmentDtoGetAll,
+                        BeanPropertyRowMapper.newInstance(DepartmentDto.class));
         return departments;
     }
 
