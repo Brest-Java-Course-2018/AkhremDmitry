@@ -10,6 +10,7 @@
 
     <bean id="departmentService" class="com.epam.brest.course.service.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
+        <constructor-arg ref="employeeDao"/>
     </bean>
 
     <bean id="employeeDao" class="org.easymock.EasyMock" factory-method="createMock">

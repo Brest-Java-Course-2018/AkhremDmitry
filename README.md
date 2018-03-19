@@ -22,4 +22,4 @@ Building
 
  Once started, the application should be available at:
  
-     http://localhost:8090/
+     http://localhost:8080/

@@ -92,20 +92,24 @@
                               th:method="@{post}">
                             <div class="form-group">
 
-                                <select th:field="${employee.departmentId}">
-                                    <option th:value="${employee.departmentId}"
-                                            th:text="${employeeDepartment.departmentName}">Wireframe
-                                    </option>
-                                    <option th:each="department : ${departments}"
-                                            th:value="${department.departmentId}"
-                                            th:text="${department.departmentName}">Wireframe
-                                    </option>
-                                </select>
+                                <label class="d-none d-sm-inline"
+                                       th:text="#{department.depName}">Department Name</label>
+                                <div>
+                                    <select th:field="${employee.departmentId}">
+                                        <option th:value="${employee.departmentId}"
+                                                th:text="${employeeDepartment.departmentName}">Wireframe
+                                        </option>
+                                        <option th:each="department : ${departments}"
+                                                th:value="${department.departmentId}"
+                                                th:text="${department.departmentName}">Wireframe
+                                        </option>
+                                    </select>
+                                </div>
                                 <div>
                                     <label class="d-none d-sm-inline text-danger"
-                                            for="employeeInputMail"
-                                            th:if="${#fields.hasErrors('departmentId')}"
-                                            th:errors="*{departmentId}">error</label>
+                                           for="employeeInputMail"
+                                           th:if="${#fields.hasErrors('departmentId')}"
+                                           th:errors="*{departmentId}">error</label>
                                 </div>
                             </div>
 

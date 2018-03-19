@@ -2,6 +2,7 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dao.DepartmentDao;
+import com.epam.brest.course.dao.EmployeeDao;
 import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.apache.logging.log4j.LogManager;
@@ -26,12 +27,19 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     /**
+     * EmployeeDap
+     */
+    private EmployeeDao employeeDao;
+
+    /**
      * Constructor DepartmentServiceImpl.
      *
      * @param departmentDao DepartmentDao
      */
-    public DepartmentServiceImpl(final DepartmentDao departmentDao) {
+    public DepartmentServiceImpl(final DepartmentDao departmentDao,
+                                 final EmployeeDao employeeDao) {
         this.departmentDao = departmentDao;
+        this.employeeDao = employeeDao;
     }
 
     @Override
@@ -74,6 +82,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public final void deleteDepartmentById(final int departmentId) {
         LOGGER.debug("deleteDepartmentById({})", departmentId);
+        if(employeeDao.getNumberEmployeesInDepartment(departmentId) != 0){
+            throw new IllegalArgumentException("You can't delete the Department because it has the employees");
+        }
         departmentDao.deleteDepartmentById(departmentId);
     }
 }
