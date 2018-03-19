@@ -5,10 +5,7 @@ import com.epam.brest.course.dao.Employee;
 import com.epam.brest.course.dao.EmployeeDao;
 import org.easymock.Capture;
 import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -42,8 +39,8 @@ public class EmployeeServiceImpMockTest {
         EMPLOYEE.setEmployeeId(ID);
     }
 
-    @After
-    public void after(){
+    @Before
+    public void before(){
         EasyMock.reset(mockEmployeeDao);
         EasyMock.reset(mockDepartmentDao);
     }

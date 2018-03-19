@@ -2,10 +2,11 @@ package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dao.DepartmentDao;
+import com.epam.brest.course.dao.EmployeeDao;
 import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import org.easymock.EasyMock;
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,13 @@ public class DepartmentServiceImplMockTest {
     @Autowired
     private DepartmentDao mockDepartmentDao;
 
-    @After
-    public void after() {
+    @Autowired
+    private EmployeeDao mockEmployeeDao;
+
+    @Before
+    public void before() {
         EasyMock.reset(mockDepartmentDao);
+        EasyMock.reset(mockEmployeeDao);
     }
 
     @Test
@@ -92,11 +97,14 @@ public class DepartmentServiceImplMockTest {
     public void deleteDepartmentById() {
         mockDepartmentDao.deleteDepartmentById(ID);
         EasyMock.expectLastCall();
+        EasyMock.expect (mockEmployeeDao.getNumberEmployeesInDepartment(ID)).andReturn(0);
 
         EasyMock.replay(mockDepartmentDao);
+        EasyMock.replay(mockEmployeeDao);
 
         departmentService.deleteDepartmentById(ID);
         EasyMock.verify(mockDepartmentDao);
+        EasyMock.verify(mockEmployeeDao);
     }
 
 
