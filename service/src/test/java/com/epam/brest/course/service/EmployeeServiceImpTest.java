@@ -1,5 +1,6 @@
 package com.epam.brest.course.service;
 
+import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dao.Employee;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -111,5 +112,16 @@ public class EmployeeServiceImpTest {
         int empCountAct = employeeService.getAllEmployee().size();
 
         Assert.assertTrue(empCountExp == empCountAct);
+    }
+
+    @Test
+    public void updateEmployee(){
+        Employee employeeExp = new Employee(NAME, EMAIL, SALARY, DEPARTMENTID);
+        employeeExp.setEmployeeId(1);
+        employeeService.updateEmployee(employeeExp);
+
+        Employee employeeAct = employeeService.getEmployeeById(1);
+        Assert.assertEquals(employeeExp, employeeAct);
+
     }
 }

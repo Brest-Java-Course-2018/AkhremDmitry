@@ -3,7 +3,6 @@ package com.epam.brest.course.dao;
 
 import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
-import org.springframework.dao.DataAccessException;
 
 import java.util.Collection;
 
@@ -17,7 +16,6 @@ public interface DepartmentDao {
      * Return all department from database.
      *
      * @return Collection departments
-     * @throws DataAccessException on data access error.
      */
     Collection<Department> getAllDepartment();
 
@@ -25,14 +23,12 @@ public interface DepartmentDao {
      * Return all department from database.
      *
      * @return Collection departments
-     * @throws DataAccessException on data access error.
      */
     Collection<DepartmentDto> getAllDepartmentDto();
 
     /**
      * Return all department with average salary from database.
      * @return Collection departmentsDto
-     * @throws DataAccessException on data access error.
      */
     Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary();
 
@@ -41,7 +37,6 @@ public interface DepartmentDao {
      *
      * @param departmentId int
      * @return Department
-     * @throws DataAccessException on data access error.
      */
     Department getDepartmentById(int departmentId);
 
@@ -50,7 +45,6 @@ public interface DepartmentDao {
      *
      * @param department Department
      * @return Department
-     * @throws DataAccessException on data access error.
      */
     Department addDepartment(Department department);
 
@@ -58,7 +52,6 @@ public interface DepartmentDao {
      * Update department in database.
      *
      * @param department Department
-     * @throws DataAccessException on data access error.
      */
     void updateDepartment(Department department);
 
@@ -66,7 +59,6 @@ public interface DepartmentDao {
      * Remove department by ID from database.
      *
      * @param departmentId int
-     * @throws DataAccessException on data access error.
      */
     void deleteDepartmentById(int departmentId);
 

@@ -53,9 +53,10 @@
            data-placement="bottom"
            title="Go back"
            th:title="#{general.tooltipGoBack}"><i class="fa fa-arrow-left text-dark"> </i></a>
-        <span class="navbar-brand text-uppercase mr-auto"
-              th:text="'&nbsp;'+${navbarBrandText}">
-            &nbsp;Edit employee
+        <span class="navbar-brand text-uppercase mr-auto">
+            <div th:if="${isEdit} == true" th:text="'&nbsp;'+#{employee.edit}">&nbsp;Edit employee</div>
+            <div th:if="${isEdit} == false" th:text="'&nbsp;'+#{employee.add}"></div>
+            <!--th:text="'&nbsp;'+${navbarBrandText}">-->
         </span>
 
         <ul class="navbar-nav float-right">
@@ -96,9 +97,6 @@
                                        th:text="#{department.depName}">Department Name</label>
                                 <div>
                                     <select th:field="${employee.departmentId}">
-                                        <option th:value="${employee.departmentId}"
-                                                th:text="${employeeDepartment.departmentName}">Wireframe
-                                        </option>
                                         <option th:each="department : ${departments}"
                                                 th:value="${department.departmentId}"
                                                 th:text="${department.departmentName}">Wireframe

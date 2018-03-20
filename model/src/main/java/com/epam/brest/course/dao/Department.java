@@ -15,14 +15,17 @@ public class Department {
     /**
      * Property departmentName.
      */
-    @Size(min=3, message = "Department Name cannot contain less than 3 characters.")
-    @Size(max=255, message = "Department Name cannot contain more than 255 characters.")
+    @Size(min = 3, message = "Department Name cannot contain less "
+            + "than 3 characters.")
+    @Size(max = 255, message = "Department Name cannot contain more "
+            + "than 255 characters.")
     private String departmentName;
 
     /**
      * Property description.
      */
-    @Size(max=255, message = "Description cannot contain more than 255 characters.")
+    @Size(max = 255, message = "Description cannot contain more "
+            + "than 255 characters.")
     private String description;
 
     /**

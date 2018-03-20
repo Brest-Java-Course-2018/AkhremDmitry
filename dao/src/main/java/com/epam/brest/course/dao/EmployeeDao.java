@@ -1,6 +1,5 @@
 package com.epam.brest.course.dao;
 
-import org.springframework.dao.DataAccessException;
 
 import java.util.Collection;
 
@@ -14,7 +13,6 @@ public interface EmployeeDao {
      * Return all employee from database.
      *
      * @return Collection employees
-     * @throws DataAccessException on data access error.
      */
     Collection<Employee> getAllEmployee();
 
@@ -25,7 +23,6 @@ public interface EmployeeDao {
      * @param minSalary int
      * @param maxSalary int
      * @return Collection employees
-     * @throws DataAccessException on data access error.
      */
     Collection<Employee> getAllEmployeeWhere(final String whereSql,
                                        final int minSalary,
@@ -36,7 +33,6 @@ public interface EmployeeDao {
      *
      * @param departmentId int
      * @return Collection employees
-     * @throws DataAccessException on data access error.
      */
     Collection<Employee> getAllEmployeeByDepartmentId(final int departmentId);
 
@@ -45,7 +41,6 @@ public interface EmployeeDao {
      *
      * @param employeeId int
      * @return Employee
-     * @throws DataAccessException on data access error.
      */
     Employee getEmployeeById(int employeeId);
 
@@ -54,7 +49,6 @@ public interface EmployeeDao {
      *
      * @param employee Employee
      * @return Employee
-     * @throws DataAccessException on data access error.
      */
     Employee addEmployee(Employee employee);
 
@@ -62,7 +56,6 @@ public interface EmployeeDao {
      * Update employee in database.
      *
      * @param employee Employee
-     * @throws DataAccessException on data access error.
      */
     void updateEmployee(Employee employee);
 
@@ -70,7 +63,6 @@ public interface EmployeeDao {
      * Remove employee by ID from database.
      *
      * @param employeeId int
-     * @throws DataAccessException on data access error.
      */
     void deleteEmployeeById(int employeeId);
 

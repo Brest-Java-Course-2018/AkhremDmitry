@@ -99,7 +99,8 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
-    public final Collection<Employee> getAllEmployeeByDepartmentId(final int departmentId) {
+    public final Collection<Employee> getAllEmployeeByDepartmentId(
+            final int departmentId) {
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("departmentId", departmentId);
         Collection<Employee> employees = namedParameterJdbcTemplate
@@ -150,7 +151,7 @@ public class EmployeeDaoImp implements EmployeeDao {
     }
 
     @Override
-    public int getNumberEmployeesInDepartment(int departmentID) {
+    public final int getNumberEmployeesInDepartment(final int departmentID) {
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("departmentId", departmentID);
         int numberOfEmployees = namedParameterJdbcTemplate

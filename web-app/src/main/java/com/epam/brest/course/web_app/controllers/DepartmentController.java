@@ -49,8 +49,8 @@ public class DepartmentController {
      */
     @GetMapping(value = "/department")
     public final String department(final Model model) {
-        String navbarBrandText = "Add department";
-        model.addAttribute("navbarBrandText", navbarBrandText);
+        boolean isEdit = false;
+        model.addAttribute("isEdit", isEdit);
         model.addAttribute("department", new Department());
         return "department";
     }
@@ -69,32 +69,11 @@ public class DepartmentController {
                                       final Model model) {
 
         if (result.hasErrors()) {
-            String navbarBrandText = "Add department";
-            model.addAttribute("navbarBrandText", navbarBrandText);
+            boolean isEdit = false;
+            model.addAttribute("isEdit", isEdit);
             return "department";
         } else {
             departmentService.addDepartment(department);
-            return "redirect:/departments";
-        }
-    }
-
-    /**
-     * Update department.
-     *
-     * @param department Department
-     * @param result     BindingResult
-     * @param model      Model
-     * @return template name
-     */
-    @PostMapping(value = "/editDepartment/{id}")
-    public final String updateDepartment(@Valid final Department department,
-                                         final BindingResult result,
-                                         final Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("navbarBrandText", "Edit department");
-            return "department";
-        } else {
-            departmentService.updateDepartment(department);
             return "redirect:/departments";
         }
     }
@@ -110,11 +89,32 @@ public class DepartmentController {
     public final String editDepartment(@PathVariable final Integer id,
                                        final Model model) {
         Department department = departmentService.getDepartmentById(id);
-        String navbarBrandText = "Edit department";
-        model.addAttribute("navbarBrandText", navbarBrandText);
+        boolean isEdit = true;
+        model.addAttribute("isEdit", isEdit);
         model.addAttribute("department", department);
 
         return "department";
+    }
+
+    /**
+     * Update department.
+     *
+     * @param department Department
+     * @param result     BindingResult
+     * @param model      Model
+     * @return template name
+     */
+    @PostMapping(value = "/editDepartment/{id}")
+    public final String updateDepartment(@Valid final Department department,
+                                         final BindingResult result,
+                                         final Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("isEdit", true);
+            return "department";
+        } else {
+            departmentService.updateDepartment(department);
+            return "redirect:/departments";
+        }
     }
 
     /**

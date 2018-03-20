@@ -34,6 +34,19 @@ public class EmployeeController {
     private DepartmentService departmentService;
 
     /**
+     * Show employees page.
+     *
+     * @param model Model
+     * @return template name
+     */
+    @GetMapping(value = "/employees")
+    public final String employees(final Model model) {
+        Collection<Employee> employees = employeeService.getAllEmployee();
+        model.addAttribute("employees", employees);
+        return "employees";
+    }
+
+    /**
      * Show employee page.
      *
      * @param model Model
@@ -41,12 +54,11 @@ public class EmployeeController {
      */
     @GetMapping(value = "/employee")
     public final String employee(final Model model) {
-        String navbarBrandText = "Add employee";
+        boolean isEdit = false;
         Collection<DepartmentDto> departments = departmentService
                 .getAllDepartmentDto();
-        model.addAttribute("navbarBrandText", navbarBrandText);
+        model.addAttribute("isEdit", isEdit);
         model.addAttribute("departments", departments);
-        model.addAttribute("employeeDepartment", new DepartmentDto());
         model.addAttribute("employee", new Employee());
         return "employee";
     }
@@ -64,18 +76,37 @@ public class EmployeeController {
                                     final BindingResult result,
                                     final Model model) {
         if (result.hasErrors()) {
-            String navbarBrandText = "Add employee";
+            boolean isEdit = false;
             Collection<DepartmentDto> departments = departmentService
                     .getAllDepartmentDto();
-            model.addAttribute("navbarBrandText", navbarBrandText);
+            model.addAttribute("isEdit", isEdit);
             model.addAttribute("departments", departments);
-            model.addAttribute("employeeDepartment", new DepartmentDto());
             return "employee";
         } else {
             employeeService.addEmployee(employee);
             return "redirect:/employees";
         }
+    }
 
+    /**
+     * Show editEmployee page.
+     *
+     * @param id    Integer
+     * @param model Model
+     * @return template name
+     */
+    @GetMapping(value = "/editEmployee/{id}")
+    public final String editEmployee(@PathVariable final Integer id,
+                                     final Model model) {
+        Employee employee = employeeService.getEmployeeById(id);
+        Collection<DepartmentDto> departments = departmentService
+                .getAllDepartmentDto();
+
+        boolean isEdit = true;
+        model.addAttribute("isEdit", isEdit);
+        model.addAttribute("employee", employee);
+        model.addAttribute("departments", departments);
+        return "employee";
     }
 
     /**
@@ -96,67 +127,14 @@ public class EmployeeController {
             Collection<DepartmentDto> departments = departmentService
                     .getAllDepartmentDto();
 
-            DepartmentDto departmentDto = null;
-            for (DepartmentDto curDep : departments) {
-                if (curDep.getDepartmentId()
-                        .equals(employee.getDepartmentId())) {
-                    departmentDto = curDep;
-                }
-            }
-            departments.remove(departmentDto);
-
-            model.addAttribute("navbarBrandText", "Edit employee");
+            model.addAttribute("isEdit", true);
             model.addAttribute("departments", departments);
-            model.addAttribute("employeeDepartment", departmentDto);
             return "employee";
         } else {
             employeeService.updateEmployee(employee);
             return "redirect:/employees";
         }
 
-    }
-
-    /**
-     * Show employees page.
-     *
-     * @param model Model
-     * @return template name
-     */
-    @GetMapping(value = "/employees")
-    public final String employees(final Model model) {
-        Collection<Employee> employees = employeeService.getAllEmployee();
-        model.addAttribute("employees", employees);
-        return "employees";
-    }
-
-    /**
-     * Show editEmployee page.
-     *
-     * @param id    Integer
-     * @param model Model
-     * @return template name
-     */
-    @GetMapping(value = "/editEmployee/{id}")
-    public final String editEmployee(@PathVariable final Integer id,
-                                     final Model model) {
-        Employee employee = employeeService.getEmployeeById(id);
-        Collection<DepartmentDto> departments = departmentService
-                .getAllDepartmentDto();
-
-        DepartmentDto departmentDto = null;
-        for (DepartmentDto curDep : departments) {
-            if (curDep.getDepartmentId().equals(employee.getDepartmentId())) {
-                departmentDto = curDep;
-            }
-        }
-        departments.remove(departmentDto);
-
-        String navbarBrandText = "Edit employee";
-        model.addAttribute("navbarBrandText", navbarBrandText);
-        model.addAttribute("employee", employee);
-        model.addAttribute("employeeDepartment", departmentDto);
-        model.addAttribute("departments", departments);
-        return "employee";
     }
 
     /**

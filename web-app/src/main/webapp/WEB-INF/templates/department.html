@@ -51,9 +51,9 @@
            data-placement="bottom"
            title="Go back"
            th:title="#{general.tooltipGoBack}"><i class="fa fa-arrow-left text-dark"> </i></a>
-        <a class="navbar-brand text-uppercase mr-auto"
-           th:text="'&nbsp;'+${navbarBrandText}">
-            &nbsp;Add department
+        <a class="navbar-brand text-uppercase mr-auto">
+            <div th:if="${isEdit} == true" th:text="'&nbsp;'+#{department.edit}">&nbsp;Add department</div>
+            <div th:if="${isEdit} == false" th:text="'&nbsp;'+#{department.add}"></div>
         </a>
         <ul class="navbar-nav float-right">
             <li class="nav-item">

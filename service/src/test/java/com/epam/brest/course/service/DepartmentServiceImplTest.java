@@ -72,7 +72,8 @@ public class DepartmentServiceImplTest {
     @Test
     public void updateDepartment(){
         Department departmentExp = new Department("Academic", DESC);
-        departmentExp = departmentService.addDepartment(departmentExp);
+        departmentExp.setDepartmentId(1);
+        departmentService.updateDepartment(departmentExp);
 
         Department departmentAct = departmentService.getDepartmentById(departmentExp.getDepartmentId());
         Assert.assertEquals(departmentExp.getDepartmentName(), departmentAct.getDepartmentName());
@@ -91,6 +92,12 @@ public class DepartmentServiceImplTest {
         Assert.assertEquals(depCountExp, depCountAct);
     }
 
+    @Test
+    public void deleteDepartmentByIdWithRule() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("You can't delete the Department because it has the employees");
+        departmentService.deleteDepartmentById(1);
+    }
 
 
 //    @Test

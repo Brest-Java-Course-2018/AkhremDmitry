@@ -1,5 +1,8 @@
 package com.epam.brest.course.dto;
 
+/**
+ * POJO DepartmentDto
+ */
 public class DepartmentDto {
     /**
      * Property departmentId.

@@ -115,16 +115,18 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary() {
-        Collection<DepartmentDtoWithAvgSalary> departments = namedParameterJdbcTemplate
+    public final Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary() {
+        Collection<DepartmentDtoWithAvgSalary> departments =
+                namedParameterJdbcTemplate
                 .getJdbcOperations()
                 .query(departmentGetAllWithAvgSalary,
-                        BeanPropertyRowMapper.newInstance(DepartmentDtoWithAvgSalary.class));
+                        BeanPropertyRowMapper
+                                .newInstance(DepartmentDtoWithAvgSalary.class));
         return departments;
     }
 
     @Override
-    public final Collection<DepartmentDto> getAllDepartmentDto(){
+    public final Collection<DepartmentDto> getAllDepartmentDto() {
         LOGGER.debug("getAllDepartmentDto");
         Collection<DepartmentDto> departments = namedParameterJdbcTemplate
                 .getJdbcOperations()

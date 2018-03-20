@@ -1,7 +1,11 @@
 package com.epam.brest.course.dto;
 
+/**
+ * POJO DepartmentDtoWithAvgSalary.
+ */
 public class DepartmentDtoWithAvgSalary {
-    /**
+
+     /**
      * Property departmentId.
      */
     private int departmentId;
@@ -20,7 +24,7 @@ public class DepartmentDtoWithAvgSalary {
      * Get department id.
      * @return Integer
      */
-    public int getDepartmentId() {
+    public final int getDepartmentId() {
         return departmentId;
     }
 
@@ -28,7 +32,7 @@ public class DepartmentDtoWithAvgSalary {
      * Set department id.
      * @param departmentId Integer
      */
-    public void setDepartmentId(int departmentId) {
+    public final void setDepartmentId(final int departmentId) {
         this.departmentId = departmentId;
     }
 
@@ -36,7 +40,7 @@ public class DepartmentDtoWithAvgSalary {
      * Get department name.
      * @return String
      */
-    public String getDepartmentName() {
+    public final String getDepartmentName() {
         return departmentName;
     }
 
@@ -44,7 +48,7 @@ public class DepartmentDtoWithAvgSalary {
      * Set department name.
      * @param departmentName String
      */
-    public void setDepartmentName(String departmentName) {
+    public final void setDepartmentName(final String departmentName) {
         this.departmentName = departmentName;
     }
 
@@ -52,7 +56,7 @@ public class DepartmentDtoWithAvgSalary {
      * Get average salary.
      * @return int
      */
-    public Integer getAvgSalary() {
+    public final Integer getAvgSalary() {
         return avgSalary;
     }
 
@@ -60,7 +64,7 @@ public class DepartmentDtoWithAvgSalary {
      * Set average salary.
      * @param avgSalary int
      */
-    public void setAvgSalary(Integer avgSalary) {
+    public final void setAvgSalary(final Integer avgSalary) {
         this.avgSalary = avgSalary;
     }
 

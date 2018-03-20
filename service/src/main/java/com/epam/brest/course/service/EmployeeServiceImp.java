@@ -37,7 +37,11 @@ public class EmployeeServiceImp implements EmployeeService {
         this.employeeDao = employeeDao;
     }
 
-    public void setDepartmentDao(DepartmentDao departmentDao) {
+    /**
+     * Setter for DepartmentDao.
+     * @param departmentDao DepartmentDao.
+     */
+    public final void setDepartmentDao(final DepartmentDao departmentDao) {
         this.departmentDao = departmentDao;
     }
 
@@ -69,7 +73,7 @@ public class EmployeeServiceImp implements EmployeeService {
     @Override
     public final Employee addEmployee(final Employee employee) {
         LOGGER.debug("addEmployee({})", employee);
-        if (employee.getEmployeeName().matches(".*[^a-zA-Zа-яА-Я].*")) {
+        if (employee.getEmployeeName().matches(".*[^a-zA-Zа-яА-Я ].*")) {
             throw new IllegalArgumentException("Department "
                     + "name can contain only letters");
         }
@@ -91,13 +95,14 @@ public class EmployeeServiceImp implements EmployeeService {
         LOGGER.debug("deleteEmployeeById({})", employeeId);
         Employee employee = employeeDao.getEmployeeById(employeeId);
         employeeDao.deleteEmployeeById(employeeId);
-        if (employeeDao.getNumberEmployeesInDepartment(employee.getDepartmentId())==0){
+        if (employeeDao.getNumberEmployeesInDepartment(employee
+                .getDepartmentId()) == 0) {
            departmentDao.deleteDepartmentById(employee.getDepartmentId());
         }
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
+    public final void updateEmployee(final Employee employee) {
         LOGGER.debug("updateEmployee({})", employee);
         employeeDao.updateEmployee(employee);
     }

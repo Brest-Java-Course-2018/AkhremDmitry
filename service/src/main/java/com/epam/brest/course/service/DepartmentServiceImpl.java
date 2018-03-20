@@ -27,7 +27,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     /**
-     * EmployeeDap
+     * EmployeeDap.
      */
     private EmployeeDao employeeDao;
 
@@ -35,6 +35,7 @@ public class DepartmentServiceImpl implements DepartmentService {
      * Constructor DepartmentServiceImpl.
      *
      * @param departmentDao DepartmentDao
+     * @param employeeDao   EmployeeDao
      */
     public DepartmentServiceImpl(final DepartmentDao departmentDao,
                                  final EmployeeDao employeeDao) {
@@ -57,7 +58,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary() {
+    public final Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary() {
         Collection<DepartmentDtoWithAvgSalary> departments =
                 departmentDao.getAllDepartmentWithAvgSalary();
         return departments;
@@ -66,15 +67,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public final Department addDepartment(final Department department) {
         LOGGER.debug("addDepartment({})", department);
-//        if (department.getDepartmentName().matches(".*[^a-zA-Zа-яА-Я0-9_].*")) {
-//            throw new IllegalArgumentException("Department "
-//                    + "name can contain only letters, numbers and underline");
-//        }
         return departmentDao.addDepartment(department);
     }
 
     @Override
-    public void updateDepartment(Department department) {
+    public final void updateDepartment(final Department department) {
         LOGGER.debug("updateDepartment({})", department);
         departmentDao.updateDepartment(department);
     }
@@ -82,8 +79,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public final void deleteDepartmentById(final int departmentId) {
         LOGGER.debug("deleteDepartmentById({})", departmentId);
-        if(employeeDao.getNumberEmployeesInDepartment(departmentId) != 0){
-            throw new IllegalArgumentException("You can't delete the Department because it has the employees");
+        if (employeeDao.getNumberEmployeesInDepartment(departmentId) != 0) {
+            throw new IllegalArgumentException("You can't delete "
+                    + "the Department because it has the employees");
         }
         departmentDao.deleteDepartmentById(departmentId);
     }

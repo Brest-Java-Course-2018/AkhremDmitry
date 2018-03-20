@@ -1,7 +1,6 @@
 package com.epam.brest.course.service;
 
 import com.epam.brest.course.dao.Employee;
-import org.springframework.dao.DataAccessException;
 
 import java.util.Collection;
 
@@ -24,7 +23,6 @@ public interface EmployeeService {
      * @param minSalary int
      * @param maxSalary int
      * @return List
-     * @throws DataAccessException on data access error.
      */
     Collection<Employee> getAllEmployeeWhere(int minSalary, int maxSalary);
 
@@ -33,7 +31,6 @@ public interface EmployeeService {
      *
      * @param employeeId int
      * @return Employee
-     * @throws DataAccessException on data access error.
      */
     Employee getEmployeeById(int employeeId);
 
@@ -42,7 +39,6 @@ public interface EmployeeService {
      *
      * @param employee Employee
      * @return Employee
-     * @throws DataAccessException on data access error.
      */
     Employee addEmployee(Employee employee);
 
@@ -51,7 +47,6 @@ public interface EmployeeService {
      *
      * @param employeeId Employee
      * @param salary     int
-     * @throws DataAccessException on data access error.
      */
     void updateEmployeeSalary(int employeeId, int salary);
 
@@ -59,7 +54,6 @@ public interface EmployeeService {
      * Remove employee by ID from database.
      *
      * @param employeeId int
-     * @throws DataAccessException on data access error.
      */
     void deleteEmployeeById(int employeeId);
 
@@ -67,7 +61,6 @@ public interface EmployeeService {
      * Update employee in database.
      *
      * @param employee Employee
-     * @throws DataAccessException on data access error.
      */
     void updateEmployee(Employee employee);
 }

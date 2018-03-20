@@ -3,7 +3,6 @@ package com.epam.brest.course.service;
 import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
-import org.springframework.dao.DataAccessException;
 
 import java.util.Collection;
 
@@ -20,7 +19,6 @@ public interface DepartmentService {
      *
      * @param departmentId int
      * @return Department
-     * @throws DataAccessException on data access error.
      */
     Department getDepartmentById(int departmentId);
 
@@ -34,7 +32,6 @@ public interface DepartmentService {
     /**
      * Return all department with average salary from database.
      * @return list departmentsDto
-     * @throws DataAccessException on data access error.
      */
     Collection<DepartmentDtoWithAvgSalary> getAllDepartmentWithAvgSalary();
 
@@ -44,7 +41,6 @@ public interface DepartmentService {
      *
      * @param department Department
      * @return Department
-     * @throws DataAccessException on data access error.
      */
     Department addDepartment(Department department);
 
@@ -52,7 +48,6 @@ public interface DepartmentService {
      * Update department in database.
      *
      * @param department Department
-     * @throws DataAccessException on data access error.
      */
     void updateDepartment(Department department);
 
@@ -60,7 +55,6 @@ public interface DepartmentService {
      * Remove department by ID from database.
      *
      * @param departmentId int
-     * @throws DataAccessException on data access error.
      */
     void deleteDepartmentById(int departmentId);
 

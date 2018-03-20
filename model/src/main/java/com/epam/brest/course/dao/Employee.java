@@ -1,6 +1,10 @@
 package com.epam.brest.course.dao;
 
-import javax.validation.constraints.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 /**
  * POJO Employee for model.
@@ -15,8 +19,10 @@ public class Employee {
     /**
      * Property employeeName.
      */
-    @Size(min=3, message = "Employee Name cannot contain less than 3 characters.")
-    @Size(max=255, message = "Employee Name cannot contain more than 255 characters.")
+    @Size(min = 3, message = "Employee Name cannot contain less "
+            + "than 3 characters.")
+    @Size(max = 255, message = "Employee Name cannot contain more "
+            + "than 255 characters.")
     private String employeeName;
 
     /**
@@ -52,7 +58,10 @@ public class Employee {
      * @param departmentId  int
      * @param employeeEmail String.
      */
-    public Employee(String employeeName, String employeeEmail, int salary, int departmentId) {
+    public Employee(final String employeeName,
+                    final String employeeEmail,
+                    final int salary,
+                    final int departmentId) {
         this.employeeName = employeeName;
         this.employeeEmail = employeeEmail;
         this.salary = salary;
@@ -64,7 +73,7 @@ public class Employee {
      *
      * @return employeeEmail
      */
-    public String getEmployeeEmail() {
+    public final String getEmployeeEmail() {
         return employeeEmail;
     }
 
@@ -73,7 +82,7 @@ public class Employee {
      *
      * @param employeeEmail String
      */
-    public void setEmployeeEmail(String employeeEmail) {
+    public final void setEmployeeEmail(final String employeeEmail) {
         this.employeeEmail = employeeEmail;
     }
 
