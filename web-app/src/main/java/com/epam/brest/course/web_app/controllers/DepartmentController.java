@@ -20,9 +20,11 @@ import java.util.Collection;
 @Controller
 public class DepartmentController {
 
-
+    /**
+     * DepartmentService.
+     */
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
 
     /**
@@ -32,7 +34,7 @@ public class DepartmentController {
      * @return template name
      */
     @GetMapping(value = "/departments")
-    public final String departments(Model model) {
+    public final String departments(final Model model) {
         Collection<DepartmentDtoWithAvgSalary> departments =
                 departmentService.getAllDepartmentWithAvgSalary();
         model.addAttribute("departments", departments);
@@ -46,7 +48,7 @@ public class DepartmentController {
      * @return template name
      */
     @GetMapping(value = "/department")
-    public final String department(Model model) {
+    public final String department(final Model model) {
         String navbarBrandText = "Add department";
         model.addAttribute("navbarBrandText", navbarBrandText);
         model.addAttribute("department", new Department());
@@ -57,38 +59,41 @@ public class DepartmentController {
      * Add department to db.
      *
      * @param department Department
-     * @param result BindingResult
+     * @param result     BindingResult
+     * @param model      Model
      * @return template name
      */
     @PostMapping(value = "/department")
-    public final String addDepartment(@Valid Department department,
-                                      BindingResult result,
-                                      Model model) {
+    public final String addDepartment(@Valid final Department department,
+                                      final BindingResult result,
+                                      final Model model) {
 
-     if (result.hasErrors()){
-         String navbarBrandText = "Add department";
-         model.addAttribute("navbarBrandText", navbarBrandText);
-         return "department";
-     }else {
-         departmentService.addDepartment(department);
-         return "redirect:/departments";
-     }
+        if (result.hasErrors()) {
+            String navbarBrandText = "Add department";
+            model.addAttribute("navbarBrandText", navbarBrandText);
+            return "department";
+        } else {
+            departmentService.addDepartment(department);
+            return "redirect:/departments";
+        }
     }
 
     /**
      * Update department.
      *
      * @param department Department
-     * @param result BindingResult
+     * @param result     BindingResult
+     * @param model      Model
      * @return template name
      */
     @PostMapping(value = "/editDepartment/{id}")
-    public final String updateDepartment(@Valid Department department,
-                                         BindingResult result, Model model) {
-        if (result.hasErrors()){
+    public final String updateDepartment(@Valid final Department department,
+                                         final BindingResult result,
+                                         final Model model) {
+        if (result.hasErrors()) {
             model.addAttribute("navbarBrandText", "Edit department");
             return "department";
-        }else {
+        } else {
             departmentService.updateDepartment(department);
             return "redirect:/departments";
         }
@@ -102,7 +107,8 @@ public class DepartmentController {
      * @return template name
      */
     @GetMapping(value = "/editDepartment/{id}")
-    public final String editDepartment(@PathVariable Integer id, Model model) {
+    public final String editDepartment(@PathVariable final Integer id,
+                                       final Model model) {
         Department department = departmentService.getDepartmentById(id);
         String navbarBrandText = "Edit department";
         model.addAttribute("navbarBrandText", navbarBrandText);
@@ -118,7 +124,7 @@ public class DepartmentController {
      * @return template name
      */
     @GetMapping(value = "/department/{id}/delete")
-    public  final String deleteDepartment(@PathVariable Integer id){
+    public final String deleteDepartment(@PathVariable final Integer id) {
         departmentService.deleteDepartmentById(id);
         return "redirect:/departments";
     }

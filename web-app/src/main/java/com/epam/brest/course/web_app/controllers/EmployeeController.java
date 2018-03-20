@@ -21,11 +21,17 @@ import java.util.Collection;
 @Controller
 public class EmployeeController {
 
+    /**
+     * EmployeeService.
+     */
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
 
+    /**
+     * DepartmentService.
+     */
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     /**
      * Show employee page.
@@ -34,9 +40,10 @@ public class EmployeeController {
      * @return template name
      */
     @GetMapping(value = "/employee")
-    public final String employee(Model model) {
+    public final String employee(final Model model) {
         String navbarBrandText = "Add employee";
-        Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
+        Collection<DepartmentDto> departments = departmentService
+                .getAllDepartmentDto();
         model.addAttribute("navbarBrandText", navbarBrandText);
         model.addAttribute("departments", departments);
         model.addAttribute("employeeDepartment", new DepartmentDto());
@@ -49,14 +56,17 @@ public class EmployeeController {
      *
      * @param employee Employee
      * @param result   BindingResult
+     * @param model    Model
      * @return template name
      */
     @PostMapping(value = "/employee")
-    public final String addEmployee(@Valid Employee employee,
-                                    BindingResult result, Model model) {
+    public final String addEmployee(@Valid final Employee employee,
+                                    final BindingResult result,
+                                    final Model model) {
         if (result.hasErrors()) {
             String navbarBrandText = "Add employee";
-            Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
+            Collection<DepartmentDto> departments = departmentService
+                    .getAllDepartmentDto();
             model.addAttribute("navbarBrandText", navbarBrandText);
             model.addAttribute("departments", departments);
             model.addAttribute("employeeDepartment", new DepartmentDto());
@@ -72,19 +82,24 @@ public class EmployeeController {
      * Update employee.
      *
      * @param employee Employee
-     * @param result BindingResult
+     * @param result   BindingResult
+     * @param model    Model
+     * @param id       Integer
      * @return template name
      */
     @PostMapping(value = "/editEmployee/{id}")
-    public final String updateEmployee(@PathVariable Integer id,
-                                       @Valid Employee employee,
-                                       BindingResult result, Model model) {
+    public final String updateEmployee(@PathVariable final Integer id,
+                                       @Valid final Employee employee,
+                                       final BindingResult result,
+                                       final Model model) {
         if (result.hasErrors()) {
-            Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
+            Collection<DepartmentDto> departments = departmentService
+                    .getAllDepartmentDto();
 
             DepartmentDto departmentDto = null;
             for (DepartmentDto curDep : departments) {
-                if (curDep.getDepartmentId().equals(employee.getDepartmentId())) {
+                if (curDep.getDepartmentId()
+                        .equals(employee.getDepartmentId())) {
                     departmentDto = curDep;
                 }
             }
@@ -108,7 +123,7 @@ public class EmployeeController {
      * @return template name
      */
     @GetMapping(value = "/employees")
-    public final String employees(Model model) {
+    public final String employees(final Model model) {
         Collection<Employee> employees = employeeService.getAllEmployee();
         model.addAttribute("employees", employees);
         return "employees";
@@ -122,9 +137,11 @@ public class EmployeeController {
      * @return template name
      */
     @GetMapping(value = "/editEmployee/{id}")
-    public final String editEmployee(@PathVariable Integer id, Model model) {
+    public final String editEmployee(@PathVariable final Integer id,
+                                     final Model model) {
         Employee employee = employeeService.getEmployeeById(id);
-        Collection<DepartmentDto> departments = departmentService.getAllDepartmentDto();
+        Collection<DepartmentDto> departments = departmentService
+                .getAllDepartmentDto();
 
         DepartmentDto departmentDto = null;
         for (DepartmentDto curDep : departments) {
@@ -149,7 +166,7 @@ public class EmployeeController {
      * @return template name
      */
     @GetMapping(value = "/employee/{id}/delete")
-    public final String deleteEmployee(@PathVariable Integer id) {
+    public final String deleteEmployee(@PathVariable final Integer id) {
         employeeService.deleteEmployeeById(id);
         return "redirect:/employees";
     }

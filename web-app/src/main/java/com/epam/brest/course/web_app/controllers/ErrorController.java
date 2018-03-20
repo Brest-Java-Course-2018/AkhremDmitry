@@ -4,6 +4,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Error controller.
+ */
 @ControllerAdvice
 public class ErrorController extends RuntimeException {
 
@@ -14,8 +17,9 @@ public class ErrorController extends RuntimeException {
      * @return template name.
      */
     @ExceptionHandler(Exception.class)
-    public String exceptionHandler( Exception  ex, Model model) {
-        model.addAttribute  ("Text",ex.getMessage().toString());
+    public final String exceptionHandler(final Exception  ex,
+                                         final Model model) {
+        model.addAttribute("Text", ex.getMessage().toString());
         return "error";
     }
 
