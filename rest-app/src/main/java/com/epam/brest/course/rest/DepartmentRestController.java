@@ -1,7 +1,7 @@
 package com.epam.brest.course.rest;
 
 import com.epam.brest.course.dao.Department;
-import com.epam.brest.course.dto.DepartmentDto;
+import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,9 +20,9 @@ public class DepartmentRestController {
     private DepartmentService departmentService;
 
     @GetMapping(value = "/departments")
-    Collection<DepartmentDto> getDepartments(){
+    Collection<DepartmentDtoWithAvgSalary> getDepartments(){
         LOGGER.debug("departments()");
-        return departmentService.getAllDepartmentDto();
+        return departmentService.getAllDepartmentWithAvgSalary();
     }
 
     @GetMapping(value = "/departments/{id}")
@@ -45,5 +45,12 @@ public class DepartmentRestController {
         LOGGER.debug("deleteDepartmentById({})", id);
         departmentService.deleteDepartmentById(id);
     }
+
+    @PutMapping(value = "/departments")
+    void updateDepartment(@RequestBody Department department){
+        LOGGER.debug("updateDepartment({})", department);
+        departmentService.updateDepartment(department);
+    }
+
 
 }
