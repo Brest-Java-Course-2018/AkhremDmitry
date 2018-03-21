@@ -1,10 +1,7 @@
 package com.epam.brest.course.dao;
 
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 /**
  * POJO Employee for model.
