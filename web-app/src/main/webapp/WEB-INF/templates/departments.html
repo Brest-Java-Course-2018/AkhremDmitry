@@ -100,8 +100,8 @@
                                     <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"
                                                                        th:text="#{general.edit}">Edit</span>
                                 </a>
+                                <span th:if="${department.avgSalary}==0">
                                 <a href="#" class="btn-sm btn-outline-secondary"
-
                                    data-toggle="tooltip"
                                    data-target="confirmDeleteModal"
                                    data-placement="top"
@@ -116,6 +116,22 @@
                                 </span>
 
                                 </a>
+                                </span>
+                                <span th:unless="${department.avgSalary}==0">
+                                    <a href="#" class="btn-sm btn-outline-secondary"
+                                       data-toggle="tooltip"
+                                       data-target="cannotDelete"
+                                       data-placement="top"
+                                       title="Delete department"
+                                       th:title="#{department.tooltipDelete}">
+                                <span data-toggle="modal"
+                                      data-target="#cannotDelete">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"
+                                                                       th:text="#{general.delete}">Delete</span>
+                                </span>
+
+                                </a>
+                                </span>
 
                             </td>
                         </tr>
@@ -205,6 +221,28 @@
                 <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
                 <a id="deleteUrl" href="#" class="btn btn-danger"
                    th:text="#{general.delete}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cannotDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-info">
+                <h5 class="modal-title" id="exampleCannotDelete">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" th:text="#{department.cannotDelete}">
+                Can't delete
+            </div>
+            <div class="modal-footer" align="left">
+                <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
+                <a id="return" th:href="@{/departments}" class="btn btn-info"
+                   th:text="#{general.ok}">Ok</a>
             </div>
         </div>
     </div>
