@@ -50,6 +50,7 @@
             <list>
                 <value>classpath:sql.properties</value>
                 <value>classpath:application.properties</value>
+                <value>classpath:sample_db/db.properties</value>
             </list>
         </property>
     </bean>
