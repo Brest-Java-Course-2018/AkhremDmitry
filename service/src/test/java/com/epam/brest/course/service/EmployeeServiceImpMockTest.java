@@ -27,12 +27,12 @@ public class EmployeeServiceImpMockTest {
     @Autowired
     private DepartmentDao mockDepartmentDao;
 
-    private static String NAME = "Kenny";
-    private static String EMAIL = "Kenny@gmail.com";
-    private static int SALARY = 450;
-    private static int DEPARTMENTID = 1;
-    private static int ID = 1;
-    private static Employee EMPLOYEE = new Employee(NAME, EMAIL, SALARY, DEPARTMENTID);
+    private static final String NAME = "Kenny";
+    private static final String EMAIL = "Kenny@gmail.com";
+    private static final int SALARY = 450;
+    private static final int DEPARTMENTID = 1;
+    private static final int ID = 1;
+    private static final Employee EMPLOYEE = new Employee(NAME, EMAIL, SALARY, DEPARTMENTID);
 
     @BeforeClass
     public static void beforeClass(){

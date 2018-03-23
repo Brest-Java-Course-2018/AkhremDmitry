@@ -21,6 +21,25 @@ public class DepartmentDtoWithAvgSalary {
     private Integer avgSalary;
 
     /**
+     * Constructor DepartmentDtoWithAvgSalary.
+     */
+    public DepartmentDtoWithAvgSalary() {
+    }
+
+    /**
+     * Constructor DepartmentDtoWithAvgSalary.
+     *
+     * @param departmentId int
+     * @param departmentName String
+     * @param avgSalary int
+     */
+    public DepartmentDtoWithAvgSalary(int departmentId, String departmentName, Integer avgSalary) {
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.avgSalary = avgSalary;
+    }
+
+    /**
      * Get department id.
      * @return Integer
      */

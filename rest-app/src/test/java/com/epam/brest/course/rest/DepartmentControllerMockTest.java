@@ -1,5 +1,6 @@
 package com.epam.brest.course.rest;
 
+import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.easymock.EasyMock;
@@ -16,9 +17,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,21 +35,25 @@ public class DepartmentControllerMockTest {
 
     private MockMvc mockMvc;
 
+    private static final int DEPARTMENTID = 1;
+    private static final String DEPARTMENTNAME = "Java";
+    private static final int AVGSALARY = 1000;
+    private static final String DESCRIPTION = "Java department";
+
     @Before
-    public void setUp(){
+    public void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(departmentRestController)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
                 .build();
+        EasyMock.reset(mockDepartmentService);
     }
 
     @Test
-    public void getDepartmentsTest() throws Exception{
+    public void getDepartmentsTest() throws Exception {
         Collection<DepartmentDtoWithAvgSalary> departments = new ArrayList<>();
-        DepartmentDtoWithAvgSalary dep = new DepartmentDtoWithAvgSalary();
-        dep.setDepartmentId(1);
-        dep.setDepartmentName("Java");
-        dep.setAvgSalary(10);
-        departments.add(dep);
+        departments.add(new DepartmentDtoWithAvgSalary(
+                DEPARTMENTID, DEPARTMENTNAME, AVGSALARY));
+
         EasyMock.expect(mockDepartmentService.getAllDepartmentWithAvgSalary())
                 .andReturn(departments).times(1);
         EasyMock.replay(mockDepartmentService);
@@ -58,11 +62,94 @@ public class DepartmentControllerMockTest {
                 get("/departments")
                         .accept(MediaType.APPLICATION_JSON)
         ).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string("[{\"departmentId\":1,\"departmentName\":\"Java\",\"avgSalary\":10}]"));
+                .andExpect(content().string("[{\"departmentId\":1," +
+                        "\"departmentName\":\"Java\"," +
+                        "\"avgSalary\":1000}]"));
 
         EasyMock.verify(mockDepartmentService);
+    }
 
+    @Test
+    public void departmentByIdTest() throws Exception {
+        Department department = new Department(
+                DEPARTMENTNAME, DESCRIPTION);
+        department.setDepartmentId(DEPARTMENTID);
 
+        EasyMock.expect(mockDepartmentService.getDepartmentById(DEPARTMENTID))
+                .andReturn(department).times(1);
+        EasyMock.replay(mockDepartmentService);
+
+        mockMvc.perform(
+                get("/departments/{id}", DEPARTMENTID)
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print()).andExpect(status().isFound())
+                .andExpect(content().string("{\"departmentId\":1," +
+                        "\"departmentName\":\"Java\"," +
+                        "\"description\":\"Java department\"}"));
+
+        EasyMock.verify(mockDepartmentService);
+    }
+
+    @Test
+    public void addDepartmentTest() throws Exception {
+        Department department = new Department(
+                DEPARTMENTNAME, DESCRIPTION);
+        department.setDepartmentId(DEPARTMENTID);
+
+        EasyMock.expect(mockDepartmentService.addDepartment(new Department(
+                DEPARTMENTNAME, DESCRIPTION))).andReturn(department);
+        EasyMock.replay(mockDepartmentService);
+
+        mockMvc.perform(
+                post("/departments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"departmentName\":\"Java\"," +
+                                "\"description\":\"Java department\"}")
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print()).andExpect(status().isCreated())
+                .andExpect(content().string("{\"departmentId\":1," +
+                        "\"departmentName\":\"Java\"," +
+                        "\"description\":\"Java department\"}"));
+
+        EasyMock.verify(mockDepartmentService);
+    }
+
+    @Test
+    public void deleteDepartmentByIdTest() throws Exception{
+        mockDepartmentService.deleteDepartmentById(DEPARTMENTID);
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(mockDepartmentService);
+
+        mockMvc.perform(
+                delete("/departments/{id}", DEPARTMENTID)
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print()).andExpect(status().isFound());
+
+        EasyMock.verify(mockDepartmentService);
+    }
+
+    @Test
+    public void updateDepartmentTest() throws Exception {
+        Department department = new Department(
+                DEPARTMENTNAME, DESCRIPTION);
+        department.setDepartmentId(DEPARTMENTID);
+
+        mockDepartmentService.updateDepartment(department);
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(mockDepartmentService);
+
+        mockMvc.perform(
+                put("/departments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"departmentId\":1," +
+                                "\"departmentName\":\"Java\"," +
+                                "\"description\":\"Java department\"}")
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print()).andExpect(status().isOk());
+
+        EasyMock.verify(mockDepartmentService);
     }
 
 }
