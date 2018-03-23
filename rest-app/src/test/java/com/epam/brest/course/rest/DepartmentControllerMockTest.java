@@ -4,6 +4,7 @@ import com.epam.brest.course.dao.Department;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.easymock.EasyMock;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,12 +16,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -50,21 +51,24 @@ public class DepartmentControllerMockTest {
 
     @Test
     public void getDepartmentsTest() throws Exception {
-        Collection<DepartmentDtoWithAvgSalary> departments = new ArrayList<>();
-        departments.add(new DepartmentDtoWithAvgSalary(
-                DEPARTMENTID, DEPARTMENTNAME, AVGSALARY));
+        DepartmentDtoWithAvgSalary department = new DepartmentDtoWithAvgSalary(
+                DEPARTMENTID, DEPARTMENTNAME, AVGSALARY);
 
         EasyMock.expect(mockDepartmentService.getAllDepartmentWithAvgSalary())
-                .andReturn(departments).times(1);
+                .andReturn(Arrays.asList(department)).times(1);
         EasyMock.replay(mockDepartmentService);
 
         mockMvc.perform(
                 get("/departments")
                         .accept(MediaType.APPLICATION_JSON)
         ).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string("[{\"departmentId\":1," +
-                        "\"departmentName\":\"Java\"," +
-                        "\"avgSalary\":1000}]"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$[0].departmentId", Matchers.is(1)))
+                .andExpect(jsonPath("$[0].departmentName", Matchers.is("Java")))
+                .andExpect(jsonPath("$[0].avgSalary", Matchers.is(1000)));
+//                        .string("[{\"departmentId\":1," +
+//                        "\"departmentName\":\"Java\"," +
+//                        "\"avgSalary\":1000}]"));
 
         EasyMock.verify(mockDepartmentService);
     }
