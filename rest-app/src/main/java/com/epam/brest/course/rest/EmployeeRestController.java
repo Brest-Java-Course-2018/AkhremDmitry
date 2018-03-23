@@ -48,7 +48,6 @@ public class EmployeeRestController {
     }
 
     @PutMapping(value = "/employees")
-    @ResponseStatus(HttpStatus.FOUND)
     void updateEmployee(@RequestBody Employee employee){
         LOGGER.debug("updateEmployee({})", employee);
         employeeService.updateEmployee(employee);
