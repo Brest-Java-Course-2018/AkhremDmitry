@@ -1,6 +1,7 @@
 package com.epam.brest.course.rest;
 
 import com.epam.brest.course.dao.Department;
+import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.easymock.EasyMock;
@@ -47,6 +48,26 @@ public class DepartmentControllerMockTest {
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
                 .build();
         EasyMock.reset(mockDepartmentService);
+    }
+
+    @Test
+    public void getDepartmentsDtoTest() throws Exception {
+        DepartmentDto departmentDto = new DepartmentDto(
+                DEPARTMENTID, DEPARTMENTNAME);
+
+        EasyMock.expect(mockDepartmentService.getAllDepartmentDto())
+                .andReturn(Arrays.asList(departmentDto));
+        EasyMock.replay(mockDepartmentService);
+
+        mockMvc.perform(
+                get("/departmentsdto")
+                .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$[0].departmentId", Matchers.is(1)))
+                .andExpect(jsonPath("$[0].departmentName", Matchers.is("Java")));
+
+        EasyMock.verify(mockDepartmentService);
     }
 
     @Test

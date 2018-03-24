@@ -1,6 +1,7 @@
 package com.epam.brest.course.client.rest;
 
 import com.epam.brest.course.dao.Department;
+import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.easymock.EasyMock;
@@ -36,22 +37,39 @@ public class DepartmentServiceRestMockTest {
 
     @Before
     public void init() {
-        departmentDtoWithAvgSalary1 = new DepartmentDtoWithAvgSalary(1,"name1", 100);
-        departmentDtoWithAvgSalary2= new DepartmentDtoWithAvgSalary(2,"name2", 200);
+        departmentDtoWithAvgSalary1 = new DepartmentDtoWithAvgSalary(1, "name1", 100);
+        departmentDtoWithAvgSalary2 = new DepartmentDtoWithAvgSalary(2, "name2", 200);
         department = new Department("name", "desc");
         department.setDepartmentId(3);
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         EasyMock.verify(mockRestTemplate);
         EasyMock.reset(mockRestTemplate);
     }
 
     @Test
-    public void getAllDepartments(){
+    public void getAllDepartmentDto() {
+        List departments = Arrays.asList(new DepartmentDto(1, "Java"));
+        ResponseEntity entity = new ResponseEntity(departments, HttpStatus.FOUND);
+
+        EasyMock.expect(mockRestTemplate.getForEntity("http://localhost:8090/departmentsdto", List.class))
+                .andReturn(entity);
+        EasyMock.replay(mockRestTemplate);
+
+        Collection<DepartmentDto> results
+                = departmentService.getAllDepartmentDto();
+
+        Assert.assertNotNull(results);
+        Assert.assertEquals(1, results.size());
+
+    }
+
+    @Test
+    public void getAllDepartments() {
         List departments = Arrays.asList(departmentDtoWithAvgSalary1, departmentDtoWithAvgSalary2);
-        ResponseEntity entity = new ResponseEntity<> (departments, HttpStatus.OK);
+        ResponseEntity entity = new ResponseEntity<>(departments, HttpStatus.OK);
 
         EasyMock.expect(mockRestTemplate.getForEntity(EasyMock.anyString(), EasyMock.anyObject()))
                 .andReturn(entity).times(1);
@@ -61,13 +79,13 @@ public class DepartmentServiceRestMockTest {
         Collection<DepartmentDtoWithAvgSalary> results
                 = departmentService.getAllDepartmentWithAvgSalary();
 
-        Assert.assertNotNull(departments);
-        Assert.assertEquals(2, departments.size());
+        Assert.assertNotNull(results);
+        Assert.assertEquals(2, results.size());
     }
 
     @Test
     public void getDepartmentById() {
-        ResponseEntity entity = new ResponseEntity<> (department, HttpStatus.FOUND);
+        ResponseEntity entity = new ResponseEntity<>(department, HttpStatus.FOUND);
         EasyMock.expect(mockRestTemplate.getForEntity(EasyMock.anyString(), EasyMock.anyObject()))
                 .andReturn(entity);
         EasyMock.replay(mockRestTemplate);
@@ -80,7 +98,7 @@ public class DepartmentServiceRestMockTest {
 
     @Test
     public void addDepartment() {
-        ResponseEntity entity = new ResponseEntity<> (department, HttpStatus.FOUND);
+        ResponseEntity entity = new ResponseEntity<>(department, HttpStatus.FOUND);
         EasyMock.expect(mockRestTemplate.postForEntity(EasyMock.anyString(), EasyMock.anyObject(), EasyMock.anyObject()))
                 .andReturn(entity);
         EasyMock.replay(mockRestTemplate);
@@ -89,6 +107,25 @@ public class DepartmentServiceRestMockTest {
 
         Assert.assertNotNull(result);
         Assert.assertEquals(3, result.getDepartmentId().intValue());
+    }
+
+    @Test
+    public void updateDepartment() {
+        mockRestTemplate.put("http://localhost:8090/departments", department);
+        EasyMock.expectLastCall();
+        EasyMock.replay(mockRestTemplate);
+
+        departmentService.updateDepartment(department);
+    }
+
+    @Test
+    public void deleteDepartment() {
+        mockRestTemplate.delete("http://localhost:8090/departments/1");
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(mockRestTemplate);
+
+        departmentService.deleteDepartmentById(1);
     }
 
 

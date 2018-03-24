@@ -30,7 +30,10 @@ public class DepertmentConsumerRest implements DepartmentService{
 
     @Override
     public Collection<DepartmentDto> getAllDepartmentDto() {
-        return null;
+        ResponseEntity responseEntity
+                = restTemplate.getForEntity(url+"dto", List.class);
+        List<DepartmentDto> result = (List<DepartmentDto>) responseEntity.getBody();
+        return result;
     }
 
     @Override
@@ -53,11 +56,11 @@ public class DepertmentConsumerRest implements DepartmentService{
 
     @Override
     public void updateDepartment(Department department) {
-
+        restTemplate.put(url, department);
     }
 
     @Override
     public void deleteDepartmentById(int departmentId) {
-
+        restTemplate.delete(url + "/" + departmentId);
     }
 }

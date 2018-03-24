@@ -34,6 +34,10 @@
             <artifactId>test-db</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.epam.brest.course</groupId>
+            <artifactId>rest-client</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>

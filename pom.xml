@@ -62,6 +62,11 @@
                 <artifactId>service</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.epam.brest.course</groupId>
+                <artifactId>rest-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.springframework</groupId>

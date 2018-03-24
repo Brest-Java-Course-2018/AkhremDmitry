@@ -1,6 +1,7 @@
 package com.epam.brest.course.rest;
 
 import com.epam.brest.course.dao.Department;
+import com.epam.brest.course.dto.DepartmentDto;
 import com.epam.brest.course.dto.DepartmentDtoWithAvgSalary;
 import com.epam.brest.course.service.DepartmentService;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,12 @@ public class DepartmentRestController {
     Collection<DepartmentDtoWithAvgSalary> getDepartments(){
         LOGGER.debug("departments()");
         return departmentService.getAllDepartmentWithAvgSalary();
+    }
+
+    @GetMapping(value = "/departmentsdto")
+    Collection<DepartmentDto> getAllDepartmentDto(){
+        LOGGER.debug("getAllDepartmentDto()");
+        return departmentService.getAllDepartmentDto();
     }
 
     @GetMapping(value = "/departments/{id}")
