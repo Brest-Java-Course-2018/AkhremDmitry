@@ -4,6 +4,7 @@ import com.epam.brest.course.dto.CarDto;
 import com.epam.brest.course.dto.CarDtoWithCrew;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -16,24 +17,62 @@ import java.util.Collection;
 
 public class CarDaoImpl implements CarDao {
 
-    private String selectAllCarsDtoSql = "SELECT carId, registrationPlate FROM car";
+    /**
+     * SQL request for get carsDto.
+     */
+    @Value("${car.selectAllCarsDtoSql}")
+    private String selectAllCarsDtoSql;
 
-    private String selectCarByIdSql = "SELECT carId, registrationPlate, description FROM car WHERE carId = :carId";
+    /**
+     * SQL request for get car by ID.
+     */
+    @Value("${car.selectCarByIdSql}")
+    private String selectCarByIdSql;
 
-    private String insertCarSql = "INSERT INTO car (registrationPlate, description) VALUES (:registrationPlate, :description)";
+    /**
+     * SQL request for insert new car.
+     */
+    @Value("${car.insertCarSql}")
+    private String insertCarSql;
 
-    private String updateCarSql = "UPDATE car SET registrationPlate = :registrationPlate, description = :description WHERE carId = :carId";
+    /**
+     * SQL request for update car.
+     */
+    @Value("${car.updateCarSql}")
+    private String updateCarSql;
 
-    private String deleteCarByIdSql = "DELETE FROM car WHERE carId = :carId";
+    /**
+     * SQL request for delete car.
+     */
+    @Value("${car.deleteCarByIdSql}")
+    private String deleteCarByIdSql;
 
-    private String selectNumberOfCarsSql = "SELECT count(*) FROM car";
+    /**
+     * SQL request for get number of cars.
+     */
+    @Value("${car.selectNumberOfCarsSql}")
+    private String selectNumberOfCarsSql;
 
-    private String selectAllCarsDtoWithCrew= "SELECT c.carId, c.registrationPlate, c.description, IFNULL(COUNT(cr.*),0) AS numberOfCrew FROM car AS c LEFT JOIN CREW AS cr ON(c.carId = cr.carId) GROUP BY c.carId";
+    /**
+     * SQL request for get all carsDto with number of crew.
+     */
+    @Value("${car.selectAllCarsDtoWithCrew}")
+    private String selectAllCarsDtoWithCrew;
 
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * NamedParameterJdbcTemplate.
+     */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    /**
+     * Constructor CarDaoImpl.
+     * @param namedParameterJdbcTemplate namedParameterJdbcTemplate
+     */
     public CarDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }

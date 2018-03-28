@@ -15,7 +15,7 @@ import java.util.Collection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-db-spring.xml",
-        "classpath:dao-test.xml"})
+        "classpath:dao-test.xml", "classpath:dao.xml"})
 @Rollback
 @Transactional
 public class CarDaoImplTest {
