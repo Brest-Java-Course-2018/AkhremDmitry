@@ -3,7 +3,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/Brest-Java-Course-2018/AkhremDmitry/badge.svg)](https://coveralls.io/github/Brest-Java-Course-2018/AkhremDmitry)
 
-# Simple HR-manager.
+# Simple ambulance service manager.
 
 Building
 --------

@@ -8,7 +8,7 @@ public class Car {
     /**
      * Property id.
      */
-    private String carId;
+    private int carId;
 
     /**
      * Property registration plate.
@@ -41,7 +41,7 @@ public class Car {
      * det car id.
      * @return carId.
      */
-    public String getCarId() {
+    public int getCarId() {
         return carId;
     }
 
@@ -49,7 +49,7 @@ public class Car {
      * Set car id.
      * @param carId carId.
      */
-    public void setCarId(String carId) {
+    public void setCarId(int carId) {
         this.carId = carId;
     }
 
@@ -88,7 +88,7 @@ public class Car {
     @Override
     public String toString() {
         return "Car{" +
-                "id='" + carId + '\'' +
+                "carId=" + carId +
                 ", registrationPlate='" + registrationPlate + '\'' +
                 ", description='" + description + '\'' +
                 '}';
@@ -101,7 +101,7 @@ public class Car {
 
         Car car = (Car) o;
 
-        if (carId != null ? !carId.equals(car.carId) : car.carId != null) return false;
+        if (carId != car.carId) return false;
         if (registrationPlate != null ? !registrationPlate.equals(car.registrationPlate) : car.registrationPlate != null)
             return false;
         return description != null ? description.equals(car.description) : car.description == null;
@@ -109,7 +109,7 @@ public class Car {
 
     @Override
     public int hashCode() {
-        int result = carId != null ? carId.hashCode() : 0;
+        int result = carId;
         result = 31 * result + (registrationPlate != null ? registrationPlate.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
