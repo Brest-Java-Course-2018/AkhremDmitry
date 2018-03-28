@@ -1,5 +1,7 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.CarDto;
+import com.epam.brest.course.dto.CarDtoWithCrew;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +30,7 @@ public class CarDaoImplTest {
 
     @Test
     public void getAllCarTest(){
-        Collection<Car> cars = carDao.getAllCar();
+        Collection<CarDto> cars = carDao.getAllCarsDto();
         Assert.assertFalse(cars.isEmpty());
     }
 
@@ -44,11 +46,11 @@ public class CarDaoImplTest {
     @Test
     public void addCar(){
         Car expCar = new Car(REGISTRATIONPLATE, DESCRIPTION);
-        Collection<Car> carsBefore = carDao.getAllCar();
+        int numCarsBefore = carDao.getNumberOfCars();
         Car actCar = carDao.addCar(expCar);
-        Collection<Car> carsAfter = carDao.getAllCar();
+        int numCarsAfter = carDao.getNumberOfCars();
 
-        Assert.assertTrue(carsBefore.size() == carsAfter.size()-1);
+        Assert.assertTrue(numCarsBefore == numCarsAfter-1);
         Assert.assertEquals(REGISTRATIONPLATE, actCar.getRegistrationPlate());
         Assert.assertEquals(DESCRIPTION, actCar.getDescription());
     }
@@ -60,13 +62,13 @@ public class CarDaoImplTest {
         Car addedCar = carDao.addCar(new Car("car", "some description"));
         expCar.setCarId(addedCar.getCarId());
 
-        Collection<Car> carsBefore = carDao.getAllCar();
+        int numCarsBefore = carDao.getNumberOfCars();
         carDao.updateCar(expCar);
-        Collection<Car> carsAfter = carDao.getAllCar();
+        int numCarsAfter = carDao.getNumberOfCars();
 
         Car actCar = carDao.getCarById(expCar.getCarId());
 
-        Assert.assertTrue(carsBefore.size() == carsAfter.size());
+        Assert.assertTrue(numCarsBefore == numCarsAfter);
         Assert.assertEquals(expCar, actCar);
     }
 
@@ -75,13 +77,31 @@ public class CarDaoImplTest {
         Car car = new Car(REGISTRATIONPLATE, DESCRIPTION);
         car = carDao.addCar(car);
 
-        Collection<Car> carsBefore = carDao.getAllCar();
+        int numCarsBefore = carDao.getNumberOfCars();
         carDao.deleteCarById(car.getCarId());
-        Collection<Car> carsAfter = carDao.getAllCar();
+        int numCarsAfter = carDao.getNumberOfCars();
 
-        Assert.assertTrue(carsBefore.size()-1 == carsAfter.size());
+        Assert.assertTrue(numCarsBefore-1 == numCarsAfter);
     }
 
+    @Test
+    public void getNunberOfCars(){
+        int expNumOfCars = carDao.getAllCarsDto().size();
+        int actNumOfCars = carDao.getNumberOfCars();
+
+        Assert.assertEquals(expNumOfCars, actNumOfCars);
+
+        carDao.addCar(new Car());
+        actNumOfCars = carDao.getNumberOfCars();
+
+        Assert.assertEquals(expNumOfCars+1, actNumOfCars);
+    }
+
+    @Test
+    public void getAllCarDtoWithCrewTest(){
+        Collection<CarDtoWithCrew> cars = carDao.getAllCarsDtoWithCrew();
+        Assert.assertFalse(cars.isEmpty());
+    }
 
 
 }

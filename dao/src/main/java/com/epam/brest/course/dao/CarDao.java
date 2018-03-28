@@ -1,5 +1,8 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.CarDto;
+import com.epam.brest.course.dto.CarDtoWithCrew;
+
 import java.util.Collection;
 
 /**
@@ -9,9 +12,9 @@ public interface CarDao {
 
     /**
      * Return all cars from database.
-     * @return Collection Cars.
+     * @return Collection CarsDto.
      */
-    Collection<Car> getAllCar();
+    Collection<CarDto> getAllCarsDto();
 
     /**
      * Return car by id from database.
@@ -38,4 +41,16 @@ public interface CarDao {
      * @param id car id
      */
     void deleteCarById (int id);
+
+    /**
+     * Return number of cars.
+     * @return number of records in the table car.
+     */
+    int getNumberOfCars();
+
+    /**
+     * Return all cars DTO with number of crew.
+     * @return
+     */
+    Collection<CarDtoWithCrew> getAllCarsDtoWithCrew();
 }

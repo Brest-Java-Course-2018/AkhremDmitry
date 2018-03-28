@@ -1,5 +1,7 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.dto.CarDto;
+import com.epam.brest.course.dto.CarDtoWithCrew;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,7 +16,7 @@ import java.util.Collection;
 
 public class CarDaoImpl implements CarDao {
 
-    private String selectAllCarsSql = "SELECT carId, registrationPlate, description FROM car";
+    private String selectAllCarsDtoSql = "SELECT carId, registrationPlate FROM car";
 
     private String selectCarByIdSql = "SELECT carId, registrationPlate, description FROM car WHERE carId = :carId";
 
@@ -23,6 +25,10 @@ public class CarDaoImpl implements CarDao {
     private String updateCarSql = "UPDATE car SET registrationPlate = :registrationPlate, description = :description WHERE carId = :carId";
 
     private String deleteCarByIdSql = "DELETE FROM car WHERE carId = :carId";
+
+    private String selectNumberOfCarsSql = "SELECT count(*) FROM car";
+
+    private String selectAllCarsDtoWithCrew= "SELECT c.carId, c.registrationPlate, c.description, IFNULL(COUNT(cr.*),0) AS numberOfCrew FROM car AS c LEFT JOIN CREW AS cr ON(c.carId = cr.carId) GROUP BY c.carId";
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -33,12 +39,12 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public final Collection<Car> getAllCar() {
+    public final Collection<CarDto> getAllCarsDto() {
         LOGGER.debug("getAllCar()");
 
-        Collection<Car> cars = namedParameterJdbcTemplate
+        Collection<CarDto> cars = namedParameterJdbcTemplate
                 .getJdbcOperations()
-                .query(selectAllCarsSql, BeanPropertyRowMapper.newInstance(Car.class));
+                .query(selectAllCarsDtoSql, BeanPropertyRowMapper.newInstance(CarDto.class));
         return cars;
     }
 
@@ -85,4 +91,26 @@ public class CarDaoImpl implements CarDao {
 
         namedParameterJdbcTemplate.update(deleteCarByIdSql, namedParamerer);
     }
+
+    @Override
+    public int getNumberOfCars() {
+        LOGGER.debug("getNumberOfCars()");
+        int countCar = namedParameterJdbcTemplate
+                .getJdbcOperations()
+                .queryForObject(selectNumberOfCarsSql, Integer.class);
+        return countCar;
+    }
+
+    @Override
+    public Collection<CarDtoWithCrew> getAllCarsDtoWithCrew() {
+        LOGGER.debug("getAllCarsDtoWithCrew()");
+        Collection<CarDtoWithCrew> cars = namedParameterJdbcTemplate
+                .getJdbcOperations()
+                .query(selectAllCarsDtoWithCrew,
+                        BeanPropertyRowMapper
+                                .newInstance(CarDtoWithCrew.class));
+        return cars;
+    }
+
+
 }
