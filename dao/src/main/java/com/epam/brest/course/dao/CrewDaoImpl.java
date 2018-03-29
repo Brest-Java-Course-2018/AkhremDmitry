@@ -4,7 +4,14 @@ import com.epam.brest.course.dto.CrewDto;
 import com.epam.brest.course.dto.CrewDtoWithCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import java.util.Collection;
 
@@ -14,9 +21,9 @@ import java.util.Collection;
 public class CrewDaoImpl implements CrewDao {
 
     /**
-     * Logger
+     * Logger.
      */
-    private final static Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * NamedParameterJdbcTemplate.
@@ -24,7 +31,8 @@ public class CrewDaoImpl implements CrewDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     /**
-     * Constructor CrewDaoImpl
+     * Constructor CrewDaoImpl.
+     *
      * @param namedParameterJdbcTemplate namedParameterJdbcTemplate
      */
     public CrewDaoImpl(final NamedParameterJdbcTemplate
@@ -32,33 +40,101 @@ public class CrewDaoImpl implements CrewDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
+    /**
+     * SQL request for get CrewsDto.
+     */
+    @Value("${crew.selectAllCrewsDtoSql}")
+    private String selectAllCrewsDtoSql;
+
+    /**
+     * SQL request for get crew by ID.
+     */
+    @Value("${crew.selectCrewByIdSql}")
+    private String selectCrewByIdSql;
+
+    /**
+     * SQL request for insert new crew.
+     */
+    @Value("${crew.insertCrewSql}")
+    private String insertCrewSql;
+
+    /**
+     * SQL request for update crew.
+     */
+    @Value("${crew.updateCrewSql}")
+    private String updateCrewSql;
+
+    /**
+     * SQL request for delete crew.
+     */
+    @Value("${crew.deleteCrewByIdSql}")
+    private String deleteCrewByIdSql;
+
+    /**
+     * SQL request for get all crewDto with number of calls.
+     */
+    @Value("${crew.selectAllCrewsDtoWithCall}")
+    private String selectAllCrewsDtoWithCall;
+
     @Override
-    public Collection<CrewDto> getAllCrewDto() {
-        return null;
+    public final Collection<CrewDto> getAllCrewDto() {
+        LOGGER.debug("getAllCrewDto()");
+        Collection<CrewDto> crews = namedParameterJdbcTemplate
+                .query(selectAllCrewsDtoSql,
+                        BeanPropertyRowMapper.newInstance(CrewDto.class));
+
+        return crews;
     }
 
     @Override
-    public Crew getCrewById(int crewId) {
-        return null;
+    public final Crew getCrewById(final int crewId) {
+        LOGGER.debug("getCrewById({})", crewId);
+        SqlParameterSource namedParameters =
+                new MapSqlParameterSource("crewId", crewId);
+
+        Crew crew = namedParameterJdbcTemplate
+                .queryForObject(selectCrewByIdSql,
+                        namedParameters,
+                        BeanPropertyRowMapper.newInstance(Crew.class));
+        return crew;
     }
 
     @Override
-    public Crew addCrew(Crew crew) {
-        return null;
+    public final Crew addCrew(final Crew crew) {
+        LOGGER.debug("addCrew({})", crew);
+        SqlParameterSource namedParameters =
+                new BeanPropertySqlParameterSource(crew);
+        KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(insertCrewSql,
+                namedParameters, generatedKeyHolder);
+        crew.setCrewId(generatedKeyHolder.getKey().intValue());
+        return crew;
     }
 
     @Override
-    public void updateCrew(Crew crew) {
-
+    public final void updateCrew(final Crew crew) {
+        LOGGER.debug("updateCrew({})", crew);
+        SqlParameterSource namedParameters =
+                new BeanPropertySqlParameterSource(crew);
+        namedParameterJdbcTemplate.update(updateCrewSql, namedParameters);
     }
 
     @Override
-    public void deleteCrewById(int id) {
-
+    public final void deleteCrewById(final int crewId) {
+        LOGGER.debug("deleteCrewById({})", crewId);
+        SqlParameterSource namedParameters =
+                new MapSqlParameterSource("crewId", crewId);
+        namedParameterJdbcTemplate.update(deleteCrewByIdSql, namedParameters);
     }
 
     @Override
-    public Collection<CrewDtoWithCall> getAllCrewDtoWithCall() {
-        return null;
+    public final Collection<CrewDtoWithCall> getAllCrewDtoWithCall() {
+        LOGGER.debug("getAllCrewDtoWithCall()");
+        Collection<CrewDtoWithCall> crews = namedParameterJdbcTemplate
+                .getJdbcOperations()
+                .query(selectAllCrewsDtoWithCall,
+                        BeanPropertyRowMapper
+                                .newInstance(CrewDtoWithCall.class));
+        return crews;
     }
 }

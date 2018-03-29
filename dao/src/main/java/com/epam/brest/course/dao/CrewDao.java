@@ -6,7 +6,7 @@ import com.epam.brest.course.dto.CrewDtoWithCall;
 import java.util.Collection;
 
 /**
- * Crew DAO interface
+ * Crew DAO interface.
  */
 public interface CrewDao {
 
@@ -38,9 +38,9 @@ public interface CrewDao {
 
     /**
      * Remove crew by id from database.
-     * @param id crew id
+     * @param crewId crew id
      */
-    void deleteCrewById(int id);
+    void deleteCrewById(int crewId);
 
     /**
      * Return all crews DTO with number of calls.

@@ -31,6 +31,7 @@ public class CrewDaoImplTest {
     @Test
     public void getAllCrewTest(){
         Collection<CrewDto> crews = crewDao.getAllCrewDto();
+        System.out.println(crews);
         Assert.assertFalse(crews.isEmpty());
     }
 
@@ -88,6 +89,7 @@ public class CrewDaoImplTest {
     @Test
     public void getAllCrewDtoWithCallTest(){
         Collection<CrewDtoWithCall> crews = crewDao.getAllCrewDtoWithCall();
+        System.out.println(crews);
         Assert.assertFalse(crews.isEmpty());
         Assert.assertTrue(crews.size() == crewDao.getAllCrewDto().size());
     }
