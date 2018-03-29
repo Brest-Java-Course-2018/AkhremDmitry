@@ -36,7 +36,9 @@ public class Crew {
      * @param description Some description
      * @param carId Crew's car.
      */
-    public Crew(String crewName, String description, int carId) {
+    public Crew(final String crewName,
+                final String description,
+                final int carId) {
         this.crewName = crewName;
         this.description = description;
         this.carId = carId;
@@ -46,7 +48,7 @@ public class Crew {
      * Get crew id.
      * @return Unique identifier.
      */
-    public int getCrewId() {
+    public final int getCrewId() {
         return crewId;
     }
 
@@ -54,7 +56,7 @@ public class Crew {
      * Set crewId.
      * @param crewId Unique identifier.
      */
-    public void setCrewId(int crewId) {
+    public final void setCrewId(final int crewId) {
         this.crewId = crewId;
     }
 
@@ -62,7 +64,7 @@ public class Crew {
      * Get crew name.
      * @return Crew name.
      */
-    public String getCrewName() {
+    public final String getCrewName() {
         return crewName;
     }
 
@@ -70,7 +72,7 @@ public class Crew {
      * Set crew name.
      * @param crewName Crew name.
      */
-    public void setCrewName(String crewName) {
+    public final void setCrewName(final String crewName) {
         this.crewName = crewName;
     }
 
@@ -78,7 +80,7 @@ public class Crew {
      * Get description.
      * @return Some description.
      */
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
@@ -86,7 +88,7 @@ public class Crew {
      * Set description.
      * @param description Some description.
      */
-    public void setDescription(String description) {
+    public final void setDescription(final String description) {
         this.description = description;
     }
 
@@ -94,7 +96,7 @@ public class Crew {
      * Get car id.
      * @return Crew's car.
      */
-    public int getCarId() {
+    public final int getCarId() {
         return carId;
     }
 
@@ -102,7 +104,7 @@ public class Crew {
      * Set car id.
      * @param carId Crew's car.
      */
-    public void setCarId(int carId) {
+    public final void setCarId(final int carId) {
         this.carId = carId;
     }
 

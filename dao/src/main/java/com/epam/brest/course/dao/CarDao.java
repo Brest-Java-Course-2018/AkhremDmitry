@@ -28,19 +28,19 @@ public interface CarDao {
      * @param car new car
      * @return car with id
      */
-    Car addCar (Car car);
+    Car addCar(Car car);
 
     /**
      * Update car in database.
      * @param car car
      */
-    void updateCar (Car car);
+    void updateCar(Car car);
 
     /**
      * Remove car by id from database.
      * @param id car id
      */
-    void deleteCarById (int id);
+    void deleteCarById(int id);
 
     /**
      * Return number of cars.
@@ -50,7 +50,7 @@ public interface CarDao {
 
     /**
      * Return all cars DTO with number of crew.
-     * @return
+     * @return Collection CarDtoWithCrew.
      */
     Collection<CarDtoWithCrew> getAllCarsDtoWithCrew();
 }

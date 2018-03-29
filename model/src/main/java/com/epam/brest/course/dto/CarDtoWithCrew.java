@@ -38,9 +38,9 @@ public class CarDtoWithCrew {
      * @param description       Some description.
      * @param numberOfCrew      number of crew.
      */
-    public CarDtoWithCrew(String registrationPlate,
-                          String description,
-                          int numberOfCrew) {
+    public CarDtoWithCrew(final String registrationPlate,
+                          final String description,
+                          final int numberOfCrew) {
         this.registrationPlate = registrationPlate;
         this.description = description;
         this.numberOfCrew = numberOfCrew;
@@ -51,7 +51,7 @@ public class CarDtoWithCrew {
      *
      * @return carId.
      */
-    public int getCarId() {
+    public final int getCarId() {
         return carId;
     }
 
@@ -60,7 +60,7 @@ public class CarDtoWithCrew {
      *
      * @param carId carId.
      */
-    public void setCarId(int carId) {
+    public final void setCarId(final int carId) {
         this.carId = carId;
     }
 
@@ -69,7 +69,7 @@ public class CarDtoWithCrew {
      *
      * @return registration plate.
      */
-    public String getRegistrationPlate() {
+    public final String getRegistrationPlate() {
         return registrationPlate;
     }
 
@@ -78,7 +78,7 @@ public class CarDtoWithCrew {
      *
      * @param registrationPlate registrationPlate.
      */
-    public void setRegistrationPlate(String registrationPlate) {
+    public final void setRegistrationPlate(final String registrationPlate) {
         this.registrationPlate = registrationPlate;
     }
 
@@ -87,7 +87,7 @@ public class CarDtoWithCrew {
      *
      * @return description.
      */
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
@@ -96,7 +96,7 @@ public class CarDtoWithCrew {
      *
      * @param description description.
      */
-    public void setDescription(String description) {
+    public final void setDescription(final String description) {
         this.description = description;
     }
 
@@ -104,7 +104,7 @@ public class CarDtoWithCrew {
      * Get number of crew.
      * @return number of crew.
      */
-    public int getNumberOfCrew() {
+    public final int getNumberOfCrew() {
         return numberOfCrew;
     }
 
@@ -112,7 +112,7 @@ public class CarDtoWithCrew {
      * Set number of crew.
      * @param numberOfCrew number of crew.
      */
-    public void setNumberOfCrew(int numberOfCrew) {
+    public final void setNumberOfCrew(final int numberOfCrew) {
         this.numberOfCrew = numberOfCrew;
     }
 

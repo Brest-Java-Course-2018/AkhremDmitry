@@ -35,7 +35,7 @@ public class CarDto {
      *
      * @return carId.
      */
-    public int getCarId() {
+    public final int getCarId() {
         return carId;
     }
 
@@ -44,7 +44,7 @@ public class CarDto {
      *
      * @param carId carId.
      */
-    public void setCarId(int carId) {
+    public final void setCarId(final int carId) {
         this.carId = carId;
     }
 
@@ -53,7 +53,7 @@ public class CarDto {
      *
      * @return registration plate.
      */
-    public String getRegistrationPlate() {
+    public final String getRegistrationPlate() {
         return registrationPlate;
     }
 
@@ -62,7 +62,7 @@ public class CarDto {
      *
      * @param registrationPlate registrationPlate.
      */
-    public void setRegistrationPlate(String registrationPlate) {
+    public final void setRegistrationPlate(final String registrationPlate) {
         this.registrationPlate = registrationPlate;
     }
 

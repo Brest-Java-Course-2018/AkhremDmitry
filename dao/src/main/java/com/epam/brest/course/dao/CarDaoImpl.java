@@ -15,6 +15,9 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.util.Collection;
 
+/**
+ * CarDaoImpl.
+ */
 public class CarDaoImpl implements CarDao {
 
     /**
@@ -73,7 +76,8 @@ public class CarDaoImpl implements CarDao {
      * Constructor CarDaoImpl.
      * @param namedParameterJdbcTemplate namedParameterJdbcTemplate
      */
-    public CarDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public CarDaoImpl(final NamedParameterJdbcTemplate
+                                     namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
@@ -83,7 +87,8 @@ public class CarDaoImpl implements CarDao {
 
         Collection<CarDto> cars = namedParameterJdbcTemplate
                 .getJdbcOperations()
-                .query(selectAllCarsDtoSql, BeanPropertyRowMapper.newInstance(CarDto.class));
+                .query(selectAllCarsDtoSql,
+                        BeanPropertyRowMapper.newInstance(CarDto.class));
         return cars;
     }
 
@@ -114,7 +119,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void updateCar(Car car) {
+    public final void updateCar(final Car car) {
         LOGGER.debug("updateCar({})", car);
         SqlParameterSource namedParameters =
                 new BeanPropertySqlParameterSource(car);
@@ -123,7 +128,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void deleteCarById(int carId) {
+    public final void deleteCarById(final int carId) {
         LOGGER.debug("deleteCarById({})", carId);
         SqlParameterSource namedParamerer =
                 new MapSqlParameterSource("carId", carId);
@@ -132,7 +137,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public int getNumberOfCars() {
+    public final int getNumberOfCars() {
         LOGGER.debug("getNumberOfCars()");
         int countCar = namedParameterJdbcTemplate
                 .getJdbcOperations()
@@ -141,7 +146,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public Collection<CarDtoWithCrew> getAllCarsDtoWithCrew() {
+    public final Collection<CarDtoWithCrew> getAllCarsDtoWithCrew() {
         LOGGER.debug("getAllCarsDtoWithCrew()");
         Collection<CarDtoWithCrew> cars = namedParameterJdbcTemplate
                 .getJdbcOperations()

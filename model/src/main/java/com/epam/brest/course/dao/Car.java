@@ -41,7 +41,7 @@ public class Car {
      * det car id.
      * @return carId.
      */
-    public int getCarId() {
+    public final int getCarId() {
         return carId;
     }
 
@@ -49,7 +49,7 @@ public class Car {
      * Set car id.
      * @param carId carId.
      */
-    public void setCarId(int carId) {
+    public final void setCarId(final int carId) {
         this.carId = carId;
     }
 
@@ -57,7 +57,7 @@ public class Car {
      * Get registration plate.
      * @return registration plate.
      */
-    public String getRegistrationPlate() {
+    public final String getRegistrationPlate() {
         return registrationPlate;
     }
 
@@ -65,7 +65,7 @@ public class Car {
      * Set registration plate.
      * @param registrationPlate registrationPlate.
      */
-    public void setRegistrationPlate(String registrationPlate) {
+    public final void setRegistrationPlate(final String registrationPlate) {
         this.registrationPlate = registrationPlate;
     }
 
@@ -73,7 +73,7 @@ public class Car {
      * Get description.
      * @return description.
      */
-    public String getDescription() {
+    public final String getDescription() {
         return description;
     }
 
@@ -81,7 +81,7 @@ public class Car {
      * Set description.
      * @param description description.
      */
-    public void setDescription(String description) {
+    public final void setDescription(final String description) {
         this.description = description;
     }
 
