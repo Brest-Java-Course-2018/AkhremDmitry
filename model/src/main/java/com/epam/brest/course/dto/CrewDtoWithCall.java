@@ -1,9 +1,7 @@
-package com.epam.brest.course.dao;
+package com.epam.brest.course.dto;
 
-/**
- * POJO Crew.
- */
-public class Crew {
+public class CrewDtoWithCall {
+
     /**
      * Property id.
      */
@@ -22,26 +20,24 @@ public class Crew {
     /**
      * Property carId.
      */
-    private int carId;
+    private int numberOfCalls;
 
     /**
-     * Constructor Crew.
+     * Constructor CrewDtoWithCall.
      */
-    public Crew() {
+    public CrewDtoWithCall() {
     }
 
     /**
-     * Constryctor Crew.
+     * Constryctor CrewDtoWithCall.
      * @param crewName Crew name
      * @param description Some description
-     * @param carId Crew's car.
+     * @param numberOfCalls number of calls for crew.
      */
-    public Crew(final String crewName,
-                final String description,
-                final int carId) {
+    public CrewDtoWithCall(String crewName, String description, int numberOfCalls) {
         this.crewName = crewName;
         this.description = description;
-        this.carId = carId;
+        this.numberOfCalls = numberOfCalls;
     }
 
     /**
@@ -94,28 +90,27 @@ public class Crew {
 
     /**
      * Get car id.
-     * @return Crew's car.
+     * @return number of calls for crew.
      */
-    public final int getCarId() {
-        return carId;
+    public final int getNumberOfCalls() {
+        return numberOfCalls;
     }
 
     /**
      * Set car id.
-     * @param carId Crew's car.
+     * @param numberOfCalls number of calls for crew.
      */
-    public final void setCarId(final int carId) {
-        this.carId = carId;
+    public final void setNumberOfCalls(final int numberOfCalls) {
+        this.numberOfCalls = numberOfCalls;
     }
-
 
     @Override
     public String toString() {
-        return "Crew{" +
+        return "CrewDtoWithCall{" +
                 "crewId=" + crewId +
                 ", crewName='" + crewName + '\'' +
                 ", description='" + description + '\'' +
-                ", carId=" + carId +
+                ", numberOfCalls=" + numberOfCalls +
                 '}';
     }
 
@@ -124,12 +119,12 @@ public class Crew {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Crew crew = (Crew) o;
+        CrewDtoWithCall that = (CrewDtoWithCall) o;
 
-        if (crewId != crew.crewId) return false;
-        if (carId != crew.carId) return false;
-        if (crewName != null ? !crewName.equals(crew.crewName) : crew.crewName != null) return false;
-        return description != null ? description.equals(crew.description) : crew.description == null;
+        if (crewId != that.crewId) return false;
+        if (numberOfCalls != that.numberOfCalls) return false;
+        if (crewName != null ? !crewName.equals(that.crewName) : that.crewName != null) return false;
+        return description != null ? description.equals(that.description) : that.description == null;
     }
 
     @Override
@@ -137,7 +132,7 @@ public class Crew {
         int result = crewId;
         result = 31 * result + (crewName != null ? crewName.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + carId;
+        result = 31 * result + numberOfCalls;
         return result;
     }
 }

@@ -21,7 +21,7 @@ import java.util.Collection;
 public class CarDaoImplTest {
 
     @Autowired
-    CarDao carDao;
+    private CarDao carDao;
 
     private static final int ID = 1;
     private static final String REGISTRATIONPLATE = "4724 AA-1";
