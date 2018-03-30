@@ -3,6 +3,7 @@ package com.epam.brest.course.dao;
 import com.epam.brest.course.dto.CrewDto;
 import com.epam.brest.course.dto.CrewDtoWithCall;
 
+import java.sql.Date;
 import java.util.Collection;
 
 /**
@@ -47,5 +48,13 @@ public interface CrewDao {
      * @return Collection CrewDtoWithCall.
      */
     Collection<CrewDtoWithCall> getAllCrewDtoWithCall();
+
+    /**
+     * Return all crews DTO with number of calls by date.
+     * @param startDate date of first call
+     * @param endDate date of last call
+     * @return Collection CrewDtoWithCall by date.
+     */
+    Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(Date startDate, Date endDate);
 
 }

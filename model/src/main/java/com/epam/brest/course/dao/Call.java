@@ -15,7 +15,7 @@ public class Call {
     /**
      * Property date.
      */
-    private Date date;
+    private Date dateCall;
 
     /**
      * Property description.
@@ -40,16 +40,16 @@ public class Call {
 
     /**
      * Constructor Call.
-     * @param date Date of call
+     * @param dateCall Date of call
      * @param description Some description
      * @param address The address from which the call was received
      * @param crewId The crew that was sent to the call.
      */
-    public Call(final Date date,
+    public Call(final Date dateCall,
                 final String description,
                 final String address,
                 final int crewId) {
-        this.date = date;
+        this.dateCall = dateCall;
         this.description = description;
         this.address = address;
         this.crewId = crewId;
@@ -75,16 +75,16 @@ public class Call {
      * Get date.
      * @return Date of call.
      */
-    public final Date getDate() {
-        return date;
+    public final Date getDateCall() {
+        return dateCall;
     }
 
     /**
      * Set date.
-     * @param date Date of call.
+     * @param dateCall Date of call.
      */
-    public final void setDate(final Date date) {
-        this.date = date;
+    public final void setDateCall(final Date dateCall) {
+        this.dateCall = dateCall;
     }
 
     /**
@@ -139,7 +139,7 @@ public class Call {
     public String toString() {
         return "Call{" +
                 "callId=" + callId +
-                ", date=" + date +
+                ", dateCall=" + dateCall +
                 ", description='" + description + '\'' +
                 ", address='" + address + '\'' +
                 ", crewId=" + crewId +
@@ -155,7 +155,7 @@ public class Call {
 
         if (callId != call.callId) return false;
         if (crewId != call.crewId) return false;
-        if (date != null ? !date.equals(call.date) : call.date != null) return false;
+        if (dateCall != null ? !dateCall.equals(call.dateCall) : call.dateCall != null) return false;
         if (description != null ? !description.equals(call.description) : call.description != null) return false;
         return address != null ? address.equals(call.address) : call.address == null;
     }
@@ -163,7 +163,7 @@ public class Call {
     @Override
     public int hashCode() {
         int result = callId;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (dateCall != null ? dateCall.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + crewId;

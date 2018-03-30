@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.sql.Date;
 import java.util.Collection;
 
 /**
@@ -73,8 +74,14 @@ public class CrewDaoImpl implements CrewDao {
     /**
      * SQL request for get all crewDto with number of calls.
      */
-    @Value("${crew.selectAllCrewsDtoWithCall}")
-    private String selectAllCrewsDtoWithCall;
+    @Value("${crew.selectAllCrewsDtoWithCallSql}")
+    private String selectAllCrewsDtoWithCallSql;
+
+    /**
+     * SQL request for get all crewDto with number of calls by date.
+     */
+    @Value("${crew.selectAllCrewsDtoWithCallByDateSql}")
+    private String selectAllCrewsDtoWithCallByDateSql;
 
     @Override
     public final Collection<CrewDto> getAllCrewDto() {
@@ -132,7 +139,21 @@ public class CrewDaoImpl implements CrewDao {
         LOGGER.debug("getAllCrewDtoWithCall()");
         Collection<CrewDtoWithCall> crews = namedParameterJdbcTemplate
                 .getJdbcOperations()
-                .query(selectAllCrewsDtoWithCall,
+                .query(selectAllCrewsDtoWithCallSql,
+                        BeanPropertyRowMapper
+                                .newInstance(CrewDtoWithCall.class));
+        return crews;
+    }
+
+    @Override
+    public final Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(Date startDate, Date endDate) {
+        LOGGER.debug("getAllCrewDtoWithCallByDate({}, {})", startDate, endDate);
+        MapSqlParameterSource namedParameters =
+                new MapSqlParameterSource("startDate", startDate);
+        namedParameters.addValue("endDate", endDate);
+        Collection<CrewDtoWithCall> crews = namedParameterJdbcTemplate
+                .query(selectAllCrewsDtoWithCallByDateSql,
+                        namedParameters,
                         BeanPropertyRowMapper
                                 .newInstance(CrewDtoWithCall.class));
         return crews;

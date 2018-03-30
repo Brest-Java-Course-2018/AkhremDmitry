@@ -8,9 +8,9 @@ INSERT INTO crew (crewName, description, carId)
 VALUES ('Crew2', 'Some Crew2', 2);
 INSERT INTO crew (crewName, description, carId)
 VALUES ('Crew3', 'Some Crew3', 2);
-INSERT INTO call (date, description, address, crewId)
+INSERT INTO call (dateCall, description, address, crewId)
 VALUES ('2018-03-27', 'Some description1', 'Some address1', 2);
-INSERT INTO call (date, description, address, crewId)
+INSERT INTO call (dateCall, description, address, crewId)
 VALUES ('2018-03-23', 'Some description2', 'Some address2', 1);
-INSERT INTO call (date, description, address, crewId)
+INSERT INTO call (dateCall, description, address, crewId)
 VALUES ('2018-02-23', 'Some description3', 'Some address3', 1);

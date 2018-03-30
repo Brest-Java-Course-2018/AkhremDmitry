@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.Collection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -89,6 +90,16 @@ public class CrewDaoImplTest {
     @Test
     public void getAllCrewDtoWithCallTest(){
         Collection<CrewDtoWithCall> crews = crewDao.getAllCrewDtoWithCall();
+        System.out.println(crews);
+        Assert.assertFalse(crews.isEmpty());
+        Assert.assertTrue(crews.size() == crewDao.getAllCrewDto().size());
+    }
+
+
+    @Test
+    public void getAllCrewDtoWithCallByDateTest(){
+        Collection<CrewDtoWithCall> crews =
+                crewDao.getAllCrewDtoWithCallByDate(new Date(2018-1900, 3-1, 23), new Date(2018-1900, 3-1, 23));
         System.out.println(crews);
         Assert.assertFalse(crews.isEmpty());
         Assert.assertTrue(crews.size() == crewDao.getAllCrewDto().size());

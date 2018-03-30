@@ -17,7 +17,7 @@ CREATE TABLE crew (
 DROP TABLE IF EXISTS call;
 CREATE TABLE call (
   callId INT NOT NULL AUTO_INCREMENT,
-  date DATE NOT NULL,
+  dateCall DATE NOT NULL,
   description VARCHAR(255) NULL,
   address VARCHAR(255) NOT NULL,
   crewId int NOT NULL,
