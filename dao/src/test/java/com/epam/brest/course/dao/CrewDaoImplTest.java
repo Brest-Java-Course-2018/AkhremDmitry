@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -97,10 +99,13 @@ public class CrewDaoImplTest {
 
 
     @Test
-    public void getAllCrewDtoWithCallByDateTest(){
+    public void getAllCrewDtoWithCallByDateTest() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
+        Date startDate = new Date(dateFormat.parse("2018-3-23").getTime());
+        Date endDate = new Date(dateFormat.parse("2018-3-23").getTime());
+
         Collection<CrewDtoWithCall> crews =
-                crewDao.getAllCrewDtoWithCallByDate(new Date(2018-1900, 3-1, 23), new Date(2018-1900, 3-1, 23));
-        System.out.println(crews);
+                crewDao.getAllCrewDtoWithCallByDate(startDate, endDate);
         Assert.assertFalse(crews.isEmpty());
         Assert.assertTrue(crews.size() == crewDao.getAllCrewDto().size());
     }

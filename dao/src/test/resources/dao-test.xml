@@ -13,6 +13,10 @@
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
+    <bean id="callDao" class="com.epam.brest.course.dao.CallDaoImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
+
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
