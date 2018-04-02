@@ -103,5 +103,14 @@ public class CarDaoImplTest {
         Assert.assertFalse(cars.isEmpty());
     }
 
+    @Test
+    public void checkCar(){
+        carDao.addCar(new Car(REGISTRATIONPLATE, DESCRIPTION));
+
+        int actNumber = carDao.checkCar(REGISTRATIONPLATE);
+
+        Assert.assertEquals(1, actNumber);
+    }
+
 
 }

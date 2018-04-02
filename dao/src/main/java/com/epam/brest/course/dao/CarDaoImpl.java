@@ -63,6 +63,12 @@ public class CarDaoImpl implements CarDao {
     private String selectAllCarsDtoWithCrew;
 
     /**
+     * SQL request to check the existence of the car.
+     */
+    @Value("${car.selectNumberOfCarsWithRegistrationPlateSql}")
+    private String selectNumberOfCarsWithRegistrationPlateSql;
+
+    /**
      * Logger.
      */
     private static final Logger LOGGER = LogManager.getLogger();
@@ -154,6 +160,18 @@ public class CarDaoImpl implements CarDao {
                         BeanPropertyRowMapper
                                 .newInstance(CarDtoWithCrew.class));
         return cars;
+    }
+
+    @Override
+    public int checkCar(String registrationPlate) {
+        LOGGER.debug("checkCar({})", registrationPlate);
+        SqlParameterSource namedParameters =
+                new MapSqlParameterSource("registrationPlate",
+                        registrationPlate);
+        int result = namedParameterJdbcTemplate
+                .queryForObject(selectNumberOfCarsWithRegistrationPlateSql,
+                        namedParameters, Integer.class);
+        return result;
     }
 
 

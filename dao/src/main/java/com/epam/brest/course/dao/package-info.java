@@ -1,4 +1,4 @@
 /**
- * Package-info file.
+ * DAO.
  */
 package com.epam.brest.course.dao;

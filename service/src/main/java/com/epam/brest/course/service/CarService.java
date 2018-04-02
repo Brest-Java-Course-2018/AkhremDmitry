@@ -1,14 +1,15 @@
-package com.epam.brest.course.dao;
+package com.epam.brest.course.service;
 
+import com.epam.brest.course.dao.Car;
 import com.epam.brest.course.dto.CarDto;
 import com.epam.brest.course.dto.CarDtoWithCrew;
 
 import java.util.Collection;
 
 /**
- * Car DAO Interface.
+ * Car service interface.
  */
-public interface CarDao {
+public interface CarService {
 
     /**
      * Return all cars from database.
@@ -53,10 +54,4 @@ public interface CarDao {
      * @return Collection CarDtoWithCrew.
      */
     Collection<CarDtoWithCrew> getAllCarsDtoWithCrew();
-
-    /**
-     * Return 1 if the car exists in db and 0 in another case.
-     * @return number of car.
-     */
-    int checkCar(String registrationPlate);
 }

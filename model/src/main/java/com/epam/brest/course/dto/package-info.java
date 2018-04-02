@@ -1,4 +1,4 @@
 /**
- * Package-info file.
+ * Model DTO.
  */
 package com.epam.brest.course.dto;
