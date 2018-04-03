@@ -12,5 +12,13 @@
         <property name="callDao" ref="callDao"/>
     </bean>
 
+    <bean id="crewDao" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.dao.CrewDao"/>
+    </bean>
+
+    <bean id="crewService" class="com.epam.brest.course.service.CrewServiceImpl">
+        <property name="crewDao" ref="crewDao"/>
+    </bean>
+
 
 </beans>

@@ -23,9 +23,11 @@ public class CrewDto {
 
     /**
      * Constryctor Crew.
+     * @param crewId crew id
      * @param crewName Crew name
      */
-    public CrewDto(String crewName) {
+    public CrewDto(int crewId, String crewName) {
+        this.crewId = crewId;
         this.crewName = crewName;
     }
 

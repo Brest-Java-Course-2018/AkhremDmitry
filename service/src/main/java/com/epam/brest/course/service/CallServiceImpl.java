@@ -8,12 +8,25 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Date;
 import java.util.Collection;
 
+/**
+ * CallServiceImpl.
+ */
 public class CallServiceImpl implements CallService {
 
+    /**
+     * Property callDao.
+     */
     private CallDao callDao;
 
+    /**
+     * Logger init.
+     */
     private final static Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Setter for callDao.
+     * @param callDao DAO of call.
+     */
     public void setCallDao(CallDao callDao) {
         this.callDao = callDao;
     }

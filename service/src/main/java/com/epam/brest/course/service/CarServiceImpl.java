@@ -9,12 +9,25 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 
+/**
+ * CarServiceImpl.
+ */
 public class CarServiceImpl implements CarService {
 
+    /**
+     * Property carDao.
+     */
     private CarDao carDao;
 
+    /**
+     * Logger init.
+     */
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Setter for carDao.
+     * @param carDao DAO of car.
+     */
     public void setCarDao(CarDao carDao) {
         this.carDao = carDao;
     }
