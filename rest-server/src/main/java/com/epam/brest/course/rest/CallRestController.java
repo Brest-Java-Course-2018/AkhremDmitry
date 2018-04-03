@@ -5,9 +5,12 @@ import com.epam.brest.course.service.CallService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 @RestController
@@ -18,9 +21,53 @@ public class CallRestController {
     @Autowired
     private CallService callService;
 
+    public final void setCallService(final CallService callService) {
+        this.callService = callService;
+    }
+
     @GetMapping(value = "/calls")
-    Collection<Call> getAllCalls(){
+    public final Collection<Call> getAllCalls(){
         LOGGER.debug("getAllCalls()");
         return callService.getAllCall();
+    }
+
+    @GetMapping(value = "/calls/{startDate}/{endDate}")
+    public final Collection<Call> getAllCallByDate(
+            @PathVariable(value = "startDate") final String startDate,
+            @PathVariable(value = "endDate") final String endDate)
+            throws ParseException {
+        LOGGER.debug("getAllCallByDate({}, {})", startDate, endDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
+        Collection<Call> calls = callService
+                .getAllCallByDate(new Date(dateFormat.parse(startDate).getTime()),
+                        new Date(dateFormat.parse(endDate).getTime()));
+        return calls;
+    }
+
+    @GetMapping(value = "/calls/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public final Call getCallById(@PathVariable final int id){
+        LOGGER.debug("getCallById({})", id);
+        Call call = callService.getCallById(id);
+        return call;
+    }
+
+    @PostMapping(value = "/calls")
+    @ResponseStatus(HttpStatus.CREATED)
+    public final Call addCall(@RequestBody Call call){
+        LOGGER.debug("addCall({})", call);
+        return callService.addCall(call);
+    }
+
+    @PutMapping(value = "/calls")
+    public void updateCall(@RequestBody Call call) {
+        LOGGER.debug("updateCall({})", call);
+        callService.updateCall(call);
+    }
+
+    @DeleteMapping(value = "/calls/{id}")
+    public void deleteCallById(@PathVariable(value = "id") int callId){
+        LOGGER.debug("deleteCallById({})", callId);
+        callService.deleteCallById(callId);
     }
 }

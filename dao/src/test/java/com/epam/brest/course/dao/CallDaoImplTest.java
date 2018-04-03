@@ -115,7 +115,6 @@ public class CallDaoImplTest {
     @Test
     public void getAllCall() {
         Collection<Call> calls = callDao.getAllCall();
-        System.out.println(calls);
         Assert.assertFalse(calls.isEmpty());
     }
 
