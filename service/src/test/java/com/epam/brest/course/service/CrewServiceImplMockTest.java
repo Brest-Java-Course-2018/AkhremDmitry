@@ -43,7 +43,7 @@ public class CrewServiceImplMockTest {
 
     @Test
     public void getAllCrewDtoTest() {
-        Collection<CrewDto> crews = Arrays.asList(new CrewDto(ID, CREWNAME));
+        Collection<CrewDto> crews = Arrays.asList(new CrewDto(CREWNAME));
         EasyMock.expect(mockCrewDao.getAllCrewDto()).andReturn(crews);
 
         EasyMock.replay(mockCrewDao);

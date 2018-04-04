@@ -62,7 +62,8 @@ public class CrewRestControllerTest {
 
     @Test
     public void getAllCrewDtoTest() throws Exception {
-        CrewDto crew = new CrewDto(ID, NAME);
+        CrewDto crew = new CrewDto(NAME);
+        crew.setCrewId(ID);
         EasyMock.expect(mockCrewService.getAllCrewDto())
                 .andReturn(Arrays.asList(crew));
         EasyMock.replay(mockCrewService);

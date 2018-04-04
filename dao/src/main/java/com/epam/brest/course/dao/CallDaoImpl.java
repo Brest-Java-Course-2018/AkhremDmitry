@@ -74,7 +74,7 @@ public class CallDaoImpl implements CallDao {
 
 
     @Override
-    public Call getCallById(int callId) {
+    public final Call getCallById(final int callId) {
         LOGGER.debug("getCallById({})", callId);
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("callId", callId);
@@ -86,7 +86,7 @@ public class CallDaoImpl implements CallDao {
     }
 
     @Override
-    public Call addCall(Call call) {
+    public final Call addCall(final Call call) {
         LOGGER.debug("addCall({})", call);
         SqlParameterSource namesParameters =
                 new BeanPropertySqlParameterSource(call);
@@ -100,7 +100,7 @@ public class CallDaoImpl implements CallDao {
     }
 
     @Override
-    public void updateCall(Call call) {
+    public final void updateCall(final Call call) {
         LOGGER.debug("updateCall({})", call);
         SqlParameterSource namedParameters =
                 new BeanPropertySqlParameterSource(call);
@@ -110,7 +110,7 @@ public class CallDaoImpl implements CallDao {
     }
 
     @Override
-    public void deleteCallById(int callId) {
+    public final void deleteCallById(final int callId) {
         LOGGER.debug("deleteCallById({})", callId);
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("callId", callId);
@@ -119,7 +119,7 @@ public class CallDaoImpl implements CallDao {
     }
 
     @Override
-    public Collection<Call> getAllCall() {
+    public final Collection<Call> getAllCall() {
         LOGGER.debug("getAllCall()");
         Collection<Call> calls = namedParameterJdbcTemplate
                 .query(selectAllCallSql,
@@ -128,7 +128,8 @@ public class CallDaoImpl implements CallDao {
     }
 
     @Override
-    public Collection<Call> getAllCallByDate(Date startDate, Date endDate) {
+    public final Collection<Call> getAllCallByDate(
+            final Date startDate, final Date endDate) {
         LOGGER.debug("getAllCall({}, {})", startDate, endDate);
         MapSqlParameterSource namedParameters =
                 new MapSqlParameterSource("startDate", startDate);

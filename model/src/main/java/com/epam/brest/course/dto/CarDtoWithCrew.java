@@ -3,17 +3,7 @@ package com.epam.brest.course.dto;
 /**
  * POJO CarDtoWithCrew.
  */
-public class CarDtoWithCrew {
-
-    /**
-     * Property id.
-     */
-    private int carId;
-
-    /**
-     * Property registration plate.
-     */
-    private String registrationPlate;
+public class CarDtoWithCrew extends AbstractCarDto{
 
     /**
      * Some description.
@@ -44,42 +34,6 @@ public class CarDtoWithCrew {
         this.registrationPlate = registrationPlate;
         this.description = description;
         this.numberOfCrew = numberOfCrew;
-    }
-
-    /**
-     * det car id.
-     *
-     * @return carId.
-     */
-    public final int getCarId() {
-        return carId;
-    }
-
-    /**
-     * Set car id.
-     *
-     * @param carId carId.
-     */
-    public final void setCarId(final int carId) {
-        this.carId = carId;
-    }
-
-    /**
-     * Get registration plate.
-     *
-     * @return registration plate.
-     */
-    public final String getRegistrationPlate() {
-        return registrationPlate;
-    }
-
-    /**
-     * Set registration plate.
-     *
-     * @param registrationPlate registrationPlate.
-     */
-    public final void setRegistrationPlate(final String registrationPlate) {
-        this.registrationPlate = registrationPlate;
     }
 
     /**
@@ -119,33 +73,10 @@ public class CarDtoWithCrew {
     @Override
     public String toString() {
         return "CarDtoWithCrew{" +
-                "carId=" + carId +
-                ", registrationPlate='" + registrationPlate + '\'' +
-                ", description='" + description + '\'' +
+                "description='" + description + '\'' +
                 ", numberOfCrew=" + numberOfCrew +
+                ", carId=" + carId +
+                ", registrationPlate='" + registrationPlate + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CarDtoWithCrew that = (CarDtoWithCrew) o;
-
-        if (carId != that.carId) return false;
-        if (numberOfCrew != that.numberOfCrew) return false;
-        if (registrationPlate != null ? !registrationPlate.equals(that.registrationPlate) : that.registrationPlate != null)
-            return false;
-        return description != null ? description.equals(that.description) : that.description == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = carId;
-        result = 31 * result + (registrationPlate != null ? registrationPlate.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + numberOfCrew;
-        return result;
     }
 }

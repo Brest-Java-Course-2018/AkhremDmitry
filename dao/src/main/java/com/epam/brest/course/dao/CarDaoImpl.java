@@ -163,7 +163,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public int checkCar(String registrationPlate) {
+    public final int checkCar(final String registrationPlate) {
         LOGGER.debug("checkCar({})", registrationPlate);
         SqlParameterSource namedParameters =
                 new MapSqlParameterSource("registrationPlate",

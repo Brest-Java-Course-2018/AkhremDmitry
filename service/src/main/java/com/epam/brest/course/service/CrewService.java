@@ -56,6 +56,7 @@ public interface CrewService {
      * @param endDate date of last call
      * @return Collection CrewDtoWithCall by date.
      */
-    Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(Date startDate, Date endDate);
+    Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(
+            Date startDate, Date endDate);
 
 }

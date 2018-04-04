@@ -1,16 +1,6 @@
 package com.epam.brest.course.dto;
 
-public class CrewDtoWithCall {
-
-    /**
-     * Property id.
-     */
-    private int crewId;
-
-    /**
-     * Property name.
-     */
-    private String crewName;
+public class CrewDtoWithCall extends AbstractCrewDto{
 
     /**
      * Property description.
@@ -38,38 +28,6 @@ public class CrewDtoWithCall {
         this.crewName = crewName;
         this.description = description;
         this.numberOfCalls = numberOfCalls;
-    }
-
-    /**
-     * Get crew id.
-     * @return Unique identifier.
-     */
-    public final int getCrewId() {
-        return crewId;
-    }
-
-    /**
-     * Set crewId.
-     * @param crewId Unique identifier.
-     */
-    public final void setCrewId(final int crewId) {
-        this.crewId = crewId;
-    }
-
-    /**
-     * Get crew name.
-     * @return Crew name.
-     */
-    public final String getCrewName() {
-        return crewName;
-    }
-
-    /**
-     * Set crew name.
-     * @param crewName Crew name.
-     */
-    public final void setCrewName(final String crewName) {
-        this.crewName = crewName;
     }
 
     /**
@@ -107,32 +65,10 @@ public class CrewDtoWithCall {
     @Override
     public String toString() {
         return "CrewDtoWithCall{" +
-                "crewId=" + crewId +
-                ", crewName='" + crewName + '\'' +
-                ", description='" + description + '\'' +
+                "description='" + description + '\'' +
                 ", numberOfCalls=" + numberOfCalls +
+                ", crewId=" + crewId +
+                ", crewName='" + crewName + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CrewDtoWithCall that = (CrewDtoWithCall) o;
-
-        if (crewId != that.crewId) return false;
-        if (numberOfCalls != that.numberOfCalls) return false;
-        if (crewName != null ? !crewName.equals(that.crewName) : that.crewName != null) return false;
-        return description != null ? description.equals(that.description) : that.description == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = crewId;
-        result = 31 * result + (crewName != null ? crewName.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + numberOfCalls;
-        return result;
     }
 }

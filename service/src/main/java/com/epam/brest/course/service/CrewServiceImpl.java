@@ -23,7 +23,7 @@ public class CrewServiceImpl implements CrewService {
     /**
      * Logger init.
      */
-    private static final Logger LOGGER = LogManager.getLogger();
+    private final static Logger LOGGER = LogManager.getLogger();
 
     /**
      * Setter for crewDao.

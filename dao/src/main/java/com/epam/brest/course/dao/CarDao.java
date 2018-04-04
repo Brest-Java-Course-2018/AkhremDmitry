@@ -56,6 +56,7 @@ public interface CarDao {
 
     /**
      * Return 1 if the car exists in db and 0 in another case.
+     * @param registrationPlate registration plate
      * @return number of car.
      */
     int checkCar(String registrationPlate);

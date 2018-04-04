@@ -146,8 +146,10 @@ public class CrewDaoImpl implements CrewDao {
     }
 
     @Override
-    public final Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(Date startDate, Date endDate) {
-        LOGGER.debug("getAllCrewDtoWithCallByDate({}, {})", startDate, endDate);
+    public final Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(
+            final Date startDate, final Date endDate) {
+        LOGGER.debug("getAllCrewDtoWithCallByDate({}, {})",
+                startDate, endDate);
         MapSqlParameterSource namedParameters =
                 new MapSqlParameterSource("startDate", startDate);
         namedParameters.addValue("endDate", endDate);
