@@ -13,7 +13,7 @@ import java.util.Collection;
 /**
  * CrewServiceImpl.
  */
-public class CrewServiceImpl implements CrewService{
+public class CrewServiceImpl implements CrewService {
 
     /**
      * Property crewDao.
@@ -27,6 +27,7 @@ public class CrewServiceImpl implements CrewService{
 
     /**
      * Setter for crewDao.
+     *
      * @param crewDao DAO of crew.
      */
     public void setCrewDao(CrewDao crewDao) {
@@ -34,43 +35,44 @@ public class CrewServiceImpl implements CrewService{
     }
 
     @Override
-    public Collection<CrewDto> getAllCrewDto() {
+    public final Collection<CrewDto> getAllCrewDto() {
         LOGGER.debug("getAllCrewDto()");
         return crewDao.getAllCrewDto();
     }
 
     @Override
-    public Crew getCrewById(int crewId) {
+    public final Crew getCrewById(final int crewId) {
         LOGGER.debug("getCrewById({})", crewId);
         return crewDao.getCrewById(crewId);
     }
 
     @Override
-    public Crew addCrew(Crew crew) {
+    public final Crew addCrew(final Crew crew) {
         LOGGER.debug("addCrew({})", crew);
         return crewDao.addCrew(crew);
     }
 
     @Override
-    public void updateCrew(Crew crew) {
+    public final void updateCrew(final Crew crew) {
         LOGGER.debug("updateCrew({})", crew);
         crewDao.updateCrew(crew);
     }
 
     @Override
-    public void deleteCrewById(int crewId) {
+    public final void deleteCrewById(final int crewId) {
         LOGGER.debug("deleteCrewById({})", crewId);
         crewDao.deleteCrewById(crewId);
     }
 
     @Override
-    public Collection<CrewDtoWithCall> getAllCrewDtoWithCall() {
+    public final Collection<CrewDtoWithCall> getAllCrewDtoWithCall() {
         LOGGER.debug("getAllCrewDtoWithCall()");
         return crewDao.getAllCrewDtoWithCall();
     }
 
     @Override
-    public Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(Date startDate, Date endDate) {
+    public final Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(
+            final Date startDate, final Date endDate) {
         LOGGER.debug("getAllCrewDtoWithCallByDate({}, {})", startDate, endDate);
         return crewDao.getAllCrewDtoWithCallByDate(startDate, endDate);
     }
