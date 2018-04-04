@@ -33,14 +33,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Collection<CarDto> getAllCarsDto() {
+    public final Collection<CarDto> getAllCarsDto() {
         LOGGER.debug("getAllCarsDto()");
         Collection<CarDto> cars = carDao.getAllCarsDto();
         return cars;
     }
 
     @Override
-    public Car getCarById(int carId) {
+    public final Car getCarById(final int carId) {
         LOGGER.debug("getCarById({})", carId);
         Car car = carDao.getCarById(carId);
         return car;
@@ -57,25 +57,25 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(Car car) {
+    public final void updateCar(final Car car) {
         LOGGER.debug("updateCar({})", car);
         carDao.updateCar(car);
     }
 
     @Override
-    public void deleteCarById(int id) {
+    public final void deleteCarById(final int id) {
         LOGGER.debug("deleteCarById({})", id);
         carDao.deleteCarById(id);
     }
 
     @Override
-    public int getNumberOfCars() {
+    public final int getNumberOfCars() {
         LOGGER.debug("getNumberOfCars()");
         return carDao.getNumberOfCars();
     }
 
     @Override
-    public Collection<CarDtoWithCrew> getAllCarsDtoWithCrew() {
+    public final Collection<CarDtoWithCrew> getAllCarsDtoWithCrew() {
         LOGGER.debug("getAllCarsDtoWithCrew()");
         return carDao.getAllCarsDtoWithCrew();
     }
