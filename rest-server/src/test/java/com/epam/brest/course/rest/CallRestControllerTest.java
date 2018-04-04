@@ -134,7 +134,7 @@ public class CallRestControllerTest {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
         Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
 
-        EasyMock.expect(mockCallService.addCall(CALL)).andReturn(CALL);
+        EasyMock.expect(mockCallService.addCall(EasyMock.anyObject())).andReturn(CALL);
         EasyMock.replay(mockCallService);
 
         mockMvc.perform(
@@ -158,7 +158,7 @@ public class CallRestControllerTest {
 
     @Test
     public void updateCallTest() throws Exception {
-        mockCallService.updateCall(CALL);
+        mockCallService.updateCall(EasyMock.anyObject());
         EasyMock.expectLastCall();
 
         EasyMock.replay(mockCallService);

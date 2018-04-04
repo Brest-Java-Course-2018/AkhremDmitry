@@ -16,4 +16,12 @@
     <bean id="callRestController" class="com.epam.brest.course.rest.CallRestController">
         <property name="callService" ref="callService"/>
     </bean>
+
+    <bean id="carService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.service.CarService"/>
+    </bean>
+
+    <bean id="carRestController" class="com.epam.brest.course.rest.CarRestController">
+        <property name="carService" ref="carService"/>
+    </bean>
 </beans>
