@@ -51,7 +51,6 @@ public class CarRestController {
     }
 
     @DeleteMapping(value = "/cars/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     public final void deleteCarById(@PathVariable final int id) {
         LOGGER.debug("deleteCarById({})", id);
         carService.deleteCarById(id);
