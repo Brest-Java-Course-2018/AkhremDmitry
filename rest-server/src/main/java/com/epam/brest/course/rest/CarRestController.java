@@ -67,4 +67,11 @@ public class CarRestController {
         LOGGER.debug("getAllCarsDtoWithCrew()");
         return carService.getAllCarsDtoWithCrew();
     }
+
+    //curl -v localhost:8090/carsNum
+    @GetMapping(value = "/carsNum")
+    public final int getNumberOfCars() {
+        LOGGER.debug("getNumberOfCars()");
+        return carService.getNumberOfCars();
+    }
 }

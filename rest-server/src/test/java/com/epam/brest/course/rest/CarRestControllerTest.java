@@ -23,9 +23,7 @@ import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:rest-spring-test.xml"})
@@ -157,6 +155,19 @@ public class CarRestControllerTest {
                 delete("/cars/{id}", ID)
                         .accept(MediaType.APPLICATION_JSON)
         ).andDo(print()).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getNumberOfCarsTest() throws Exception {
+        EasyMock.expect(mockCarService.getNumberOfCars()).andReturn(2);
+        EasyMock.replay(mockCarService);
+
+        mockMvc.perform(
+                get("/carsNum")
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+        .andExpect(jsonPath("$", Matchers.is(2)));
     }
 
 }
