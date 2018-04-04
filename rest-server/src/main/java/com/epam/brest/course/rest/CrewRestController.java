@@ -7,6 +7,7 @@ import com.epam.brest.course.service.CrewService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -22,7 +23,7 @@ public class CrewRestController {
     @Autowired
     private CrewService crewService;
 
-    public void setCrewService(CrewService crewService) {
+    public final void setCrewService(final CrewService crewService) {
         this.crewService = crewService;
     }
 
@@ -33,12 +34,14 @@ public class CrewRestController {
     }
 
     @GetMapping(value = "/crews/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
     public final Crew getCrewById(@PathVariable final int id) {
         LOGGER.debug("getCrewById({})", id);
         return crewService.getCrewById(id);
     }
 
     @PostMapping(value = "/crews")
+    @ResponseStatus(HttpStatus.CREATED)
     public final Crew addCrew(@RequestBody final Crew crew) {
         LOGGER.debug("addCrew({})", crew);
         return crewService.addCrew(crew);
@@ -73,8 +76,8 @@ public class CrewRestController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
         Collection<CrewDtoWithCall> crews =
                 crewService.getAllCrewDtoWithCallByDate(
-                new Date(dateFormat.parse(startDate).getTime()),
-                new Date(dateFormat.parse(endDate).getTime()));
+                        new Date(dateFormat.parse(startDate).getTime()),
+                        new Date(dateFormat.parse(endDate).getTime()));
         return crews;
     }
 

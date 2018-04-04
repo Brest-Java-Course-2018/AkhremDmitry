@@ -30,7 +30,7 @@ public class CrewServiceImpl implements CrewService {
      *
      * @param crewDao DAO of crew.
      */
-    public void setCrewDao(CrewDao crewDao) {
+    public final void setCrewDao(final CrewDao crewDao) {
         this.crewDao = crewDao;
     }
 

@@ -20,12 +20,12 @@ public class CarRestController {
     @Autowired
     private CarService carService;
 
-    public void setCarService(CarService carService) {
+    public final void setCarService(final CarService carService) {
         this.carService = carService;
     }
 
     @GetMapping(value = "/carsDto")
-    public final Collection<CarDto> getAllCarsDto(){
+    public final Collection<CarDto> getAllCarsDto() {
         LOGGER.debug("getAllCarsDto()");
         return carService.getAllCarsDto();
     }

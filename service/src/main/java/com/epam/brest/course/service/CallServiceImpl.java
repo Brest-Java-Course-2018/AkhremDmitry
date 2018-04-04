@@ -25,44 +25,46 @@ public class CallServiceImpl implements CallService {
 
     /**
      * Setter for callDao.
+     *
      * @param callDao DAO of call.
      */
-    public void setCallDao(CallDao callDao) {
+    public final void setCallDao(final CallDao callDao) {
         this.callDao = callDao;
     }
 
     @Override
-    public Call getCallById(int callId) {
+    public final Call getCallById(final int callId) {
         LOGGER.debug("getCallById()");
         return callDao.getCallById(callId);
     }
 
     @Override
-    public Call addCall(Call call) {
+    public final Call addCall(final Call call) {
         LOGGER.debug("addCall({})");
         return callDao.addCall(call);
     }
 
     @Override
-    public void updateCall(Call call) {
+    public final void updateCall(final Call call) {
         LOGGER.debug("updateCall({})", call);
         callDao.updateCall(call);
     }
 
     @Override
-    public void deleteCallById(int callId) {
+    public final void deleteCallById(final int callId) {
         LOGGER.debug("deleteCallById({})", callId);
         callDao.deleteCallById(callId);
     }
 
     @Override
-    public Collection<Call> getAllCall() {
+    public final Collection<Call> getAllCall() {
         LOGGER.debug("getAllCall()");
         return callDao.getAllCall();
     }
 
     @Override
-    public Collection<Call> getAllCallByDate(Date startDate, Date endDate) {
+    public final Collection<Call> getAllCallByDate(
+            final Date startDate, final Date endDate) {
         LOGGER.debug("getAllCallByDate({}, {})", startDate, endDate);
         return callDao.getAllCallByDate(startDate, endDate);
     }

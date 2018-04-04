@@ -4,6 +4,7 @@ import com.epam.brest.course.dao.Call;
 import com.epam.brest.course.service.CallService;
 import org.easymock.EasyMock;
 import org.hamcrest.Matchers;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -61,6 +62,11 @@ public class CallRestControllerTest {
         EasyMock.reset(mockCallService);
     }
 
+    @After
+    public void check() {
+        EasyMock.verify(mockCallService);
+    }
+
     @Test
     public void getAllCallsTest() throws Exception {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
@@ -80,8 +86,6 @@ public class CallRestControllerTest {
                 .andExpect(jsonPath("$[0].address", Matchers.is("Address")))
                 .andExpect(jsonPath("$[0].description", Matchers.is("Some description")))
                 .andExpect(jsonPath("$[0].crewId", Matchers.is(1)));
-
-        EasyMock.verify(mockCallService);
     }
 
     @Test
@@ -103,8 +107,6 @@ public class CallRestControllerTest {
                 .andExpect(jsonPath("$[0].address", Matchers.is("Address")))
                 .andExpect(jsonPath("$[0].description", Matchers.is("Some description")))
                 .andExpect(jsonPath("$[0].crewId", Matchers.is(1)));
-
-        EasyMock.verify(mockCallService);
     }
 
     @Test
@@ -125,8 +127,6 @@ public class CallRestControllerTest {
                 .andExpect(jsonPath("address", Matchers.is("Address")))
                 .andExpect(jsonPath("description", Matchers.is("Some description")))
                 .andExpect(jsonPath("crewId", Matchers.is(1)));
-
-        EasyMock.verify(mockCallService);
     }
 
     @Test
@@ -152,8 +152,6 @@ public class CallRestControllerTest {
                 .andExpect(jsonPath("address", Matchers.is("Address")))
                 .andExpect(jsonPath("description", Matchers.is("Some description")))
                 .andExpect(jsonPath("crewId", Matchers.is(1)));
-
-        EasyMock.verify(mockCallService);
     }
 
     @Test
@@ -172,8 +170,6 @@ public class CallRestControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
         ).andDo(print())
                 .andExpect(status().isOk());
-
-        EasyMock.verify(mockCallService);
     }
 
     @Test
@@ -188,8 +184,6 @@ public class CallRestControllerTest {
                         .accept(MediaType.APPLICATION_JSON)
         ).andDo(print())
                 .andExpect(status().isOk());
-
-        EasyMock.verify(mockCallService);
     }
 
 }

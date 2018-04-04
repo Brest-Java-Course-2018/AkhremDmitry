@@ -26,9 +26,10 @@ public class CarServiceImpl implements CarService {
 
     /**
      * Setter for carDao.
+     *
      * @param carDao DAO of car.
      */
-    public void setCarDao(CarDao carDao) {
+    public final void setCarDao(final CarDao carDao) {
         this.carDao = carDao;
     }
 
@@ -49,7 +50,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public final Car addCar(final Car car) {
         LOGGER.debug("addCar({})", car);
-        if (carDao.checkCar(car.getRegistrationPlate()) != 0){
+        if (carDao.checkCar(car.getRegistrationPlate()) != 0) {
             throw new IllegalArgumentException("Car with the same "
                     + "registration plate already exists in DB.");
         }

@@ -26,7 +26,7 @@ public class CallRestController {
     }
 
     @GetMapping(value = "/calls")
-    public final Collection<Call> getAllCalls(){
+    public final Collection<Call> getAllCalls() {
         LOGGER.debug("getAllCalls()");
         return callService.getAllCall();
     }
@@ -46,7 +46,7 @@ public class CallRestController {
 
     @GetMapping(value = "/calls/{id}")
     @ResponseStatus(HttpStatus.FOUND)
-    public final Call getCallById(@PathVariable final int id){
+    public final Call getCallById(@PathVariable final int id) {
         LOGGER.debug("getCallById({})", id);
         Call call = callService.getCallById(id);
         return call;
@@ -54,19 +54,19 @@ public class CallRestController {
 
     @PostMapping(value = "/calls")
     @ResponseStatus(HttpStatus.CREATED)
-    public final Call addCall(@RequestBody Call call){
+    public final Call addCall(@RequestBody final Call call) {
         LOGGER.debug("addCall({})", call);
         return callService.addCall(call);
     }
 
     @PutMapping(value = "/calls")
-    public void updateCall(@RequestBody Call call) {
+    public final void updateCall(@RequestBody final Call call) {
         LOGGER.debug("updateCall({})", call);
         callService.updateCall(call);
     }
 
     @DeleteMapping(value = "/calls/{id}")
-    public void deleteCallById(@PathVariable(value = "id") int callId){
+    public final void deleteCallById(@PathVariable(value = "id") final int callId) {
         LOGGER.debug("deleteCallById({})", callId);
         callService.deleteCallById(callId);
     }
