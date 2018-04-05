@@ -8,6 +8,7 @@ import com.epam.brest.course.service.CarService;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,19 @@ public class CarRestClientTest {
     @Autowired
     private RestTemplate mockRestTemplate;
 
+    private Car expCar = new Car();
+
     @After
     public void after() {
         EasyMock.verify(mockRestTemplate);
         EasyMock.reset(mockRestTemplate);
+    }
+
+    @Before
+    public void setUp(){
+        expCar.setCarId(1);
+        expCar.setRegistrationPlate("5555 AA-1");
+        expCar.setDescription("Ambulance");
     }
 
     @Test
@@ -57,8 +67,6 @@ public class CarRestClientTest {
 
     @Test
     public void getCarByIdTest() {
-        Car expCar = new Car("5555 AA-1", "Ambulance");
-        expCar.setCarId(1);
         ResponseEntity entity = new ResponseEntity(expCar, HttpStatus.FOUND);
 
         EasyMock.expect(mockRestTemplate.getForEntity("http://localhost:8090/cars/1", Car.class))
@@ -72,7 +80,6 @@ public class CarRestClientTest {
 
     @Test
     public void addCarTest(){
-        Car expCar = new Car("5555 AA-1", "Ambulance");
         ResponseEntity responseEntity = new ResponseEntity(expCar, HttpStatus.OK);
 
         EasyMock.expect(mockRestTemplate
@@ -87,16 +94,17 @@ public class CarRestClientTest {
 
     @Test
     public void updateCarTest(){
-        Car car = new Car("5555 AA-1", "Ambulance");
-        mockRestTemplate.put("http://localhost:8090/cars", car);
+        mockRestTemplate.put("http://localhost:8090/cars", expCar);
+        EasyMock.expectLastCall();
         EasyMock.replay(mockRestTemplate);
 
-        carService.updateCar(car);
+        carService.updateCar(expCar);
     }
 
     @Test
     public void deleteCarByIdTest(){
         mockRestTemplate.delete("http://localhost:8090/cars/1");
+        EasyMock.expectLastCall();
         EasyMock.replay(mockRestTemplate);
 
         carService.deleteCarById(1);

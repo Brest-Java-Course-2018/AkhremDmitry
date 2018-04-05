@@ -28,4 +28,13 @@
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
+    <bean id="CrewRestClient" class="com.epam.brest.course.client.rest.CrewRestClient">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.crew}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+
+    <bean id="CallRestClient" class="com.epam.brest.course.client.rest.CallRestClient">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.calls}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
 </beans>
