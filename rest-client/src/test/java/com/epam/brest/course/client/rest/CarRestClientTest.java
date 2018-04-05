@@ -1,7 +1,9 @@
 package com.epam.brest.course.client.rest;
 
 
+import com.epam.brest.course.dao.Car;
 import com.epam.brest.course.dto.CarDto;
+import com.epam.brest.course.dto.CarDtoWithCrew;
 import com.epam.brest.course.service.CarService;
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -34,8 +36,9 @@ public class CarRestClientTest {
         EasyMock.verify(mockRestTemplate);
         EasyMock.reset(mockRestTemplate);
     }
+
     @Test
-    public void getAllCarsDto() {
+    public void getAllCarsDtoTest() {
         CarDto carDto = new CarDto("5555 AA-1");
         carDto.setCarId(1);
         List cars = Arrays.asList(carDto);
@@ -47,6 +50,83 @@ public class CarRestClientTest {
 
         Collection<CarDto> results
                 = carService.getAllCarsDto();
+
+        Assert.assertNotNull(results);
+        Assert.assertEquals(1, results.size());
+    }
+
+    @Test
+    public void getCarByIdTest() {
+        Car expCar = new Car("5555 AA-1", "Ambulance");
+        expCar.setCarId(1);
+        ResponseEntity entity = new ResponseEntity(expCar, HttpStatus.FOUND);
+
+        EasyMock.expect(mockRestTemplate.getForEntity("http://localhost:8090/cars/1", Car.class))
+                .andReturn(entity);
+        EasyMock.replay(mockRestTemplate);
+
+        Car actCar = carService.getCarById(1);
+
+        Assert.assertEquals(expCar, actCar);
+    }
+
+    @Test
+    public void addCarTest(){
+        Car expCar = new Car("5555 AA-1", "Ambulance");
+        ResponseEntity responseEntity = new ResponseEntity(expCar, HttpStatus.OK);
+
+        EasyMock.expect(mockRestTemplate
+                .postForEntity("http://localhost:8090/cars", expCar, Car.class))
+                .andReturn(responseEntity);
+        EasyMock.replay(mockRestTemplate);
+
+        Car actCar = carService.addCar(expCar);
+
+        Assert.assertEquals(expCar, actCar);
+    }
+
+    @Test
+    public void updateCarTest(){
+        Car car = new Car("5555 AA-1", "Ambulance");
+        mockRestTemplate.put("http://localhost:8090/cars", car);
+        EasyMock.replay(mockRestTemplate);
+
+        carService.updateCar(car);
+    }
+
+    @Test
+    public void deleteCarByIdTest(){
+        mockRestTemplate.delete("http://localhost:8090/cars/1");
+        EasyMock.replay(mockRestTemplate);
+
+        carService.deleteCarById(1);
+    }
+
+    @Test
+    public void getNumberOfCarsTest() {
+        int numOfCar = 3;
+        EasyMock.expect(mockRestTemplate
+                .getForObject("http://localhost:8090/carsNum", Integer.class))
+                .andReturn(numOfCar);
+        EasyMock.replay(mockRestTemplate);
+
+        int result = carService.getNumberOfCars();
+        Assert.assertEquals(numOfCar, result);
+    }
+
+    @Test
+    public void getAllCarsDtoWithCrewTest() {
+        CarDtoWithCrew car = new CarDtoWithCrew("5555 AA-1", "Ambulance", 2);
+        car.setCarId(1);
+        List cars = Arrays.asList(car);
+        ResponseEntity entity = new ResponseEntity(cars, HttpStatus.FOUND);
+
+        EasyMock.expect(mockRestTemplate.getForEntity("http://localhost:8090/cars", List.class))
+                .andReturn(entity);
+        EasyMock.replay(mockRestTemplate);
+
+        Collection<CarDtoWithCrew> results
+                = carService.getAllCarsDtoWithCrew();
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());

@@ -72,6 +72,7 @@ public class CarRestClient implements CarService {
 
     @Override
     public Collection<CarDtoWithCrew> getAllCarsDtoWithCrew() {
+        LOGGER.debug("getAllCarsDtoWithCrew()");
         ResponseEntity responseEntity =
                 restTemplate.getForEntity(url, List.class);
         List<CarDtoWithCrew> cars = (List<CarDtoWithCrew>) responseEntity.getBody();
