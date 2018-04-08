@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.epam.brest.course</groupId>
-    <artifactId>rest-server</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>rest-server</name>
+    <artifactId>web-app</artifactId>
+    <version>${parent.version}</version>
+    <name>web-app</name>
     <packaging>war</packaging>
 
     <dependencies>
@@ -23,23 +23,29 @@
         </dependency>
         <dependency>
             <groupId>com.epam.brest.course</groupId>
-            <artifactId>test-db</artifactId>
+            <artifactId>service</artifactId>
         </dependency>
         <dependency>
             <groupId>com.epam.brest.course</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>rest-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
         </dependency>
 
         <dependency>
@@ -57,36 +63,6 @@
             <artifactId>log4j-jcl</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>${easymock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -95,13 +71,7 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-                    <httpConnector>
-                        <port>8090</port>
-                    </httpConnector>
-                </configuration>
             </plugin>
         </plugins>
     </build>
-    
 </project>
