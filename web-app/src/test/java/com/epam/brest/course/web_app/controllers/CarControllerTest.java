@@ -4,19 +4,14 @@ package com.epam.brest.course.web_app.controllers;
 import com.epam.brest.course.dao.Car;
 import com.epam.brest.course.dto.CarDtoWithCrew;
 import com.epam.brest.course.service.CarService;
-import com.google.gson.Gson;
 import org.easymock.EasyMock;
-import org.hamcrest.Matchers;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -40,7 +35,8 @@ public class CarControllerTest {
 
     private MockMvc mockMvc;
 
-    private static final CarDtoWithCrew CAR = new CarDtoWithCrew();
+    private static final CarDtoWithCrew CAR_DTO = new CarDtoWithCrew();
+    private static final Car CAR = new Car();
     private static final int ID = 1;
     private static final String REGISTRATIONPLATE = "8888 AI-1";
     private static final String DESCRIPTION = "Some ambulance car";
@@ -56,18 +52,22 @@ public class CarControllerTest {
                 .setViewResolvers(viewResolver)
                 .build();
 
+        CAR_DTO.setCarId(ID);
+        CAR_DTO.setRegistrationPlate(REGISTRATIONPLATE);
+        CAR_DTO.setDescription(DESCRIPTION);
+        CAR_DTO.setNumberOfCrew(NUMBEROFCREW);
+
         CAR.setCarId(ID);
         CAR.setRegistrationPlate(REGISTRATIONPLATE);
         CAR.setDescription(DESCRIPTION);
-        CAR.setNumberOfCrew(NUMBEROFCREW);
 
         EasyMock.reset(mockCarService);
     }
 
     @Test
-    public void carsTest() throws Exception {
+    public void getCarsTest() throws Exception {
         EasyMock.expect(mockCarService.getAllCarsDtoWithCrew())
-                .andReturn(Arrays.asList(CAR));
+                .andReturn(Arrays.asList(CAR_DTO));
         EasyMock.replay(mockCarService);
 
         mockMvc.perform(
@@ -83,7 +83,7 @@ public class CarControllerTest {
     }
 
     @Test
-    public void carTest() throws Exception {
+    public void getCarAddTest() throws Exception {
 
         mockMvc.perform(
                 get("/car")
@@ -96,6 +96,43 @@ public class CarControllerTest {
                 .andExpect(model().attribute("isEdit", false))
                 .andExpect(model().attribute("car", new Car()))
                 .andExpect(view().name("car"));
+    }
+
+    @Test
+    public void getCarUpdateTest() throws Exception {
+        EasyMock.expect(mockCarService.getCarById(ID)).andReturn(CAR);
+        EasyMock.replay(mockCarService);
+
+        mockMvc.perform(
+                get("/editCar/{id}", ID)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("isEdit"))
+                .andExpect(model().attributeExists("car"))
+                .andExpect(model().attribute("isEdit", true))
+                .andExpect(model().attribute("car", CAR))
+                .andExpect(view().name("car"));
+
+        EasyMock.verify(mockCarService);
+    }
+
+    @Test
+    public void deleteCarTest() throws Exception {
+        mockCarService.deleteCarById(ID);
+        EasyMock.expectLastCall();
+        EasyMock.replay(mockCarService);
+
+        mockMvc.perform(
+                get("/car/{id}/delete", ID)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:/cars"));
+
+        EasyMock.verify(mockCarService);
     }
 
 }

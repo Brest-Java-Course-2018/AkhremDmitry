@@ -214,7 +214,7 @@
         <div class="modal-content">
             <div class="modal-header alert-danger">
                 <h5 class="modal-title" id="exampleModalLabel"
-                    th:text="#{department.modalTitle}">Delete department</h5>
+                    th:text="#{car.modalTitle}">Delete car</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -249,7 +249,7 @@
             </div>
             <div class="modal-footer" align="left">
                 <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
-                <a id="return" th:href="@{/departments}" class="btn btn-info"
+                <a id="return" th:href="@{/cars}" class="btn btn-info"
                    th:text="#{general.ok}">Ok</a>
             </div>
         </div>
@@ -268,8 +268,8 @@
     })
     $('#confirmDeleteModal').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"')
-        document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
+        $(this).find('.modal-body').text('Please confirm delete car: "' + target.data('name') + '"')
+        document.getElementById('deleteUrl').href = '/car/' + target.data('id') + '/delete';
     })
 </script>
 
