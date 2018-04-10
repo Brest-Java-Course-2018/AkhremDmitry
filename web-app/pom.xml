@@ -90,7 +90,11 @@
             <artifactId>gson</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.florianlopes</groupId>
+            <artifactId>spring-mvc-test-utils</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

@@ -4,6 +4,7 @@ package com.epam.brest.course.web_app.controllers;
 import com.epam.brest.course.dao.Car;
 import com.epam.brest.course.dto.CarDtoWithCrew;
 import com.epam.brest.course.service.CarService;
+import io.florianlopes.spring.test.web.servlet.request.MockMvcRequestBuilderUtils;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -128,6 +128,33 @@ public class CarControllerTest {
                 get("/car/{id}/delete", ID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:/cars"));
+
+        EasyMock.verify(mockCarService);
+    }
+
+    @Test
+    public void addCarTest() throws Exception {
+        EasyMock.expect(mockCarService.addCar(CAR)).andReturn(CAR);
+        EasyMock.replay(mockCarService);
+
+        mockMvc.perform(MockMvcRequestBuilderUtils.postForm("/car", CAR))
+                .andDo(print())
+                .andExpect(status().isFound())
+                .andExpect(view().name("redirect:/cars"));
+
+        EasyMock.verify(mockCarService);
+    }
+
+    @Test
+    public void updateCarTest() throws Exception {
+        mockCarService.updateCar(CAR);
+        EasyMock.expectLastCall();
+        EasyMock.replay(mockCarService);
+
+        mockMvc.perform(MockMvcRequestBuilderUtils.postForm("/editCar/"+CAR.getCarId(), CAR))
                 .andDo(print())
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/cars"));
