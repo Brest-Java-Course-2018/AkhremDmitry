@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title th:text="#{general.title}">AS manager</title>
+    <link rel="stylesheet"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+</head>
+<body>
+
+
+<nav class=" p-0 pl-2 navbar navbar-expand-sm navbar-dark bg-success text-light">
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarsNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="cars.html"
+       th:href="@{/cars}"
+       class="navbar-brand">
+        <img src="../../resources/static/img/asLogoR.svg"
+             th:src="@{/resources/static/img/asLogoR.svg}" width="64" height="32"></a>
+    <div class="collapse navbar-collapse" id="navbarsNav">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link"
+               href="crews.html"
+               th:href="@{/crews}"
+               th:text="#{general.crews}">Crews<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link"
+               href="calls.html"
+               th:href="@{/calls}"
+               th:text="#{general.calls}">Calls</a>
+            <a class="nav-item nav-link active"
+               href="cars.html"
+               th:href="@{/cars}"
+               th:text="#{general.cars}">Cars</a>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <nav class="mb-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
+        <a href="cars.html"
+           th:href="@{/cars}"
+           class="small"
+           data-toggle="tooltip"
+           data-placement="bottom"
+           title="Go back"
+           th:title="#{general.tooltipGoBack}"><i class="fa fa-arrow-left text-dark"> </i></a>
+        <a class="navbar-brand text-uppercase mr-auto">
+            <div th:if="${isEdit} == true" th:text="'&nbsp;'+#{car.edit}">&nbsp;Add car</div>
+            <div th:if="${isEdit} == false" th:text="'&nbsp;'+#{car.add}"></div>
+        </a>
+        <ul class="navbar-nav float-right">
+            <li class="nav-item">
+
+                <!--Команда сабмит для формы DepartmrntForm -->
+                <a href="cars.html"
+                   th:href="@{/car}"
+                   th:onclick="@{document.forms['carForm'].submit(); return false;}"
+
+                   class="btn btn-light"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Save car"
+                   th:title="#{general.tooltipSave}">
+                    <i class="fa fa-save"></i><span class="d-none d-sm-inline"
+                                                    th:text="#{general.save}">Save</span></a>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+<section id="car">
+
+    <div class="container-fluid">
+        <div class="row">
+            <!--&lt;!&ndash; Block level &ndash;&gt;-->
+            <!--<div class="col-2 text-truncate">-->
+            <!--Praeterea iter est quasdam res quas ex communi.-->
+            <!--</div>-->
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="carForm"
+                              th:object="${car}"
+                              action="cars.html"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
+                            <!--скрытое поле carID для добавления car-->
+                            <input id="field_carID"
+                            name=""
+                            type="hidden"
+                            th:field="*{carId}"/>
+                            <div class="form-group">
+                                <label class="d-none d-sm-inline"
+                                       for="field_registrationPlate"
+                                       th:text="#{car.registrationPlate}">Number</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="field_registrationPlate"
+                                       placeholder="Add registration plate"
+                                       th:field="${car.registrationPlate}">
+                                <label class="d-none d-sm-inline text-danger"
+                                       for="field_registrationPlate"
+                                       th:if="${#fields.hasErrors('registrationPlate')}"
+                                       th:errors="*{registrationPlate}">error</label>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="d-none d-sm-inline"
+                                       for="descriptionInput"
+                                       th:text="#{car.description}">Description</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="descriptionInput"
+                                       placeholder="Add description"
+                                       th:field="*{description}">
+                                <label class="d-none d-sm-inline text-danger"
+                                       for="descriptionInput"
+                                       th:if="${#fields.hasErrors('description')}"
+                                       th:errors="*{description}">error</label>
+                                       <!--th:value="${navbarBrandText.equals('Edit department')} ? ${department.description} : ''">-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+</body>
+</html>

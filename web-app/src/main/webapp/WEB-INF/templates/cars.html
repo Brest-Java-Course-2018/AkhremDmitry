@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title th:text="#{general.title}">AS manager</title>
+    <link rel="stylesheet"
+          href="../../resources/static/css/font-awesome.min.css"
+          th:href="@{/resources/static/css/font-awesome.min.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+</head>
+<body>
+
+
+<nav class=" p-0 pl-2 navbar navbar-expand-sm navbar-dark bg-success text-light">
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarsNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="cars.html"
+       th:href="@{/cars}"
+       class="navbar-brand">
+        <img src="../../resources/static/img/asLogoR.svg"
+             th:src="@{/resources/static/img/asLogoR.svg}" width="64" height="32"></a>
+    <div class="collapse navbar-collapse" id="navbarsNav">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link"
+               href="crews.html"
+               th:href="@{/crews}"
+               th:text="#{general.crews}">Crews<span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link"
+               href="calls.html"
+               th:href="@{/calls}"
+               th:text="#{general.calls}">Calls</a>
+            <a class="nav-item nav-link active"
+               href="cars.html"
+               th:href="@{/cars}"
+               th:text="#{general.cars}">Cars</a>
+        </div>
+    </div>
+</nav>
+
+<header>
+    <nav class=" p-0 pl-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
+        <a href="cars.html"
+           th:href="@{/cars}" class="navbar-brand text-uppercase mr-auto"
+           th:text="#{general.cars}">Cars</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="car.html"
+                   th:href="@{/car}"
+                   class="btn btn-light"
+                   data-toggle="tooltip"
+                   data-placement="bottom"
+                   title="Add car"
+                   th:title="#{car.tooltipAdd}">
+                    <i class="fa fa-plus"></i><span class="d-none d-sm-inline"
+                                                    th:text="#{general.add}">Add</span></a>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+<section id="cars">
+    <div class="container-fluid">
+        <div class="row">
+            <!--&lt;!&ndash; Block level &ndash;&gt;-->
+            <!--<div class="col-2 text-truncate">-->
+            <!--Praeterea iter est quasdam res quas ex communi.-->
+            <!--</div>-->
+            <div class="col">
+                <div class="card" th:if="not ${cars.isEmpty()}">
+
+
+                    <table class="table table-striped">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th th:text="#{car.colTitle}">Number</th>
+                            <th th:text="#{car.description}">Description</th>
+                            <th th:text="#{car.numberOfCrews}">Number of crews</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="car : ${cars}">
+                            <td th:text="${car.registrationPlate}"><!--&nbsp;&nbsp;&nbsp;-->8888 AA-1</td>
+                            <td th:text="${car.description}">Ambulance1</td>
+                            <td th:text="${car.numberOfCrew}">2</td>
+                            <td class="text-right">
+                                <a href="car.html"
+                                   th:href="'/editCar/'+${car.carId}"
+                                   class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit car"
+                                   th:title="#{car.tooltipEdit}">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"
+                                                                       th:text="#{general.edit}">Edit</span>
+                                </a>
+                                <span th:if="${car.numberOfCrew}==0">
+                                <a href="#" class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete car"
+                                   th:title="#{car.tooltipDelete}">
+                                <span data-toggle="modal"
+                                      data-target="#confirmDeleteModal"
+                                      th:attr="data-id=${car.carId},
+                                               data-name=${car.registrationPlate}">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"
+                                                                       th:text="#{general.delete}">Delete</span>
+                                </span>
+
+                                </a>
+                                </span>
+                                <span th:unless="${car.numberOfCrew}==0">
+                                    <a href="#" class="btn-sm btn-outline-secondary"
+                                       data-toggle="tooltip"
+                                       data-target="cannotDelete"
+                                       data-placement="top"
+                                       title="Delete car"
+                                       th:title="#{car.tooltipDelete}">
+                                <span data-toggle="modal"
+                                      data-target="#cannotDelete">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"
+                                                                       th:text="#{general.delete}">Delete</span>
+                                </span>
+
+                                </a>
+                                </span>
+
+                            </td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>2222 AA-1</td>
+                            <td>Ambulance2</td>
+                            <td>2</td>
+                            <td class="text-right">
+                                <a href="car.html"
+                                   th:href="@{/car/2}"
+                                   class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit car">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
+                                </a>
+                                <a href="#" class="btn-sm btn-outline-secondary"
+
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete car">
+                                <span data-toggle="modal" data-target="#confirmDeleteModal">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
+
+                                </span>
+
+                                </a>
+
+                            </td>
+                        </tr>
+                        <tr th:remove="all">
+                            <td>3333 AA-1</td>
+                            <td>Ambulance3</td>
+                            <td>4</td>
+                            <td class="text-right">
+                                <a href="car.html" class="btn-sm btn-outline-secondary"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Edit car">
+                                    <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
+                                </a>
+                                <a href="#" class="btn-sm btn-outline-secondary"
+
+                                   data-toggle="tooltip"
+                                   data-target="confirmDeleteModal"
+                                   data-placement="top"
+                                   title="Delete car">
+                                <span data-toggle="modal" data-target="#confirmDeleteModal">
+                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
+
+                                </span>
+
+                                </a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card alert alert-info" th:if="${cars.isEmpty()}" align="center">
+            <h2 th:text="#{car.plAddCar}">Please add cars.</h2>
+        </div>
+    </div>
+
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel"
+                    th:text="#{department.modalTitle}">Delete department</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm delete
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        th:text="#{general.cancel}">Cancel
+                </button>
+                <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
+                <a id="deleteUrl" href="#" class="btn btn-danger"
+                   th:text="#{general.delete}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cannotDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-info">
+                <h5 class="modal-title" id="exampleCannotDelete">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" th:text="#{car.cannotDelete}">
+                Can't delete
+            </div>
+            <div class="modal-footer" align="left">
+                <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
+                <a id="return" th:href="@{/departments}" class="btn btn-info"
+                   th:text="#{general.ok}">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#confirmDeleteModal').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Please confirm delete department: "' + target.data('name') + '"')
+        document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
+    })
+</script>
+
+</body>
+</html>
