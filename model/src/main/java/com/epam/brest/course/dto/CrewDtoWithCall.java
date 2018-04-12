@@ -8,7 +8,7 @@ public class CrewDtoWithCall extends AbstractCrewDto{
     private String description;
 
     /**
-     * Property carId.
+     * Property number of calls.
      */
     private int numberOfCalls;
 

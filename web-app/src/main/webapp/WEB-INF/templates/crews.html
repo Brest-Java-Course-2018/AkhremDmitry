@@ -32,7 +32,7 @@
              th:src="@{/resources/static/img/asLogoR.svg}" width="64" height="32"></a>
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
-            <a class="nav-item nav-link"
+            <a class="nav-item nav-link  active"
                href="crews.html"
                th:href="@{/crews}"
                th:text="#{general.crews}">Crews<span class="sr-only">(current)</span></a>
@@ -40,7 +40,7 @@
                href="calls.html"
                th:href="@{/calls}"
                th:text="#{general.calls}">Calls</a>
-            <a class="nav-item nav-link active"
+            <a class="nav-item nav-link"
                href="cars.html"
                th:href="@{/cars}"
                th:text="#{general.cars}">Cars</a>
@@ -50,18 +50,18 @@
 
 <header>
     <nav class=" p-0 pl-2 navbar navbar-expand-sm navbar-light bg-light text-dark">
-        <a href="cars.html"
-           th:href="@{/cars}" class="navbar-brand text-uppercase mr-auto"
-           th:text="#{general.cars}">Cars</a>
+        <a href="crews.html"
+           th:href="@{/crews}" class="navbar-brand text-uppercase mr-auto"
+           th:text="#{general.crews}">Crews</a>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="car.html"
-                   th:href="@{/car}"
+                <a href="crew.html"
+                   th:href="@{/crew}"
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom"
-                   title="Add car"
-                   th:title="#{car.tooltipAdd}">
+                   title="Add crew"
+                   th:title="#{crew.tooltipAdd}">
                     <i class="fa fa-plus"></i><span class="d-none d-sm-inline"
                                                     th:text="#{general.add}">Add</span></a>
             </li>
@@ -73,63 +73,58 @@
 <section id="cars">
     <div class="container-fluid">
         <div class="row">
-            <!--&lt;!&ndash; Block level &ndash;&gt;-->
-            <!--<div class="col-2 text-truncate">-->
-            <!--Praeterea iter est quasdam res quas ex communi.-->
-            <!--</div>-->
-            <div class="col">
-                <div class="card" th:if="not ${cars.isEmpty()}">
-
-
+           <div class="col">
+                <div class="card" th:if="not ${crews.isEmpty()}">
                     <table class="table table-striped">
                         <thead class="thead-inverse">
                         <tr>
-                            <th th:text="#{car.colTitle}">Number</th>
-                            <th th:text="#{car.description}">Description</th>
-                            <th th:text="#{car.numberOfCrews}">Number of crews</th>
+                            <th th:text="#{crew.Name}">Name</th>
+                            <th th:text="#{crew.description}">Description</th>
+                            <th th:text="#{crew.numberOfCalls}">Number of calls</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="car : ${cars}">
-                            <td th:text="${car.registrationPlate}"><!--&nbsp;&nbsp;&nbsp;-->8888 AA-1</td>
-                            <td th:text="${car.description}">Ambulance1</td>
-                            <td th:text="${car.numberOfCrew}">2</td>
+                        <tr th:each="crew : ${crews}">
+                            <td th:text="${crew.crewName}"><!--&nbsp;&nbsp;&nbsp;-->Crew1</td>
+                            <td th:text="${crew.description}">Some Crew</td>
+                            <td th:text="${crew.numberOfCalls}">1</td>
+
                             <td class="text-right">
-                                <a href="car.html"
-                                   th:href="'/editCar/'+${car.carId}"
+                                <a href="crew.html"
+                                   th:href="'/editCrew/'+${crew.crewId}"
                                    class="btn-sm btn-outline-secondary"
                                    data-toggle="tooltip"
                                    data-placement="top"
-                                   title="Edit car"
-                                   th:title="#{car.tooltipEdit}">
+                                   title="Edit crew"
+                                   th:title="#{crew.tooltipEdit}">
                                     <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"
                                                                        th:text="#{general.edit}">Edit</span>
                                 </a>
-                                <span th:if="${car.numberOfCrew}==0">
+                                <span th:if="${crew.numberOfCalls}==0">
                                 <a href="#" class="btn-sm btn-outline-secondary"
                                    data-toggle="tooltip"
                                    data-target="confirmDeleteModal"
                                    data-placement="top"
-                                   title="Delete car"
-                                   th:title="#{car.tooltipDelete}">
+                                   title="Delete crew"
+                                   th:title="#{crew.tooltipDelete}">
                                 <span data-toggle="modal"
                                       data-target="#confirmDeleteModal"
-                                      th:attr="data-id=${car.carId},
-                                               data-name=${car.registrationPlate}">
+                                      th:attr="data-id=${crew.crewId},
+                                               data-name=${crew.crewName}">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline"
                                                                        th:text="#{general.delete}">Delete</span>
                                 </span>
 
                                 </a>
                                 </span>
-                                <span th:unless="${car.numberOfCrew}==0">
+                                <span th:unless="${crew.numberOfCalls}==0">
                                     <a href="#" class="btn-sm btn-outline-secondary"
                                        data-toggle="tooltip"
                                        data-target="cannotDelete"
                                        data-placement="top"
                                        title="Delete car"
-                                       th:title="#{car.tooltipDelete}">
+                                       th:title="#{crew.tooltipDelete}">
                                 <span data-toggle="modal"
                                       data-target="#cannotDelete">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline"
@@ -142,16 +137,16 @@
                             </td>
                         </tr>
                         <tr th:remove="all">
-                            <td>2222 AA-1</td>
-                            <td>Ambulance2</td>
-                            <td>2</td>
+                            <td>Crew2</td>
+                            <td>3</td>
+                            <td>some crew2</td>
                             <td class="text-right">
-                                <a href="car.html"
-                                   th:href="@{/car/2}"
+                                <a href="crew.html"
+                                   th:href="@{/crew/2}"
                                    class="btn-sm btn-outline-secondary"
                                    data-toggle="tooltip"
                                    data-placement="top"
-                                   title="Edit car">
+                                   title="Edit crew">
                                     <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
                                 </a>
                                 <a href="#" class="btn-sm btn-outline-secondary"
@@ -159,7 +154,7 @@
                                    data-toggle="tooltip"
                                    data-target="confirmDeleteModal"
                                    data-placement="top"
-                                   title="Delete car">
+                                   title="Delete crew">
                                 <span data-toggle="modal" data-target="#confirmDeleteModal">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
 
@@ -170,14 +165,14 @@
                             </td>
                         </tr>
                         <tr th:remove="all">
-                            <td>3333 AA-1</td>
-                            <td>Ambulance3</td>
-                            <td>4</td>
+                            <td>Crew3</td>
+                            <td>6</td>
+                            <td>Some crew3</td>
                             <td class="text-right">
-                                <a href="car.html" class="btn-sm btn-outline-secondary"
+                                <a href="crew.html" class="btn-sm btn-outline-secondary"
                                    data-toggle="tooltip"
                                    data-placement="top"
-                                   title="Edit car">
+                                   title="Edit crew">
                                     <i class="fa fa-pencil"></i> <span class="d-none d-md-inline"> Edit</span>
                                 </a>
                                 <a href="#" class="btn-sm btn-outline-secondary"
@@ -185,7 +180,7 @@
                                    data-toggle="tooltip"
                                    data-target="confirmDeleteModal"
                                    data-placement="top"
-                                   title="Delete car">
+                                   title="Delete crew">
                                 <span data-toggle="modal" data-target="#confirmDeleteModal">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline"> Delete</span>
 
@@ -200,8 +195,8 @@
                 </div>
             </div>
         </div>
-        <div class="card alert alert-info" th:if="${cars.isEmpty()}" align="center">
-            <h2 th:text="#{car.plAddCar}">Please add cars.</h2>
+        <div class="card alert alert-info" th:if="${crews.isEmpty()}" align="center">
+            <h2 th:text="#{crew.plAddCar}">Please add crews.</h2>
         </div>
     </div>
 
@@ -214,7 +209,7 @@
         <div class="modal-content">
             <div class="modal-header alert-danger">
                 <h5 class="modal-title" id="exampleModalLabel"
-                    th:text="#{car.modalTitle}">Delete car</h5>
+                    th:text="#{crew.modalTitle}">Delete crew</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -244,12 +239,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" th:text="#{car.cannotDelete}">
+            <div class="modal-body" th:text="#{crew.cannotDelete}">
                 Can't delete
             </div>
             <div class="modal-footer" align="left">
                 <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>-->
-                <a id="return" th:href="@{/cars}" class="btn btn-info"
+                <a id="return" th:href="@{/crews}" class="btn btn-info"
                    th:text="#{general.ok}">Ok</a>
             </div>
         </div>
@@ -268,8 +263,8 @@
     })
     $('#confirmDeleteModal').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete car: "' + target.data('name') + '"')
-        document.getElementById('deleteUrl').href = '/car/' + target.data('id') + '/delete';
+        $(this).find('.modal-body').text('Please confirm delete crew: "' + target.data('name') + '"')
+        document.getElementById('deleteUrl').href = '/crew/' + target.data('id') + '/delete';
     })
 </script>
 

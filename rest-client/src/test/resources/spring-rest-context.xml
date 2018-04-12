@@ -29,7 +29,7 @@
     </bean>
 
     <bean id="CrewRestClient" class="com.epam.brest.course.client.rest.CrewRestClient">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.crew}"/>
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.crews}"/>
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
