@@ -1,5 +1,8 @@
 package com.epam.brest.course.dao;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
 /**
  * POJO Crew.
  */
@@ -12,6 +15,10 @@ public class Crew {
     /**
      * Property name.
      */
+    @Size(min = 3, message = "Address cannot contain less "
+            + "than 3 characters.")
+    @Size(max = 255, message = "Address cannot contain more "
+            + "than 255 characters.")
     private String crewName;
 
     /**
@@ -22,6 +29,7 @@ public class Crew {
     /**
      * Property carId.
      */
+    @Positive
     private int carId;
 
     /**

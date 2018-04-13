@@ -14,9 +14,9 @@ public class HomeController {
      *
      * @return template name
      */
-    @GetMapping(value = "/")
+    @GetMapping(value = "/*")
     public final String defaultPageRedirect() {
-        return "redirect:/cars";
+        return "redirect:/calls";
     }
 
 }

@@ -13,8 +13,16 @@
         <constructor-arg value="com.epam.brest.course.service.CarService"/>
     </bean>
 
+    <bean id="crewService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg value="com.epam.brest.course.service.CrewService"/>
+    </bean>
+
     <bean id="carController" class="com.epam.brest.course.web_app.controllers.CarController">
         <property name="carService" ref="carService"/>
+    </bean>
+
+    <bean id="crewController" class="com.epam.brest.course.web_app.controllers.CrewController">
+        <property name="crewService" ref="crewService"/>
     </bean>
 
 

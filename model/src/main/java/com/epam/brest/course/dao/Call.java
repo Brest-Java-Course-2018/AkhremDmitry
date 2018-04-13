@@ -1,5 +1,7 @@
 package com.epam.brest.course.dao;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 /**
@@ -25,11 +27,16 @@ public class Call {
     /**
      * Property address.
      */
+    @Size(min = 3, message = "Address cannot contain less "
+            + "than 3 characters.")
+    @Size(max = 255, message = "Address cannot contain more "
+            + "than 255 characters.")
     private String address;
 
     /**
      * Property crewId.
      */
+    @Positive
     private int crewId;
 
     /**

@@ -9,9 +9,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
@@ -29,7 +32,7 @@ public class CallController {
     private final static Logger LOGGER = LogManager.getLogger();
 
     @GetMapping(value = "/calls")
-    public final String getCalls (final Model model){
+    public final String getCalls(final Model model) {
         LOGGER.debug("Req: getCalls()");
         Collection<Call> calls =
                 callService.getAllCall();
@@ -39,7 +42,7 @@ public class CallController {
     }
 
     @GetMapping(value = "/call")
-    public final String getAddCall(final Model model){
+    public final String getAddCall(final Model model) {
         LOGGER.debug("getAddCall()");
         Collection<CrewDto> crews = crewService.getAllCrewDto();
         boolean isEdit = false;
@@ -50,9 +53,61 @@ public class CallController {
     }
 
     @PostMapping(value = "/call")
-    public final String addCall(final Call call){
+    public final String addCall(@Valid final Call call,
+                                final BindingResult result,
+                                final Model model) {
         LOGGER.debug("addCall({})", call);
-        callService.addCall(call);
+
+        if (result.hasErrors()) {
+            Collection<CrewDto> crews = crewService.getAllCrewDto();
+            boolean isEdit = false;
+            model.addAttribute("crews", crews);
+            model.addAttribute("isEdit", isEdit);
+            model.addAttribute("call", call);
+            return "call";
+        } else {
+            callService.addCall(call);
+            return "redirect:/calls";
+        }
+    }
+
+    @GetMapping(value = "/editCall/{id}")
+    public final String getUpdateCall(@PathVariable final int id,
+                                      final Model model) {
+        LOGGER.debug("Req: getEditCall({})", id);
+        Call call = callService.getCallById(id);
+        Collection<CrewDto> crews = crewService.getAllCrewDto();
+        boolean isEdit = true;
+        model.addAttribute("isEdit", isEdit);
+        model.addAttribute("crews", crews);
+        model.addAttribute("call", call);
+        LOGGER.debug("Res: getEditCall({})", model);
+        return "call";
+    }
+
+    @PostMapping(value = "/editCall/{id}")
+    public final String updateCall(@Valid final Call call,
+                                   final BindingResult result,
+                                   final Model model) {
+        LOGGER.debug("updateCall({})", call);
+        if (result.hasErrors()) {
+            Collection<CrewDto> crews = crewService.getAllCrewDto();
+            boolean isEdit = true;
+            model.addAttribute("isEdit", isEdit);
+            model.addAttribute("crews", crews);
+            model.addAttribute("call", call);
+            return "call";
+        } else {
+            callService.updateCall(call);
+            return "redirect:/calls";
+        }
+
+    }
+
+    @GetMapping(value = "/call/{id}/delete")
+    public final String deleteCall(@PathVariable final int id) {
+        LOGGER.debug("deleteCall({})", id);
+        callService.deleteCallById(id);
         return "redirect:/calls";
     }
 }

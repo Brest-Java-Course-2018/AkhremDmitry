@@ -1,5 +1,7 @@
 package com.epam.brest.course.dao;
 
+import javax.validation.constraints.Pattern;
+
 /**
  * POJO Car.
  */
@@ -13,6 +15,8 @@ public class Car {
     /**
      * Property registration plate.
      */
+    @Pattern(regexp = "[0-9]{4} [A-Z]{2}-[1-7]",
+            message = "Registration plate must be in the format: 1111 XX-1")
     private String registrationPlate;
 
     /**

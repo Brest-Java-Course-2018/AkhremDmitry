@@ -8,10 +8,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 /**
@@ -73,15 +75,28 @@ public class CarController {
 
     /**
      * Add car to db.
+     *
      * @param car Car
+     * @param result BindingResult
+     * @param model Model
      * @return Template name.
      */
     @PostMapping(value = "/car")
-    public final String addCar(final Car car){
+    public final String addCar(@Valid final Car car,
+                               final BindingResult result,
+                               final Model model){
         LOGGER.debug("Req: addCar({})", car);
-        Car resultCar = carService.addCar(car);
-        LOGGER.debug("Res: addCar({})", resultCar);
-        return "redirect:/cars";
+
+        if(result.hasErrors()){
+            model.addAttribute("isEdit", false);
+            model.addAttribute("car", car);
+            return "car";
+        } else {
+            Car resultCar = carService.addCar(car);
+            LOGGER.debug("Res: addCar({})", resultCar);
+            return "redirect:/cars";
+        }
+
     }
 
     /**
@@ -107,13 +122,25 @@ public class CarController {
      * Update car in db.
      *
      * @param car Car
+     * @param result BindingResult
+     * @param model Model
      * @return Template name.
      */
     @PostMapping(value = "/editCar/{id}")
-    public final String updateCar(final Car car){
+    public final String updateCar(@Valid final Car car,
+                                  final BindingResult result,
+                                  final Model model){
         LOGGER.debug("updateCar({})", car);
-        carService.updateCar(car);
-        return "redirect:/cars";
+
+        if(result.hasErrors()){
+            model.addAttribute("car", car);
+            model.addAttribute("isEdit", true);
+            return "car";
+        } else{
+            carService.updateCar(car);
+            return "redirect:/cars";
+        }
+
     }
 
     /**
