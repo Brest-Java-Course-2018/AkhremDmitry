@@ -41,11 +41,6 @@ public class CrewController {
      */
     private final static Logger LOGGER = LogManager.getLogger();
 
-
-    public void setCrewService(CrewService crewService) {
-        this.crewService = crewService;
-    }
-
     @GetMapping(value = "/crews")
     public final String getCrews (final Model model){
         LOGGER.debug("Req: getCrews()");

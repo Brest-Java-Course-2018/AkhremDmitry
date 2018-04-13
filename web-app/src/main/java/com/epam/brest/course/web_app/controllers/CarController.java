@@ -34,15 +34,6 @@ public class CarController {
     private final static Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Setter for carService.
-     *
-     * @param carService CarService.
-     */
-    public void setCarService(CarService carService) {
-        this.carService = carService;
-    }
-
-    /**
      * Show cars page.
      *
      * @param model collection of CarDtoWithCrew
