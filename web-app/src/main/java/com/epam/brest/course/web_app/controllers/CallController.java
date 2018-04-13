@@ -1,6 +1,7 @@
 package com.epam.brest.course.web_app.controllers;
 
 import com.epam.brest.course.dao.Call;
+import com.epam.brest.course.dao.DatesRange;
 import com.epam.brest.course.dto.CrewDto;
 import com.epam.brest.course.service.CallService;
 import com.epam.brest.course.service.CrewService;
@@ -37,7 +38,9 @@ public class CallController {
         Collection<Call> calls =
                 callService.getAllCall();
         LOGGER.debug("Res: getCalls({})", calls);
+        DatesRange datesRange = new DatesRange();
         model.addAttribute("calls", calls);
+        model.addAttribute("datesRange", datesRange);
         return "calls";
     }
 
@@ -109,5 +112,24 @@ public class CallController {
         LOGGER.debug("deleteCall({})", id);
         callService.deleteCallById(id);
         return "redirect:/calls";
+    }
+
+    @PostMapping(value = "/filterCalls")
+    public final String filterCalls(@Valid final DatesRange datesRange,
+                                    final BindingResult result,
+                                    final Model model) {
+        LOGGER.debug("Req: filterCalls({})", datesRange);
+        Collection<Call> calls = null;
+        if (result.hasErrors()) {
+            calls =
+                    callService.getAllCall();
+        } else {
+            calls = callService.getAllCallByDate(datesRange.getDateFrom(),
+                            datesRange.getDateTo());
+        }
+        LOGGER.debug("Res: filterCalls({})", calls);
+        model.addAttribute("calls", calls);
+        model.addAttribute("datesRange", datesRange);
+        return "calls";
     }
 }

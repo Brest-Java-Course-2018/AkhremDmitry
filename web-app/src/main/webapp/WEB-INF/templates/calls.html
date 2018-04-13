@@ -70,10 +70,71 @@
 
 </header>
 
+<div class="container">
+    <form id="filterForm"
+          th:object="${datesRange}"
+          action="calls.html"
+          th:action="@{/filterCalls}"
+          th:method="@{post}">
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-sm mb-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                              id="inputGroup-startDate"
+                              th:text="#{general.from}">From</span>
+                    </div>
+                    <input type="date" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-sm"
+                           th:field="${datesRange.dateFrom}">
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                              id="inputGroup-endDate"
+                              th:text="#{general.to}">To</span>
+                    </div>
+                    <input type="date" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-sm"
+                           th:field="${datesRange.dateTo}">
+                    <a href="calls.html"
+                       th:href="@{/filterCalls}"
+                       th:onclick="@{document.forms['filterForm'].submit(); return false;}"
+                       class="btn-sm btn-light"
+                       data-toggle="tooltip"
+                       data-placement="bottom"
+                       title="Filter"
+                       th:title="#{general.filter}">
+                        <i class="fa fa-filter"></i></a>
+                </div>
+                <div class="col-3">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-3">
+                <label class="d-none d-sm-inline text-danger"
+                       for="inputGroup-startDate"
+                       th:if="${#fields.hasErrors('dateFrom')}">error</label>
+            </div>
+            <div class="col-3">
+                <label class="d-none d-sm-inline text-danger"
+                       for="inputGroup-endDate"
+                       th:if="${#fields.hasErrors('dateTo')}">error</label>
+            </div>
+            <div class="col-3">
+            </div>
+        </div>
+    </form>
+</div>
+
 <section id="cars">
     <div class="container-fluid">
         <div class="row">
-           <div class="col">
+            <div class="col">
                 <div class="card" th:if="not ${calls.isEmpty()}">
                     <table class="table table-striped">
                         <thead class="thead-inverse">

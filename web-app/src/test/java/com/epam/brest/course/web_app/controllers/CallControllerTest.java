@@ -162,7 +162,7 @@ public class CallControllerTest {
         EasyMock.replay(mockCallService);
 
         mockMvc.perform(MockMvcRequestBuilderUtils
-                .postForm("/editCall/"+CALL.getCallId(), CALL))
+                .postForm("/editCall/" + CALL.getCallId(), CALL))
                 .andDo(print())
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/calls"));

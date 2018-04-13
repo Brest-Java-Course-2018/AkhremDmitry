@@ -40,7 +40,7 @@ public class CarController {
      * @return Template name.
      */
     @GetMapping(value = "/cars")
-    public final String getCars(final Model model){
+    public final String getCars(final Model model) {
         LOGGER.debug("Req: getCars()");
         Collection<CarDtoWithCrew> cars =
                 carService.getAllCarsDtoWithCrew();
@@ -56,7 +56,7 @@ public class CarController {
      * @return Template name.
      */
     @GetMapping(value = "/car")
-    public final String getCarAdd(final Model model){
+    public final String getCarAdd(final Model model) {
         LOGGER.debug("getCarAdd()");
         boolean isEdit = false;
         model.addAttribute("isEdit", isEdit);
@@ -67,18 +67,18 @@ public class CarController {
     /**
      * Add car to db.
      *
-     * @param car Car
+     * @param car    Car
      * @param result BindingResult
-     * @param model Model
+     * @param model  Model
      * @return Template name.
      */
     @PostMapping(value = "/car")
     public final String addCar(@Valid final Car car,
                                final BindingResult result,
-                               final Model model){
+                               final Model model) {
         LOGGER.debug("Req: addCar({})", car);
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("isEdit", false);
             model.addAttribute("car", car);
             return "car";
@@ -91,15 +91,15 @@ public class CarController {
     }
 
     /**
-     *  Show car edit page.
+     * Show car edit page.
      *
-     * @param id carId
+     * @param id    carId
      * @param model Model
      * @return Template name.
      */
     @GetMapping(value = "/editCar/{id}")
     public final String getCarUpdate(@PathVariable final int id,
-                                     final Model model){
+                                     final Model model) {
         LOGGER.debug("Req: getCarUpdate({})", id);
         boolean isEdit = true;
         model.addAttribute("isEdit", isEdit);
@@ -112,22 +112,22 @@ public class CarController {
     /**
      * Update car in db.
      *
-     * @param car Car
+     * @param car    Car
      * @param result BindingResult
-     * @param model Model
+     * @param model  Model
      * @return Template name.
      */
     @PostMapping(value = "/editCar/{id}")
     public final String updateCar(@Valid final Car car,
                                   final BindingResult result,
-                                  final Model model){
+                                  final Model model) {
         LOGGER.debug("updateCar({})", car);
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             model.addAttribute("car", car);
             model.addAttribute("isEdit", true);
             return "car";
-        } else{
+        } else {
             carService.updateCar(car);
             return "redirect:/cars";
         }
@@ -136,11 +136,12 @@ public class CarController {
 
     /**
      * Delete car.
+     *
      * @param carId carId
      * @return template name
      */
     @GetMapping(value = "/car/{id}/delete")
-    public final String deleteCar(@PathVariable(value = "id") final int carId){
+    public final String deleteCar(@PathVariable(value = "id") final int carId) {
         LOGGER.debug("deleteCar({})", carId);
         carService.deleteCarById(carId);
         return "redirect:/cars";

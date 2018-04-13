@@ -154,7 +154,7 @@ public class CarControllerTest {
         EasyMock.expectLastCall();
         EasyMock.replay(mockCarService);
 
-        mockMvc.perform(MockMvcRequestBuilderUtils.postForm("/editCar/"+CAR.getCarId(), CAR))
+        mockMvc.perform(MockMvcRequestBuilderUtils.postForm("/editCar/" + CAR.getCarId(), CAR))
                 .andDo(print())
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/cars"));

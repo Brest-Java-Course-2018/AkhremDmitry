@@ -54,7 +54,7 @@ public class CrewControllerTest {
 
 
     @BeforeClass
-    public static void before(){
+    public static void before() {
         CREW_DTO.setCrewId(ID);
         CREW_DTO.setCrewName(NAME);
         CREW_DTO.setDescription(DESCRIPTION);
@@ -169,7 +169,7 @@ public class CrewControllerTest {
         EasyMock.replay(mockCrewService);
 
         mockMvc.perform(MockMvcRequestBuilderUtils
-                .postForm("/editCrew/"+CREW.getCrewId(), CREW))
+                .postForm("/editCrew/" + CREW.getCrewId(), CREW))
                 .andDo(print())
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/crews"));
