@@ -18,8 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -42,14 +40,13 @@ public class CallRestControllerTest {
 
     private static final int ID = 1;
     private static final Call CALL = new Call();
+    private static final Date DATECALL = Date.valueOf("2018-3-14");
 
     @BeforeClass
-    public static void before() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
+    public static void before() {
         CALL.setCallId(ID);
         CALL.setDescription("Some description");
-        CALL.setDateCall(dateCall);
+        CALL.setDateCall(Date.valueOf("2018-3-14"));
         CALL.setAddress("Address");
         CALL.setCrewId(1);
     }
@@ -69,9 +66,6 @@ public class CallRestControllerTest {
 
     @Test
     public void getAllCallsTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
-
         EasyMock.expect(mockCallService.getAllCall())
                 .andReturn(Arrays.asList(CALL));
         EasyMock.replay(mockCallService);
@@ -82,7 +76,7 @@ public class CallRestControllerTest {
         ).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].callId", Matchers.is(1)))
-                .andExpect(jsonPath("$[0].dateCall", Matchers.is(dateCall.getTime())))
+                .andExpect(jsonPath("$[0].dateCall", Matchers.is(DATECALL.getTime())))
                 .andExpect(jsonPath("$[0].address", Matchers.is("Address")))
                 .andExpect(jsonPath("$[0].description", Matchers.is("Some description")))
                 .andExpect(jsonPath("$[0].crewId", Matchers.is(1)));
@@ -90,20 +84,17 @@ public class CallRestControllerTest {
 
     @Test
     public void getAllCallByDateTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
-
-        EasyMock.expect(mockCallService.getAllCallByDate(dateCall, dateCall))
+        EasyMock.expect(mockCallService.getAllCallByDate(DATECALL, DATECALL))
                 .andReturn(Arrays.asList(CALL));
         EasyMock.replay(mockCallService);
 
         mockMvc.perform(
-                get("/calls/" + dateCall + "/" + dateCall)
+                get("/calls/" + DATECALL + "/" + DATECALL)
                         .accept(MediaType.APPLICATION_JSON)
         ).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$[0].callId", Matchers.is(1)))
-                .andExpect(jsonPath("$[0].dateCall", Matchers.is(dateCall.getTime())))
+                .andExpect(jsonPath("$[0].dateCall", Matchers.is(DATECALL.getTime())))
                 .andExpect(jsonPath("$[0].address", Matchers.is("Address")))
                 .andExpect(jsonPath("$[0].description", Matchers.is("Some description")))
                 .andExpect(jsonPath("$[0].crewId", Matchers.is(1)));
@@ -111,9 +102,6 @@ public class CallRestControllerTest {
 
     @Test
     public void getCallByIdTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
-
         EasyMock.expect(mockCallService.getCallById(ID)).andReturn(CALL);
         EasyMock.replay(mockCallService);
 
@@ -123,7 +111,7 @@ public class CallRestControllerTest {
         ).andDo(print()).andExpect(status().isFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("callId", Matchers.is(1)))
-                .andExpect(jsonPath("dateCall", Matchers.is(dateCall.getTime())))
+                .andExpect(jsonPath("dateCall", Matchers.is(DATECALL.getTime())))
                 .andExpect(jsonPath("address", Matchers.is("Address")))
                 .andExpect(jsonPath("description", Matchers.is("Some description")))
                 .andExpect(jsonPath("crewId", Matchers.is(1)));
@@ -131,9 +119,6 @@ public class CallRestControllerTest {
 
     @Test
     public void addCallTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
-
         EasyMock.expect(mockCallService.addCall(EasyMock.anyObject())).andReturn(CALL);
         EasyMock.replay(mockCallService);
 
@@ -148,7 +133,7 @@ public class CallRestControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("callId", Matchers.is(1)))
-                .andExpect(jsonPath("dateCall", Matchers.is(dateCall.getTime())))
+                .andExpect(jsonPath("dateCall", Matchers.is(DATECALL.getTime())))
                 .andExpect(jsonPath("address", Matchers.is("Address")))
                 .andExpect(jsonPath("description", Matchers.is("Some description")))
                 .andExpect(jsonPath("crewId", Matchers.is(1)));

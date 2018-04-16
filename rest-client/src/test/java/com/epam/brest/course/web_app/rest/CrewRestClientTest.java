@@ -19,8 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -132,10 +130,9 @@ public class CrewRestClientTest {
     }
 
     @Test
-    public void getAllCrewDtoWithCallByDateTest() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date startDate = new Date(dateFormat.parse("2018-03-14").getTime());
-        Date endDate = new Date(dateFormat.parse("2018-03-15").getTime());
+    public void getAllCrewDtoWithCallByDateTest() {
+        Date startDate = Date.valueOf("2018-3-14");
+        Date endDate = Date.valueOf("2018-3-15");
 
         CrewDtoWithCall crew = new CrewDtoWithCall("Crew1", "Ambulance",2);
         List crews = Arrays.asList(crew);

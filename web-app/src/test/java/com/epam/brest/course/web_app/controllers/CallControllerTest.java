@@ -19,7 +19,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -57,10 +56,8 @@ public class CallControllerTest {
                 .setViewResolvers(viewResolver)
                 .build();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
         CALL.setCallId(ID);
-        CALL.setDateCall(dateCall);
+        CALL.setDateCall(Date.valueOf("2018-3-14"));
         CALL.setAddress("Lenina 80");
         CALL.setDescription("heard ache");
         CALL.setCrewId(2);

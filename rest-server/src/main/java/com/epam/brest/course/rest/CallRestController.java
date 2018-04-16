@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.text.ParseException;
 import java.util.Collection;
 
 @RestController
@@ -29,8 +28,7 @@ public class CallRestController {
     @GetMapping(value = "/calls/{startDate}/{endDate}")
     public final Collection<Call> getAllCallByDate(
             @PathVariable(value = "startDate") final String startDate,
-            @PathVariable(value = "endDate") final String endDate)
-            throws ParseException {
+            @PathVariable(value = "endDate") final String endDate) {
         LOGGER.debug("getAllCallByDate({}, {})", startDate, endDate);
         Collection<Call> calls = callService
                 .getAllCallByDate(Date.valueOf(startDate), Date.valueOf(endDate));

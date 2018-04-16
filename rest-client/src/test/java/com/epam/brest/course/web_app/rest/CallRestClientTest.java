@@ -18,8 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,10 +43,9 @@ public class CallRestClientTest {
     }
 
     @Before
-    public void setUp() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        startDate = new Date(dateFormat.parse("2018-03-14").getTime());
-        endDate = new Date(dateFormat.parse("2018-03-15").getTime());
+    public void setUp() {
+        startDate = Date.valueOf("2018-3-14");
+        endDate = Date.valueOf("2018-3-15");
         expCall.setCallId(1);
         expCall.setAddress("Address");
         expCall.setDescription("Description");
@@ -56,7 +53,7 @@ public class CallRestClientTest {
     }
 
     @Test
-    public void getCallByIdTest(){
+    public void getCallByIdTest() {
         ResponseEntity entity = new ResponseEntity(expCall, HttpStatus.FOUND);
 
         EasyMock.expect(mockRestTemplate.getForEntity("http://localhost:8090/calls/1", Call.class))
@@ -69,11 +66,11 @@ public class CallRestClientTest {
     }
 
     @Test
-    public void addCallTest(){
+    public void addCallTest() {
         ResponseEntity entity = new ResponseEntity(expCall, HttpStatus.FOUND);
 
         EasyMock.expect(mockRestTemplate
-                .postForEntity("http://localhost:8090/calls", expCall,  Call.class))
+                .postForEntity("http://localhost:8090/calls", expCall, Call.class))
                 .andReturn(entity);
         EasyMock.replay(mockRestTemplate);
 
@@ -82,7 +79,7 @@ public class CallRestClientTest {
     }
 
     @Test
-    public void updateCallTest(){
+    public void updateCallTest() {
         mockRestTemplate.put("http://localhost:8090/calls", expCall);
         EasyMock.expectLastCall();
         EasyMock.replay(mockRestTemplate);
@@ -91,7 +88,7 @@ public class CallRestClientTest {
     }
 
     @Test
-    public void deleteCallByIdTest(){
+    public void deleteCallByIdTest() {
         mockRestTemplate.delete("http://localhost:8090/calls/1");
         EasyMock.expectLastCall();
         EasyMock.replay(mockRestTemplate);
@@ -115,7 +112,7 @@ public class CallRestClientTest {
     }
 
     @Test
-    public void getAllCallByDateTest(){
+    public void getAllCallByDateTest() {
         List calls = Arrays.asList(expCall);
         ResponseEntity entity = new ResponseEntity(calls, HttpStatus.FOUND);
 

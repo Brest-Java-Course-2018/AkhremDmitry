@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -167,9 +166,8 @@ public class CrewRestControllerTest {
 
     @Test
     public void getAllCrewDtoWithCallByDateTest() throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date startDate = new Date(dateFormat.parse("2018-3-14").getTime());
-        Date endDate = new Date(dateFormat.parse("2018-3-15").getTime());
+        Date startDate = Date.valueOf("2018-3-15");
+        Date endDate = Date.valueOf("2018-3-15");
 
         CrewDtoWithCall crew = new CrewDtoWithCall(NAME, DESCRIPTION, NUMBEROFCALLS);
         crew.setCrewId(ID);

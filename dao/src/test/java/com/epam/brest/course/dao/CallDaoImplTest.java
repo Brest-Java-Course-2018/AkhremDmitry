@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,11 +23,9 @@ public class CallDaoImplTest {
     private CallDao callDao;
 
     @Test
-    public void getCallById() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
+    public void getCallById() {
         Call expCall = new Call();
-        expCall.setDateCall(dateCall);
+        expCall.setDateCall(Date.valueOf("2018-3-14"));
         expCall.setDescription("Some description");
         expCall.setAddress("Address");
         expCall.setCrewId(1);
@@ -42,11 +38,9 @@ public class CallDaoImplTest {
     }
 
     @Test
-    public void addCall() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
+    public void addCall() {
         Call expCall = new Call();
-        expCall.setDateCall(dateCall);
+        expCall.setDateCall(Date.valueOf("2018-3-14"));
         expCall.setDescription("Some description");
         expCall.setAddress("Address");
         expCall.setCrewId(1);
@@ -64,18 +58,15 @@ public class CallDaoImplTest {
 
 
     @Test
-    public void updateCall() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
+    public void updateCall() {
         Call expCall = new Call();
-        expCall.setDateCall(dateCall);
+        expCall.setDateCall(Date.valueOf("2018-3-14"));
         expCall.setDescription("Some description");
         expCall.setAddress("Address");
         expCall.setCrewId(1);
 
-        dateCall = new Date(dateFormat.parse("2010-3-14").getTime());
         Call addedCall = new Call();
-        addedCall.setDateCall(dateCall);
+        addedCall.setDateCall(Date.valueOf("2010-3-14"));
         addedCall.setDescription("So");
         addedCall.setAddress("A");
         addedCall.setCrewId(2);
@@ -94,11 +85,9 @@ public class CallDaoImplTest {
     }
 
     @Test
-    public void deleteCall() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date dateCall = new Date(dateFormat.parse("2018-3-14").getTime());
-        Call call= new Call();
-        call.setDateCall(dateCall);
+    public void deleteCall() {
+        Call call = new Call();
+        call.setDateCall(Date.valueOf("2018-3-14"));
         call.setDescription("Some description");
         call.setAddress("Address");
         call.setCrewId(1);
@@ -109,7 +98,7 @@ public class CallDaoImplTest {
         callDao.deleteCallById(call.getCallId());
         int numCallsAfter = callDao.getAllCall().size();
 
-        Assert.assertTrue(numCallsBefore-1 == numCallsAfter);
+        Assert.assertTrue(numCallsBefore - 1 == numCallsAfter);
     }
 
     @Test
@@ -120,10 +109,10 @@ public class CallDaoImplTest {
 
 
     @Test
-    public void getAllCallByDateTest() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
-        Date startDate = new Date(dateFormat.parse("2018-3-23").getTime());
-        Date endDate = new Date(dateFormat.parse("2018-3-23").getTime());
+    public void getAllCallByDateTest() {
+        Date startDate = Date.valueOf("2018-3-23");
+        Date endDate = Date.valueOf("2018-3-23");
+        ;
 
         Collection<Call> calls =
                 callDao.getAllCallByDate(startDate, endDate);

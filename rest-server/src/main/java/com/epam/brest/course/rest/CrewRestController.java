@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 @RestController
@@ -65,15 +63,12 @@ public class CrewRestController {
     @GetMapping(value = "/crews/{startDate}/{endDate}")
     public final Collection<CrewDtoWithCall> getAllCrewDtoWithCallByDate(
             @PathVariable(value = "startDate") final String startDate,
-            @PathVariable(value = "endDate") final String endDate)
-            throws ParseException {
+            @PathVariable(value = "endDate") final String endDate) {
         LOGGER.debug("getAllCrewDtoWithCallByDate({}, {})",
                 startDate, endDate);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
         Collection<CrewDtoWithCall> crews =
-                crewService.getAllCrewDtoWithCallByDate(
-                        new Date(dateFormat.parse(startDate).getTime()),
-                        new Date(dateFormat.parse(endDate).getTime()));
+                crewService.getAllCrewDtoWithCallByDate(Date.valueOf(startDate),
+                        Date.valueOf(endDate));
         return crews;
     }
 
