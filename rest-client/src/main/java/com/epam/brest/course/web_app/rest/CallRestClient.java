@@ -14,7 +14,7 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
-@Service
+@Service("callRest")
 public class CallRestClient implements CallService {
 
     @Value("${call.RestClientUrl}")

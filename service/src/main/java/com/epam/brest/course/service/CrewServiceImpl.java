@@ -6,6 +6,8 @@ import com.epam.brest.course.dto.CrewDto;
 import com.epam.brest.course.dto.CrewDtoWithCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -13,11 +15,13 @@ import java.util.Collection;
 /**
  * CrewServiceImpl.
  */
+@Service
 public class CrewServiceImpl implements CrewService {
 
     /**
      * Property crewDao.
      */
+    @Autowired
     private CrewDao crewDao;
 
     /**

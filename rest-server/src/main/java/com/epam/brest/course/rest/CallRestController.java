@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 @RestController
@@ -20,10 +19,6 @@ public class CallRestController {
 
     @Autowired
     private CallService callService;
-
-    public final void setCallService(final CallService callService) {
-        this.callService = callService;
-    }
 
     @GetMapping(value = "/calls")
     public final Collection<Call> getAllCalls() {
@@ -37,10 +32,8 @@ public class CallRestController {
             @PathVariable(value = "endDate") final String endDate)
             throws ParseException {
         LOGGER.debug("getAllCallByDate({}, {})", startDate, endDate);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-dd");
         Collection<Call> calls = callService
-                .getAllCallByDate(new Date(dateFormat.parse(startDate).getTime()),
-                        new Date(dateFormat.parse(endDate).getTime()));
+                .getAllCallByDate(Date.valueOf(startDate), Date.valueOf(endDate));
         return calls;
     }
 

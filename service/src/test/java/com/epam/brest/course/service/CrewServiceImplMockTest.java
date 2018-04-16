@@ -23,7 +23,7 @@ import java.util.Collection;
 public class CrewServiceImplMockTest {
 
     @Autowired
-    private CrewService callService;
+    private CrewService crewService;
 
     @Autowired
     private CrewDao mockCrewDao;
@@ -48,7 +48,7 @@ public class CrewServiceImplMockTest {
 
         EasyMock.replay(mockCrewDao);
 
-        callService.getAllCrewDto();
+        crewService.getAllCrewDto();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CrewServiceImplMockTest {
 
         EasyMock.replay(mockCrewDao);
 
-        callService.getCrewById(ID);
+        crewService.getCrewById(ID);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class CrewServiceImplMockTest {
 
         EasyMock.replay(mockCrewDao);
 
-        callService.addCrew(CREW);
+        crewService.addCrew(CREW);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class CrewServiceImplMockTest {
 
         EasyMock.replay(mockCrewDao);
 
-        callService.updateCrew(CREW);
+        crewService.updateCrew(CREW);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class CrewServiceImplMockTest {
 
         EasyMock.replay(mockCrewDao);
 
-        callService.deleteCrewById(ID);
+        crewService.deleteCrewById(ID);
     }
 
     @Test
@@ -97,7 +97,7 @@ public class CrewServiceImplMockTest {
 
         EasyMock.replay(mockCrewDao);
 
-        callService.getAllCrewDtoWithCall();
+        crewService.getAllCrewDtoWithCall();
     }
 
     @Test
@@ -113,7 +113,7 @@ public class CrewServiceImplMockTest {
 
         EasyMock.replay(mockCrewDao);
 
-        callService.getAllCrewDtoWithCallByDate(startDate, endDate);
+        crewService.getAllCrewDtoWithCallByDate(startDate, endDate);
     }
 
 }

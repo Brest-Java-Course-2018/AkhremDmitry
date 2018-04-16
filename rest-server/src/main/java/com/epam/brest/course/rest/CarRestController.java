@@ -20,10 +20,6 @@ public class CarRestController {
     @Autowired
     private CarService carService;
 
-    public final void setCarService(final CarService carService) {
-        this.carService = carService;
-    }
-
     //curl -v localhost:8090/carsDto
     @GetMapping(value = "/carsDto")
     public final Collection<CarDto> getAllCarsDto() {

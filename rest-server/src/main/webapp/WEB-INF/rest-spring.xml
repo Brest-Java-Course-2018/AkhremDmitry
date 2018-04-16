@@ -15,7 +15,7 @@
 
     <mvc:annotation-driven/>
     <!-- Component scan for @Controller, @Service... annotations -->
-    <context:component-scan base-package="com.epam.brest.course.rest"/>
+    <context:component-scan base-package="com.epam.brest.course"/>
 
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -32,30 +32,6 @@
 
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="callDao" class="com.epam.brest.course.dao.CallDaoImpl">
-        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="carDao" class="com.epam.brest.course.dao.CarDaoImpl">
-        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="crewDao" class="com.epam.brest.course.dao.CrewDaoImpl">
-        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-    </bean>
-
-    <bean id="callService" class="com.epam.brest.course.service.CallServiceImpl">
-        <property name="callDao" ref="callDao"/>
-    </bean>
-
-    <bean id="carService" class="com.epam.brest.course.service.CarServiceImpl">
-        <property name="carDao" ref="carDao"/>
-    </bean>
-
-    <bean id="crewService" class="com.epam.brest.course.service.CrewServiceImpl">
-        <property name="crewDao" ref="crewDao"/>
     </bean>
 
     <!--<context:property-placeholder location="classpath:application.properties"/>-->

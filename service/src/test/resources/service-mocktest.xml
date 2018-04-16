@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version = "1.0" encoding = "UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="callDao" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.course.dao.CallDao"/>
-    </bean>
-
-    <bean id="callService" class="com.epam.brest.course.service.CallServiceImpl">
-        <property name="callDao" ref="callDao"/>
     </bean>
 
     <bean id="crewDao" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.course.dao.CrewDao"/>
     </bean>
 
+    <bean id="callService" class="com.epam.brest.course.service.CallServiceImpl">
+    <property name="callDao" ref="callDao"/>
+    </bean>
+
     <bean id="crewService" class="com.epam.brest.course.service.CrewServiceImpl">
-        <property name="crewDao" ref="crewDao"/>
+    <property name="crewDao" ref="crewDao"/>
     </bean>
 
 

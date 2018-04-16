@@ -4,6 +4,7 @@ import com.epam.brest.course.dto.CrewDto;
 import com.epam.brest.course.dto.CrewDtoWithCall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -19,6 +21,7 @@ import java.util.Collection;
 /**
  * Crew DAO implementation.
  */
+@Component
 public class CrewDaoImpl implements CrewDao {
 
     /**
@@ -29,17 +32,8 @@ public class CrewDaoImpl implements CrewDao {
     /**
      * NamedParameterJdbcTemplate.
      */
+    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    /**
-     * Constructor CrewDaoImpl.
-     *
-     * @param namedParameterJdbcTemplate namedParameterJdbcTemplate
-     */
-    public CrewDaoImpl(final NamedParameterJdbcTemplate
-                               namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
 
     /**
      * SQL request for get CrewsDto.

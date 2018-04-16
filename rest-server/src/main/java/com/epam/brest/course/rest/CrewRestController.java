@@ -23,10 +23,6 @@ public class CrewRestController {
     @Autowired
     private CrewService crewService;
 
-    public final void setCrewService(final CrewService crewService) {
-        this.crewService = crewService;
-    }
-
     @GetMapping(value = "/crewsDto")
     public final Collection<CrewDto> getAllCrewDto() {
         LOGGER.debug("getAllCrewDto()");

@@ -7,29 +7,19 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--<context:component-scan base-package="com.epam.brest.course.rest"/>-->
+
 
     <bean id="callService" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.course.service.CallService"/>
-    </bean>
-
-    <bean id="callRestController" class="com.epam.brest.course.rest.CallRestController">
-        <property name="callService" ref="callService"/>
     </bean>
 
     <bean id="carService" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.course.service.CarService"/>
     </bean>
 
-    <bean id="carRestController" class="com.epam.brest.course.rest.CarRestController">
-        <property name="carService" ref="carService"/>
-    </bean>
-
     <bean id="crewService" class="org.easymock.EasyMock" factory-method="createMock">
         <constructor-arg value="com.epam.brest.course.service.CrewService"/>
     </bean>
 
-    <bean id="crewRestController" class="com.epam.brest.course.rest.CrewRestController">
-        <property name="crewService" ref="crewService"/>
-    </bean>
+    <context:component-scan base-package="com.epam.brest.course.rest"/>
 </beans>

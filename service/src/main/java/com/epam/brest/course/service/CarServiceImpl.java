@@ -6,17 +6,21 @@ import com.epam.brest.course.dto.CarDto;
 import com.epam.brest.course.dto.CarDtoWithCrew;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
  * CarServiceImpl.
  */
+@Service
 public class CarServiceImpl implements CarService {
 
     /**
      * Property carDao.
      */
+    @Autowired
     private CarDao carDao;
 
     /**

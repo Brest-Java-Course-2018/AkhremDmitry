@@ -4,6 +4,8 @@ import com.epam.brest.course.dao.Call;
 import com.epam.brest.course.dao.CallDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -11,11 +13,13 @@ import java.util.Collection;
 /**
  * CallServiceImpl.
  */
+@Service
 public class CallServiceImpl implements CallService {
 
     /**
      * Property callDao.
      */
+    @Autowired
     private CallDao callDao;
 
     /**

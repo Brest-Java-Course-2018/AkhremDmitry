@@ -4,6 +4,7 @@ import com.epam.brest.course.dto.CarDto;
 import com.epam.brest.course.dto.CarDtoWithCrew;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -12,12 +13,14 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
 /**
  * CarDaoImpl.
  */
+@Component
 public class CarDaoImpl implements CarDao {
 
     /**
@@ -76,16 +79,8 @@ public class CarDaoImpl implements CarDao {
     /**
      * NamedParameterJdbcTemplate.
      */
+    @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    /**
-     * Constructor CarDaoImpl.
-     * @param namedParameterJdbcTemplate namedParameterJdbcTemplate
-     */
-    public CarDaoImpl(final NamedParameterJdbcTemplate
-                                     namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
 
     @Override
     public final Collection<CarDto> getAllCarsDto() {
