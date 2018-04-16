@@ -118,12 +118,14 @@
             <div class="col-3">
                 <label class="d-none d-sm-inline text-danger"
                        for="inputGroup-startDate"
-                       th:if="${#fields.hasErrors('dateFrom')}">error</label>
+                       th:if="${#fields.hasErrors('dateFrom')}"
+                       th:text="#{general.dateError}">error</label>
             </div>
             <div class="col-3">
                 <label class="d-none d-sm-inline text-danger"
                        for="inputGroup-endDate"
-                       th:if="${#fields.hasErrors('dateTo')}">error</label>
+                       th:if="${#fields.hasErrors('dateTo')}"
+                       th:text="#{general.dateError}">error</label>
             </div>
             <div class="col-3">
             </div>
