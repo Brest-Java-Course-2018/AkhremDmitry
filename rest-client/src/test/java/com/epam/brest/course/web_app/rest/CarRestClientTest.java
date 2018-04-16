@@ -1,4 +1,4 @@
-package com.epam.brest.course.client.rest;
+package com.epam.brest.course.web_app.rest;
 
 
 import com.epam.brest.course.dao.Car;

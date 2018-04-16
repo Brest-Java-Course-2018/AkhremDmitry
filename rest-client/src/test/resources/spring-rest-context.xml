@@ -23,8 +23,8 @@
         <constructor-arg value="org.springframework.web.client.RestTemplate"/>
     </bean>
 
-    <bean id="callService" class="com.epam.brest.course.client.rest.CallRestClient"/>
-    <bean id="carService" class="com.epam.brest.course.client.rest.CarRestClient"/>
-    <bean id="crewService" class="com.epam.brest.course.client.rest.CrewRestClient"/>
+    <bean id="callService" class="com.epam.brest.course.web_app.rest.CallRestClient"/>
+    <bean id="carService" class="com.epam.brest.course.web_app.rest.CarRestClient"/>
+    <bean id="crewService" class="com.epam.brest.course.web_app.rest.CrewRestClient"/>
 
 </beans>
