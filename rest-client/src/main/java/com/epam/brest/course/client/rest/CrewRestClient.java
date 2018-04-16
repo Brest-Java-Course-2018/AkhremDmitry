@@ -6,25 +6,26 @@ import com.epam.brest.course.dto.CrewDtoWithCall;
 import com.epam.brest.course.service.CrewService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
+@Service
 public class CrewRestClient implements CrewService {
 
+    @Value("${crew.RestClientUrl}")
     private String url;
 
+    @Autowired
     private RestTemplate restTemplate;
 
     private static final Logger LOGGER = LogManager.getLogger();
-
-    public CrewRestClient(String url, RestTemplate restTemplate) {
-        this.url = url;
-        this.restTemplate = restTemplate;
-    }
 
     @Override
     public final Collection<CrewDto> getAllCrewDto() {

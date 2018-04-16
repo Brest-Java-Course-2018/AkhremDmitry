@@ -56,21 +56,6 @@
         </property>
     </bean>
 
-    <bean id="CarRestClient" class="com.epam.brest.course.client.rest.CarRestClient">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.cars}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
-    <bean id="CrewRestClient" class="com.epam.brest.course.client.rest.CrewRestClient">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.crews}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
-    <bean id="CallRestClient" class="com.epam.brest.course.client.rest.CallRestClient">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.calls}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
-
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="messages"/>
         <property name="defaultEncoding" value="UTF-8"/>
