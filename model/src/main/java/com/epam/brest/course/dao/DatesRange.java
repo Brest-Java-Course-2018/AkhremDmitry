@@ -28,4 +28,12 @@ public class DatesRange {
 
     public DatesRange() {
     }
+
+    @Override
+    public String toString() {
+        return "DatesRange{" +
+                "dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
+                '}';
+    }
 }

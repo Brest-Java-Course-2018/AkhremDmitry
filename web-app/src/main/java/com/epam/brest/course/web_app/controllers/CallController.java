@@ -119,10 +119,9 @@ public class CallController {
                                     final BindingResult result,
                                     final Model model) {
         LOGGER.debug("Req: filterCalls({})", datesRange);
-        Collection<Call> calls = null;
+        Collection<Call> calls;
         if (result.hasErrors()) {
-            calls =
-                    callService.getAllCall();
+            calls = callService.getAllCall();
         } else {
             calls = callService.getAllCallByDate(datesRange.getDateFrom(),
                             datesRange.getDateTo());

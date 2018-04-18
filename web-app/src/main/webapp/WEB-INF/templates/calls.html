@@ -188,7 +188,15 @@
             </div>
         </div>
         <div class="card alert alert-info" th:if="${calls.isEmpty()}" align="center">
-            <h2 th:text="#{call.plAddCar}">Please add calls.</h2>
+            <div th:if="${datesRange.dateFrom!=null} and ${datesRange.dateTo!=null}">
+                <h2 th:text="#{call.noCall}">There are no calls for this period.</h2>
+                <div th:if="${datesRange.dateFrom>datesRange.dateTo}">
+                    <h2 th:text="#{call.dateCannotBeLager}">DateFrom cannot be larger than dateTo.</h2>
+                </div>
+            </div>
+            <div th:unless="${datesRange.dateFrom!=null} and ${datesRange.dateTo!=null}">
+                <h2 th:text="#{call.plAddCall}">Please add calls.</h2>
+            </div>
         </div>
     </div>
 

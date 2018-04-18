@@ -19,6 +19,4 @@
     <bean id="crewService" class="com.epam.brest.course.service.CrewServiceImpl">
     <property name="crewDao" ref="crewDao"/>
     </bean>
-
-
 </beans>
